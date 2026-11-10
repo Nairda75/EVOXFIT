@@ -1,0 +1,54 @@
+<!--{"file":"contactos.html","title":"Contactos e como chegar | EVOXFIT Maia","title_en":"Contact and directions | EVOXFIT Maia","desc":"EVOXFIT Maia, R. Eng. Frederico Ulrich 1636, 4470-605 Maia. Telefone 961 382 108. Ginásio aberto 24 horas, todos os dias.","nav":"contactos","body":"page-inner","cta":true,"ldjson":true}-->
+<section class="page-hero">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Localização" data-en-aria="Breadcrumb"><a href="index.html" data-en="Home">Início</a><span>/</span><span data-en="Contact">Contactos</span></nav>
+    <h1 data-en="Come <span class='y'>say hi.</span>">Aparece. <span class="y">Ou liga.</span></h1>
+    <p class="lead" data-en="We're open 24 hours a day, every day of the week. For anything else, call or message us.">Estamos abertos 24 horas por dia, todos os dias da semana. Para tudo o resto, liga ou manda mensagem.</p>
+  </div>
+</section>
+
+<section class="section" aria-label="Contactos" data-en-aria="Contact details">
+  <div class="wrap contact-grid">
+    <div>
+      <p class="eyebrow" data-en="Phone">Telefone</p>
+      <a class="big-phone" href="tel:{{tel_e164}}">{{tel}}</a>
+      <div class="btn-row" style="margin-bottom:34px">
+        <a class="btn btn--y" href="tel:{{tel_e164}}">{{icon:phone}}<span data-en="Call now">Ligar agora</span></a>
+        <a class="btn btn--line" href="https://wa.me/{{wa}}?text=Ol%C3%A1!%20Gostava%20de%20saber%20mais%20sobre%20o%20EVOXFIT%20Maia." data-wa="Olá! Gostava de saber mais sobre o EVOXFIT Maia." data-wa-en="Hello! I would like to know more about EVOXFIT Maia." target="_blank" rel="noopener">{{icon:wa}}<span>WhatsApp</span></a>
+      </div>
+      <ul class="info">
+        <li>{{icon:pin}}<div><b data-en="Address">Morada</b><a href="{{rota}}" target="_blank" rel="noopener">{{morada}}<br>{{cp}}</a></div></li>
+        <li>{{icon:pin}}<div><b>Plus Code</b><span>{{plus}}</span></div></li>
+        <li>{{icon:ig}}<div><b>Instagram</b><a href="{{ig}}" target="_blank" rel="noopener">@evoxfit.maia</a></div></li>
+        <li>{{icon:star}}<div><b data-en="Google reviews">Avaliações no Google</b><a href="{{ficha}}" target="_blank" rel="noopener" data-en="{{nota}} out of 5 · {{n}} reviews">{{nota}} em 5 · {{n}} avaliações</a></div></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyebrow" data-en="Opening hours">Horário</p>
+      <ul class="hours">
+        <li><span data-en="Monday">Segunda</span><span data-en="24 hours">24 horas</span></li>
+        <li><span data-en="Tuesday">Terça</span><span data-en="24 hours">24 horas</span></li>
+        <li><span data-en="Wednesday">Quarta</span><span data-en="24 hours">24 horas</span></li>
+        <li><span data-en="Thursday">Quinta</span><span data-en="24 hours">24 horas</span></li>
+        <li><span data-en="Friday">Sexta</span><span data-en="24 hours">24 horas</span></li>
+        <li><span data-en="Saturday">Sábado</span><span data-en="24 hours">24 horas</span></li>
+        <li><span data-en="Sunday">Domingo</span><span data-en="24 hours">24 horas</span></li>
+      </ul>
+      <p class="small" style="margin-top:16px" data-en="Hours as shown on Google Maps. Public holidays: call to confirm.">Horário conforme o Google Maps. Em feriados, liga para confirmar.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section--tight" style="padding-top:0" aria-label="Mapa" data-en-aria="Map">
+  <div class="wrap">
+    <div class="real-map" style="min-height:min(70vh,560px)">
+      <iframe title="Mapa do EVOXFIT Maia no Google Maps" data-en-title="EVOXFIT Maia on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="{{mapa}}"></iframe>
+      <div class="pin" aria-hidden="true"><b>EVOXFIT</b><i></i></div>
+      <button type="button" class="map-lock" data-en="Tap to explore the map">Toca para explorar o mapa</button>
+    </div>
+    <div class="btn-row" style="margin-top:20px">
+      <a class="btn btn--y" href="{{rota}}" target="_blank" rel="noopener"><span data-en="Get directions">Como chegar</span>{{icon:arrow}}</a>
+      <a class="btn btn--line" href="{{ficha}}" target="_blank" rel="noopener"><span data-en="Open in Google Maps">Abrir no Google Maps</span></a>
+    </div>
+  </div>
+</section>

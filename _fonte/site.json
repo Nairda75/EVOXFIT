@@ -1,0 +1,19 @@
+{
+  "nome": "EVOXFIT Maia",
+  "telefone_e164": "+351961382108",
+  "telefone": "961 382 108",
+  "whatsapp": "351961382108",
+  "instagram": "https://www.instagram.com/evoxfit.maia/",
+  "morada": "R. Eng. Frederico Ulrich 1636",
+  "codigo_postal": "4470-605 Maia",
+  "plus_code": "7978+WQ Maia",
+  "lat": 41.2648302,
+  "lng": -8.633035,
+  "google_ficha": "https://www.google.com/maps/place/Evox+Fit+Maia/@41.2648302,-8.633035,17z",
+  "google_rota": "https://www.google.com/maps/dir/?api=1&destination=41.2648302,-8.633035",
+  "google_mapa_embed": "https://maps.google.com/maps?q=41.2648302,-8.633035&z=17&output=embed",
+  "nota": "4,7",
+  "n_avaliacoes": 32,
+  "avaliacoes_data": "novembro de 2026",
+  "distribuicao": {"5": 29, "4": 1, "3": 0, "2": 0, "1": 2}
+}
