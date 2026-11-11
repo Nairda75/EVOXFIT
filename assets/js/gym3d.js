@@ -508,17 +508,32 @@ function boot() {
   }
 
   /* ---------- Ciclo ---------- */
-  let target = 0, cur = 0, view = 0, raf = 0, running = false, last = performance.now();
+  /* Modo "diapositivos": o deslize só escolhe a paragem; a câmara viaja sozinha, com tempo próprio
+     (arranque e chegada suaves, meio rápido) e escurece a meio para cada paragem parecer uma cena à parte. */
+  const STOPS = [0, 0.19, 0.37, 0.55, 0.73, 0.92];
+  const SLIDE_MS = 1500;
+  const stopFromScroll = () => {
+    const p = clamp(-sec.getBoundingClientRect().top / total());
+    return p > INTRO ? Math.min(N - 1, Math.floor((p - INTRO) / (1 - INTRO) * N)) + 1 : 0;
+  };
+  let cur = 0, raf = 0, running = false, last = performance.now(), stop = 0, tw = null, dip = 0;
+  const ease = (u) => (u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
   const total = () => Math.max(1, sec.offsetHeight - window.innerHeight);
-  const read = () => { target = clamp(-sec.getBoundingClientRect().top / total()); };
+  const read = () => {
+    const st = stopFromScroll();
+    if (st === stop) return;
+    const skip = Math.abs(st - stop);
+    stop = st;
+    tw = { from: cur, to: STOPS[st], t0: performance.now(), dur: SLIDE_MS + (skip > 1 ? 350 : 0) };
+  };
   window.addEventListener("scroll", read, { passive: true });
   function resize() {
     W0 = Math.max(1, host.clientWidth); H0 = Math.max(1, host.clientHeight);
-    const cap = Math.sqrt((isMobile ? 2.2e6 : 3.6e6) / (W0 * H0));            // limite de pixéis: ecrãs 4K não afogam a placa gráfica
+    const cap = Math.sqrt((isMobile ? 2.0e6 : 2.8e6) / (W0 * H0));            // limite de pixéis: ecrãs 4K não afogam a placa gráfica
     pr = Math.max(minPR, Math.min(pr, DPR, cap)); renderer.setPixelRatio(pr);
     renderer.setSize(W0, H0, false); read();
   }
-  new ResizeObserver(resize).observe(host); resize(); cur = view = target;
+  new ResizeObserver(resize).observe(host); resize(); stop = stopFromScroll(); cur = STOPS[stop];
 
   // qualidade adaptativa: se o computador não aguenta ~30 fps, baixa a resolução (a cena continua igual)
   let qAcc = 0, qN = 0;
@@ -531,13 +546,16 @@ function boot() {
   }
   function frame(now) {
     const dt = Math.min(0.05, (now - last) / 1000); adapt((now - last) / 1000); last = now;
-    // duas fases de suavização: o deslize da roda/dedo nunca "salta" na câmara
-    cur += (target - cur) * (1 - Math.exp(-dt * 4.2));
-    const prev = view; view += (cur - view) * (1 - Math.exp(-dt * 9));
-    const sp = Math.abs(view - prev) / Math.max(dt, 0.001); bobAmp += (clamp(sp * 14) - bobAmp) * 0.15; bobPh += Math.abs(view - prev) * 900;
-    if (Math.abs(target - cur) < 0.00005) cur = target;
-    if (Math.abs(cur - view) < 0.00005) view = cur;
-    animate(now); place(view, now);
+    const prev = cur;
+    if (tw) {
+      const u = clamp((now - tw.t0) / tw.dur);
+      cur = lerp(tw.from, tw.to, ease(u));
+      dip = Math.pow(Math.sin(Math.PI * u), 1.6) * 0.94;
+      if (u >= 1) { tw = null; dip = 0; cur = STOPS[stop]; }
+    }
+    host.style.setProperty("--dip", dip.toFixed(3));
+    const sp = Math.abs(cur - prev) / Math.max(dt, 0.001); bobAmp += (clamp(sp * 10) - bobAmp) * 0.12; bobPh += Math.abs(cur - prev) * 900;
+    animate(now); place(cur, now);
     renderer.render(scene, camera);
   }
   function loop(now) { frame(now); raf = requestAnimationFrame(loop); }
@@ -556,5 +574,5 @@ function boot() {
   requestAnimationFrame(() => host.classList.add("ready"));
 
   /* gancho para testes: salta para um ponto do percurso */
-  window.__gym = { jump(p) { target = cur = view = clamp(p); frame(performance.now()); return p; }, get p() { return view; }, get pr() { return pr; } };
+  window.__gym = { jump(p) { tw = null; cur = clamp(p); frame(performance.now()); return p; }, get p() { return cur; }, get pr() { return pr; } };
 }

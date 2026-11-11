@@ -64,11 +64,17 @@
     if (!live) return;
     var p = progress(), idx = p > INTRO ? Math.min(N - 1, Math.floor((p - INTRO) / (1 - INTRO) * N)) : -1;
     if (idx === cur) return;
+    var first = cur === -2;
     cur = idx;
     sec.classList.toggle("is-step", idx >= 0);
-    steps.forEach(function (s, i) { s.classList.toggle("on", i === idx); s.setAttribute("aria-hidden", i === idx ? "false" : "true"); });
     tabs.forEach(function (b, i) { b.classList.toggle("on", i === idx); if (i === idx) b.setAttribute("aria-current", "true"); else b.removeAttribute("aria-current"); });
+    // com o 3D ligado: o texto anterior sai logo e o novo entra quando o ecrã está mais escuro (a meio da viagem)
+    steps.forEach(function (s) { s.classList.remove("on"); s.setAttribute("aria-hidden", "true"); });
+    clearTimeout(showT);
+    function show() { steps.forEach(function (s, i) { s.classList.toggle("on", i === idx); s.setAttribute("aria-hidden", i === idx ? "false" : "true"); }); }
+    if (first || idx < 0 || !sec.classList.contains("gl-on")) show(); else showT = setTimeout(show, 720);
   }
+  var showT = 0;
   window.addEventListener("scroll", render, { passive: true });
   window.addEventListener("resize", render);
   render();

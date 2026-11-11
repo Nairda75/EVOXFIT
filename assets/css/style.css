@@ -570,3 +570,17 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 }
 .gate-name{margin:0;font-family:var(--display);font-weight:700;letter-spacing:.34em;text-transform:uppercase;font-size:.9rem;color:var(--y)}
 .gate-slogan{margin:0;color:#d4d4da;font-size:1.05rem;letter-spacing:.04em}
+
+/* escurece entre paragens (valor --dip vem do 3D) */
+.vs-gl::after{content:"";position:absolute;inset:0;background:#030307;opacity:var(--dip,0);pointer-events:none}
+.vs-live{height:calc(100svh + 6 * 75svh)}
+.vs-live .vs-step{transition:opacity .35s,transform .35s var(--ease),visibility 0s .35s}
+.vs-live .vs-step.on{transition:opacity .55s,transform .8s var(--ease),visibility 0s}
+
+/* desempenho: nada de desfoque (backdrop-filter) por cima do 3D, que se redesenha a cada imagem */
+.gl-on .vs-card,.vs-tabs button,.page-home .site-header.solid{backdrop-filter:none;-webkit-backdrop-filter:none}
+.gl-on .vs-trad{background:rgba(10,10,14,.82)}
+.gl-on .vs-evox{background:linear-gradient(135deg,rgba(60,48,8,.92),rgba(18,16,6,.9))}
+.vs-tabs button{background:rgba(17,17,20,.92)}
+.page-home .site-header.solid{background:rgba(10,10,11,.94)}
+.gl-on .vs-24{filter:none;text-shadow:0 0 30px rgba(255,210,31,.35)}
