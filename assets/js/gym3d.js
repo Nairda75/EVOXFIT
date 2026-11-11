@@ -29,10 +29,10 @@ function boot() {
   const N = sec.querySelectorAll(".vs-step").length || 5;
 
   let renderer;
-  try { renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: "high-performance" }); }
+  try { renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" }); }
   catch (e) { renderer = new THREE.WebGLRenderer({ antialias: false }); }
-  const DPR = Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 1.5);
-  let pr = DPR, minPR = 0.55;
+  const DPR = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2);
+  let pr = DPR, minPR = 0.8;
   renderer.setPixelRatio(pr);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -45,6 +45,7 @@ function boot() {
   const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 900);
 
   /* ---------- Ambiente (reflexos) ---------- */
+  const maxAniso = Math.min(8, renderer.capabilities.getMaxAnisotropy());
   const pmrem = new THREE.PMREMGenerator(renderer);
   const envScene = new THREE.Scene();
   envScene.add(new THREE.Mesh(new THREE.BoxGeometry(30, 14, 30), new THREE.MeshBasicMaterial({ color: 0x0a0a10, side: THREE.BackSide })));
@@ -60,7 +61,7 @@ function boot() {
 
   /* ---------- Texturas desenhadas em canvas ---------- */
   const cv = (w, h) => { const c = document.createElement("canvas"); c.width = w; c.height = h; return c; };
-  const tex = (c, srgb = true) => { const t = new THREE.CanvasTexture(c); if (srgb) t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4; return t; };
+  const tex = (c, srgb = true) => { const t = new THREE.CanvasTexture(c); if (srgb) t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = maxAniso; t.generateMipmaps = true; t.minFilter = THREE.LinearMipmapLinearFilter; return t; };
   const FONT = '800 italic %spx "Barlow Condensed", Impact, "Arial Narrow", sans-serif';
   const font = (px) => FONT.replace("%s", px);
 
@@ -72,32 +73,32 @@ function boot() {
   const glowY = radialTex("255,210,31"), glowW = radialTex("255,236,200"), glowB = radialTex("110,92,255");
 
   function signTex() {
-    const c = cv(2048, 360), g = c.getContext("2d");
+    const c = cv(4096, 720), g = c.getContext("2d"); g.scale(2, 2);
     g.fillStyle = "#0a0a0e"; g.fillRect(0, 0, 2048, 360);
     g.strokeStyle = "#ffd21f"; g.lineWidth = 8; g.strokeRect(14, 14, 2020, 332);
     g.font = font(300); g.textAlign = "center"; g.textBaseline = "middle";
-    g.shadowColor = "#ffd21f"; g.shadowBlur = 40; g.fillStyle = "#ffd21f";
+    g.shadowColor = "#ffd21f"; g.shadowBlur = 80; g.fillStyle = "#ffd21f";
     g.fillText("EVOXFIT", 900, 192); g.fillText("EVOXFIT", 900, 192);
     g.shadowBlur = 0; g.fillStyle = "#fff5cf"; g.fillText("EVOXFIT", 900, 192);
-    g.font = font(110); g.fillStyle = "#8c7bff"; g.shadowColor = "#4b3bff"; g.shadowBlur = 24; g.textAlign = "left";
+    g.font = font(110); g.fillStyle = "#8c7bff"; g.shadowColor = "#4b3bff"; g.shadowBlur = 48; g.textAlign = "left";
     g.fillText("MAIA", 1500, 196);
     return tex(c);
   }
   function muralTex() {
-    const c = cv(2048, 640), g = c.getContext("2d");
+    const c = cv(4096, 1280), g = c.getContext("2d"); g.scale(2, 2);
     const bg = g.createLinearGradient(0, 0, 0, 640); bg.addColorStop(0, "#14122e"); bg.addColorStop(1, "#0a0a12");
     g.fillStyle = bg; g.fillRect(0, 0, 2048, 640);
     g.font = font(560); g.textAlign = "center"; g.textBaseline = "middle";
     g.lineWidth = 6; g.strokeStyle = "rgba(255,210,31,.35)"; g.strokeText("EVOXFIT", 1024, 340);
-    g.fillStyle = "#ffd21f"; g.shadowColor = "#ffd21f"; g.shadowBlur = 50; g.globalAlpha = 0.95; g.fillText("EVOX", 640, 340);
-    g.globalAlpha = 1; g.fillStyle = "#f6f4ee"; g.shadowColor = "#fff"; g.shadowBlur = 24; g.fillText("FIT", 1500, 340);
+    g.fillStyle = "#ffd21f"; g.shadowColor = "#ffd21f"; g.shadowBlur = 100; g.globalAlpha = 0.95; g.fillText("EVOX", 640, 340);
+    g.globalAlpha = 1; g.fillStyle = "#f6f4ee"; g.shadowColor = "#fff"; g.shadowBlur = 48; g.fillText("FIT", 1500, 340);
     return tex(c);
   }
   function logoTex() {
-    const c = cv(1024, 256), g = c.getContext("2d");
+    const c = cv(2048, 512), g = c.getContext("2d"); g.scale(2, 2);
     g.fillStyle = "#0a0a0e"; g.fillRect(0, 0, 1024, 256);
     g.font = font(190); g.textAlign = "center"; g.textBaseline = "middle";
-    g.fillStyle = "#ffd21f"; g.shadowColor = "#ffd21f"; g.shadowBlur = 26; g.fillText("EVOXFIT", 512, 134);
+    g.fillStyle = "#ffd21f"; g.shadowColor = "#ffd21f"; g.shadowBlur = 52; g.fillText("EVOXFIT", 512, 134);
     return tex(c);
   }
   function pTex() {
@@ -507,17 +508,17 @@ function boot() {
   }
 
   /* ---------- Ciclo ---------- */
-  let target = 0, cur = 0, raf = 0, running = false, last = performance.now();
+  let target = 0, cur = 0, view = 0, raf = 0, running = false, last = performance.now();
   const total = () => Math.max(1, sec.offsetHeight - window.innerHeight);
   const read = () => { target = clamp(-sec.getBoundingClientRect().top / total()); };
   window.addEventListener("scroll", read, { passive: true });
   function resize() {
     W0 = Math.max(1, host.clientWidth); H0 = Math.max(1, host.clientHeight);
-    const cap = Math.sqrt(2.4e6 / (W0 * H0));            // limite de pixéis: ecrãs 4K não afogam a placa gráfica
+    const cap = Math.sqrt((isMobile ? 2.2e6 : 3.6e6) / (W0 * H0));            // limite de pixéis: ecrãs 4K não afogam a placa gráfica
     pr = Math.max(minPR, Math.min(pr, DPR, cap)); renderer.setPixelRatio(pr);
     renderer.setSize(W0, H0, false); read();
   }
-  new ResizeObserver(resize).observe(host); resize(); cur = target;
+  new ResizeObserver(resize).observe(host); resize(); cur = view = target;
 
   // qualidade adaptativa: se o computador não aguenta ~30 fps, baixa a resolução (a cena continua igual)
   let qAcc = 0, qN = 0;
@@ -526,14 +527,17 @@ function boot() {
     qAcc += raw; qN++;
     if (qN < 36) return;
     const avg = qAcc / qN; qAcc = 0; qN = 0;
-    if (avg > 0.033 && pr > minPR + 0.01) { pr = Math.max(minPR, pr * 0.8); renderer.setPixelRatio(pr); renderer.setSize(W0, H0, false); }
+    if (avg > 0.030 && pr > minPR + 0.01) { pr = Math.max(minPR, pr * 0.88); renderer.setPixelRatio(pr); renderer.setSize(W0, H0, false); }
   }
   function frame(now) {
-    const dt = Math.min(0.1, (now - last) / 1000); adapt((now - last) / 1000); last = now;
-    const prev = cur; cur += (target - cur) * (1 - Math.exp(-dt * 5.5));
-    const sp = Math.abs(cur - prev) / Math.max(dt, 0.001); bobAmp += (clamp(sp * 14) - bobAmp) * 0.15; bobPh += Math.abs(cur - prev) * 900;
+    const dt = Math.min(0.05, (now - last) / 1000); adapt((now - last) / 1000); last = now;
+    // duas fases de suavização: o deslize da roda/dedo nunca "salta" na câmara
+    cur += (target - cur) * (1 - Math.exp(-dt * 4.2));
+    const prev = view; view += (cur - view) * (1 - Math.exp(-dt * 9));
+    const sp = Math.abs(view - prev) / Math.max(dt, 0.001); bobAmp += (clamp(sp * 14) - bobAmp) * 0.15; bobPh += Math.abs(view - prev) * 900;
     if (Math.abs(target - cur) < 0.00005) cur = target;
-    animate(now); place(cur, now);
+    if (Math.abs(cur - view) < 0.00005) view = cur;
+    animate(now); place(view, now);
     renderer.render(scene, camera);
   }
   function loop(now) { frame(now); raf = requestAnimationFrame(loop); }
@@ -552,5 +556,5 @@ function boot() {
   requestAnimationFrame(() => host.classList.add("ready"));
 
   /* gancho para testes: salta para um ponto do percurso */
-  window.__gym = { jump(p) { target = cur = clamp(p); frame(performance.now()); return p; }, get p() { return cur; } };
+  window.__gym = { jump(p) { target = cur = view = clamp(p); frame(performance.now()); return p; }, get p() { return view; }, get pr() { return pr; } };
 }

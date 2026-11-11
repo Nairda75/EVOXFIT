@@ -1,4 +1,4 @@
-"""Gera as páginas estáticas do site EVOXFIT Maia (UNO Studio).
+"""Gera as páginas estáticas do site EVOXFIT Fitness Health Club Maia (UNO Studio).
 
 Cada ficheiro em _fonte/pages/*.html começa com um comentário JSON:
 <!--{"file":"index.html","title":"...","title_en":"...","desc":"...","nav":"inicio","body":"page-home"}-->
@@ -47,7 +47,7 @@ ICON = {
 }
 
 MARK = '<svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="11" fill="#FFD21F"/><g transform="translate(5.1 0) skewX(-12)" fill="#0a0a0b"><rect x="13" y="11" width="7" height="26"/><rect x="13" y="11" width="23" height="6.5"/><rect x="13" y="20.7" width="18" height="6.5"/><rect x="13" y="30.5" width="23" height="6.5"/></g></svg>'
-BRAND = '<a class="brand" href="maia.html" aria-label="EVOXFIT Maia, página inicial" data-en-aria="EVOXFIT Maia, home"><img src="assets/img/logo-evoxfit-128.png" width="46" height="46" alt=""><span class="sub">MAIA</span></a>'
+BRAND = '<a class="brand" href="maia.html" aria-label="EVOXFIT Fitness Health Club Maia, página inicial" data-en-aria="EVOXFIT Fitness Health Club Maia, home"><img src="assets/img/logo-evoxfit-128.png" width="46" height="46" alt=""><span class="sub">MAIA</span></a>'
 
 def esc(s): return html.escape(s, quote=True)
 
@@ -63,14 +63,14 @@ def subst(text):
     for k, v in ICON.items(): text = text.replace('{{icon:' + k + '}}', v)
     return text
 
-WA_MSG_PT = "Olá! Gostava de saber mais sobre o EVOXFIT Maia."
-WA_MSG_EN = "Hello! I would like to know more about EVOXFIT Maia."
+WA_MSG_PT = "Olá! Gostaria de obter mais informações sobre o EVOXFIT Fitness Health Club Maia."
+WA_MSG_EN = "Hello! I would like to obtain more information about EVOXFIT Fitness Health Club Maia."
 
 def head(m):
     ld = ''
     if m.get('ldjson'):
         data = {
-            "@context": "https://schema.org", "@type": "ExerciseGym", "name": "EVOXFIT Maia",
+            "@context": "https://schema.org", "@type": "ExerciseGym", "name": "EVOXFIT Fitness Health Club Maia",
             "telephone": S['telefone_e164'], "sameAs": [S['instagram'], S['google_ficha']],
             "address": {"@type": "PostalAddress", "streetAddress": S['morada'], "postalCode": "4470-605", "addressLocality": "Maia", "addressCountry": "PT"},
             "geo": {"@type": "GeoCoordinates", "latitude": S['lat'], "longitude": S['lng']},
@@ -138,9 +138,9 @@ def header(active):
 def final_cta():
     return f'''<section class="final-cta" aria-labelledby="final-titulo">
   <div class="wrap">
-    <h2 id="final-titulo" data-en="Your first workout is waiting.">O teu primeiro treino está à espera.</h2>
+    <h2 id="final-titulo" data-en="Schedule your first workout.">Agende o seu primeiro treino.</h2>
     <div class="actions">
-      <a class="btn btn--k btn--big" href="primeiro-treino.html"><span data-en="Book my first workout">Marcar o meu primeiro treino</span>{ICON['arrow']}</a>
+      <a class="btn btn--k btn--big" href="primeiro-treino.html"><span data-en="Book first workout">Marcar primeiro treino</span>{ICON['arrow']}</a>
       <a class="btn btn--line btn--big" href="tel:{S['telefone_e164']}">{ICON['phone']}<span>{S['telefone']}</span></a>
     </div>
   </div>
@@ -153,7 +153,7 @@ def footer(active):
     <div class="footer-top">
       <div>
         {BRAND}
-        <p data-en="Train when you want, at EVOXFIT Maia.">Treina quando quiseres, no EVOXFIT Maia.</p>
+        <p data-en="Train. We've got the rest.">Treine. O resto é connosco.</p>
       </div>
       <div>
         <h3 data-en="Pages">Páginas</h3>
@@ -177,7 +177,7 @@ def footer(active):
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© <span data-year>2026</span> EVOXFIT Maia</span>
+      <span>© <span data-year>2026</span> EVOXFIT Fitness Health Club Maia</span>
       <span data-en="Website by UNO Studio">Website por UNO Studio</span>
     </div>
   </div>
@@ -202,7 +202,7 @@ def _photo_buttons(imgs):
     out = []
     for p in imgs:
         rel = os.path.relpath(p, OUT).replace(os.sep, '/')
-        out.append(f'<button type="button" data-full="{rel}" aria-label="Ver fotografia" data-en-aria="View photo"><img src="{rel}" alt="Treino no EVOXFIT Maia" data-en-alt="Training at EVOXFIT Maia" loading="lazy" decoding="async"></button>')
+        out.append(f'<button type="button" data-full="{rel}" aria-label="Ver fotografia" data-en-aria="View photo"><img src="{rel}" alt="Treino no EVOXFIT Fitness Health Club Maia" data-en-alt="Training at EVOXFIT Fitness Health Club Maia" loading="lazy" decoding="async"></button>')
     return out
 
 def gallery_html():
@@ -211,8 +211,8 @@ def gallery_html():
     if not imgs: return ''
     return ('''<section class="section" aria-labelledby="gal-titulo">
   <div class="wrap">
-    <p class="eyebrow" data-en="Inside">Por dentro</p>
-    <h2 id="gal-titulo" style="margin-bottom:36px" data-en="See it for yourself.">Vê com os teus olhos.</h2>
+    <p class="eyebrow" data-en="Facilities">Instalações</p>
+    <h2 id="gal-titulo" style="margin-bottom:36px" data-en="Discover the facilities.">Conheça as instalações.</h2>
     <div class="gallery" data-photos>''' + '\n'.join(_photo_buttons(imgs)) + '</div>\n  </div>\n</section>\n' + LIGHTBOX)
 
 PLACEHOLDERS = [
@@ -228,14 +228,14 @@ def fotos_html():
     else:
         print('AVISO: sem fotografias em assets/img/gym-*.jpg — a tira do início mostra marcadores.')
         items = '\n'.join(
-            f'<figure class="ph">{ICON["dumbbell"]}<b data-en="{en}">{pt}</b><span data-en="A real photo of the gym goes here.">Aqui entra uma foto real do ginásio.</span></figure>'
+            f'<figure class="ph">{ICON["dumbbell"]}<b data-en="{en}">{pt}</b><span data-en="Photograph of the gym coming soon.">Fotografia do ginásio em breve.</span></figure>'
             for pt, en in PLACEHOLDERS)
         attr = ''; extra = ''
     return f'''<section class="section photos" aria-labelledby="fotos-titulo">
   <div class="wrap head">
     <div>
-      <p class="eyebrow" data-en="Inside">Por dentro</p>
-      <h2 id="fotos-titulo" data-en="See the <span class='y'>space.</span>">Vê o <span class="y">espaço.</span></h2>
+      <p class="eyebrow" data-en="Facilities">Instalações</p>
+      <h2 id="fotos-titulo" data-en="See the <span class='y'>facility.</span>">Conheça o <span class="y">espaço.</span></h2>
     </div>
     <div class="strip-ctl">
       <button type="button" data-strip-prev aria-label="Anterior" data-en-aria="Previous">{ICON['left']}</button>

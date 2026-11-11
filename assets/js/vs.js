@@ -1,4 +1,4 @@
-/* EVOXFIT Maia — início: relógio "agora mesmo" e sequência EVOXFIT vs ginásio tradicional.
+/* EVOXFIT Fitness Health Club Maia — início: relógio "agora mesmo" e sequência EVOXFIT vs ginásio tradicional.
    Sem JS ou com "reduzir movimento" a sequência aparece simplesmente em lista, uma diferença a seguir à outra. */
 (function () {
   "use strict";
@@ -46,7 +46,7 @@
   function tick() {
     var d = new Date(), t = pad(d.getHours()) + ":" + pad(d.getMinutes());
     if (timeEl) timeEl.textContent = t;
-    if (nowEl) nowEl.textContent = en() ? "It's " + t + ". Yes, the door is open." : "Agora: " + t + ". Sim, a porta está aberta.";
+    if (nowEl) nowEl.textContent = en() ? "Open now (" + t + "). 24-hour access." : "Aberto agora (" + t + "). Acesso 24 horas.";
     if (dial) window.EVOXDial.set(dial, d.getHours() + d.getMinutes() / 60);
   }
   setTimeout(tick, 350);

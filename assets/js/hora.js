@@ -1,4 +1,4 @@
-/* EVOXFIT Maia — "A que horas te dá jeito?": escolhe uma hora e segue para o formulário já preenchida */
+/* EVOXFIT Fitness Health Club Maia — "A que horas te dá jeito?": escolhe uma hora e segue para o formulário já preenchida */
 (function () {
   "use strict";
   var sec = document.querySelector("[data-hora]");

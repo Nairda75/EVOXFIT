@@ -1,4 +1,4 @@
-/* EVOXFIT Maia — pedido de primeiro treino. Monta a mensagem e abre o WhatsApp (nada é guardado no site). */
+/* EVOXFIT Fitness Health Club Maia — pedido de primeiro treino. Monta a mensagem e abre o WhatsApp (nada é guardado no site). */
 (function () {
   "use strict";
   var form = document.getElementById("treino-form");
@@ -32,8 +32,8 @@
   function message() {
     var nome = form.nome.value.trim(), tel = form.tel.value.trim(), obj = label("objetivo"), exp = label("exp");
     var L = en()
-      ? { hi: "Hello! I'd like to book my first workout at EVOXFIT Maia.", n: "Name", w: "When", g: "Goal", e: "Experience", p: "Phone" }
-      : { hi: "Olá! Quero marcar o meu primeiro treino no EVOXFIT Maia.", n: "Nome", w: "Quando", g: "Objetivo", e: "Experiência", p: "Telemóvel" };
+      ? { hi: "Hello, I would like to book my first workout at EVOXFIT Fitness Health Club Maia.", n: "Name", w: "When", g: "Goal", e: "Experience", p: "Phone" }
+      : { hi: "Olá! Gostaria de marcar o meu primeiro treino no EVOXFIT Fitness Health Club Maia.", n: "Nome", w: "Quando", g: "Objetivo", e: "Experiência", p: "Telemóvel" };
     var lines = [L.hi, L.n + ": " + (nome || "…"), L.w + ": " + quando()];
     if (obj) lines.push(L.g + ": " + obj);
     if (exp) lines.push(L.e + ": " + exp);

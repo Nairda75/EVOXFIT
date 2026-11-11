@@ -1,4 +1,4 @@
-/* EVOXFIT Maia — comportamento partilhado (idioma, menu, cabeçalho, transições, mapa, galeria) */
+/* EVOXFIT Fitness Health Club Maia — comportamento partilhado (idioma, menu, cabeçalho, transições, mapa, galeria) */
 (function () {
   "use strict";
   var doc = document.documentElement, body = document.body;
