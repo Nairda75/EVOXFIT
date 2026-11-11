@@ -42,12 +42,12 @@
 
   /* ---------- Mostrador com a hora do visitante ---------- */
   var dial = sec.querySelector(".vs-dial"), timeEl = sec.querySelector("[data-time]"), nowEl = sec.querySelector("[data-now]");
-  if (dial) window.EVOXDial.build(dial);
-  function tick() {
+  window.EVOXDial.build(dial);
+  function tick(first) {
     var d = new Date(), t = pad(d.getHours()) + ":" + pad(d.getMinutes());
-    if (timeEl) timeEl.textContent = t;
+    timeEl.textContent = t;
     if (nowEl) nowEl.textContent = en() ? "It's " + t + ". Yes, the door is open." : "Agora: " + t + ". Sim, a porta está aberta.";
-    if (dial) window.EVOXDial.set(dial, d.getHours() + d.getMinutes() / 60);
+    window.EVOXDial.set(dial, d.getHours() + d.getMinutes() / 60);
   }
   setTimeout(tick, 350);
   setInterval(tick, 20000);
@@ -55,7 +55,7 @@
 
   /* ---------- Sequência ---------- */
   var steps = [].slice.call(sec.querySelectorAll(".vs-step")), tabs = [].slice.call(sec.querySelectorAll(".vs-tabs button"));
-  var N = steps.length, INTRO = parseFloat(sec.getAttribute("data-intro") || "0.1"), live = !reduce, cur = -2;
+  var N = steps.length, INTRO = 0.06, live = !reduce, cur = -2;
   if (live) sec.classList.add("vs-live");
 
   function span() { return Math.max(1, sec.offsetHeight - window.innerHeight); }

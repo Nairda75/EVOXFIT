@@ -23,13 +23,7 @@ Os `.html` na raiz são **gerados**. Edita a fonte e volta a gerar:
 - A nota 4,7 / 32 avaliações é de novembro de 2026; atualizar em `site.json`.
 
 ## Início
-- Primeiro ecrã: "24H" (a única vez que o site o diz em grande), uma piada e, por trás, o ginásio em 3D à noite, visto de longe.
-- Ao deslizar a câmara aproxima-se: parque → porta → sala → máquinas → receção. Cada vista corresponde a uma diferença EVOXFIT vs ginásio tradicional (`assets/js/vs.js` trata do texto e dos botões, `assets/js/gym3d.js` da cena three.js).
-- A cena é desenhada em código (sem fotografias). Sem WebGL ou com "reduzir movimento" aparece a lista normal, sem 3D. Para testar uma vista: `window.__gym.jump(0.55)` na consola.
+- Primeiro ecrã: "24H" (a única vez que o site o diz em grande), uma piada e o relógio com a hora do visitante.
+- Ao deslizar, a secção prende ao ecrã e mostra 5 diferenças EVOXFIT vs ginásio tradicional (`assets/js/vs.js`). Os botões levam a cada uma.
 - "A que horas te dá jeito?" (`assets/js/hora.js`): escolhe uma hora e segue para o formulário já preenchida.
-- GSAP + ScrollTrigger + Lenis para as entradas.
-
-## Abas, faixa UNO Studio e contactos
-- Abas (`assets/js/tabs.js`, `data-tabs`): indicador que desliza, avanço automático (`data-auto="ms"`), setas/Home/End, deslizar com o dedo, ARIA. Usadas em "O teu primeiro treino" (início), nas zonas de "O ginásio" (`tabs--v`) e no bloco de contactos.
-- Faixa "UNO Studio — fazemos as coisas por nós" (`{{UNO}}` nas páginas): início, O ginásio e Primeiro treino.
-- Bloco de contactos e localização (`contact_block()` em `_fonte/build.py`): aparece no fim de TODAS as páginas, incluindo a 404.
+- GSAP + ScrollTrigger + Lenis para as entradas. Respeita "reduzir movimento" (a sequência passa a lista normal).
