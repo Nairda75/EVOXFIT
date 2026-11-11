@@ -32,7 +32,7 @@
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;background:var(--bg)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--texto);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--texto);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-x:clip}
 img,svg{display:block;max-width:100%}
 a{color:inherit}
 button,input,select,textarea{font:inherit;color:inherit}
@@ -496,4 +496,75 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
   .gl-on .vs-tabs button{padding:8px 9px;font-size:.76rem;letter-spacing:.04em;white-space:nowrap;flex:none}
   .gl-on .vs-vs .note-small{font-size:.72rem;margin:0}
   .gl-on .vs-scrim::after{background:linear-gradient(0deg,rgba(6,6,11,.97) 0%,rgba(6,6,11,.92) 46%,rgba(6,6,11,.7) 62%,rgba(6,6,11,0) 82%),linear-gradient(180deg,rgba(6,6,11,.6) 0%,rgba(6,6,11,0) 14%)}
+}
+
+/* ===== 3D: menos texto por cima da cena (mais pequeno, legível) ===== */
+.gl-on .vs-24{font-size:clamp(5rem,11vw,9.5rem);filter:drop-shadow(0 0 28px rgba(255,210,31,.3))}
+.gl-on .vs-joke{font-size:clamp(1.2rem,2.2vw,1.9rem);max-width:none;margin-top:8px}
+.gl-on .vs-intro .actions{margin-top:20px}
+.gl-on .vs-now{margin-top:12px;font-size:.95rem}
+.gl-on.vs-live .vs-step{padding:calc(var(--header-h) + 16px) 0 78px}
+.gl-on .vs-step>.wrap{grid-template-columns:minmax(0,.9fr) minmax(0,1.5fr);gap:clamp(16px,3vw,44px);align-items:end}
+.gl-on .vs-copy .num{font-size:.85rem;margin-bottom:8px}
+.gl-on .vs-copy .num::after{width:36px}
+.gl-on .vs-copy h2{font-size:clamp(1.6rem,2.6vw,2.4rem);margin-bottom:0;text-shadow:0 2px 18px rgba(0,0,0,.7)}
+.gl-on .vs-copy p{display:none}
+.gl-on .vs-vs{grid-template-columns:1fr 1fr;gap:8px 10px}
+.gl-on .vs-card{grid-template-columns:1fr;gap:3px;padding:12px 16px;border-radius:16px}
+.gl-on .vs-card .mk{display:none}
+.gl-on .vs-card .tag{font-size:.7rem;grid-row:auto}
+.gl-on .vs-card p{font-size:.95rem;line-height:1.3}
+.gl-on .vs-vs .note-small{grid-column:1/-1;font-size:.68rem;opacity:.75}
+.gl-on.vs-live .vs-tabs{bottom:18px}
+.gl-on .vs-tabs button{padding:7px 14px;font-size:.82rem}
+.gl-on .vs-scrim::after{background:linear-gradient(0deg,rgba(6,6,11,.9) 0%,rgba(6,6,11,.7) 22%,rgba(6,6,11,.25) 38%,rgba(6,6,11,0) 52%),linear-gradient(180deg,rgba(6,6,11,.5) 0%,rgba(6,6,11,0) 14%)}
+@media (max-width:860px){
+  .gl-on .vs-24{font-size:clamp(4.6rem,24vw,7rem)}
+  .gl-on .vs-joke{font-size:clamp(1.15rem,5.2vw,1.5rem)}
+  .gl-on.vs-live .vs-step{padding:calc(var(--header-h) + 10px) 0 102px}
+  .gl-on.vs-live .vs-tabs{display:none}
+  .gl-on .vs-step>.wrap{grid-template-columns:1fr;gap:8px}
+  .gl-on .vs-copy h2{font-size:clamp(1.4rem,6.4vw,1.8rem)}
+  .gl-on .vs-copy .num{display:none}
+  .gl-on .vs-vs{grid-template-columns:1fr;gap:6px}
+  .gl-on .vs-card{padding:8px 12px;grid-template-columns:auto 1fr;align-items:baseline;gap:10px}
+  .gl-on .vs-card .tag{font-size:.62rem;min-width:7.2em}
+  .gl-on .vs-card p{font-size:.88rem}
+  .gl-on .vs-trad{padding-block:8px}
+  .gl-on .vs-tabs button{padding:6px 8px;font-size:.7rem}
+  .gl-on .vs-vs .note-small{font-size:.62rem}
+  .gl-on .vs-scrim::after{background:linear-gradient(0deg,rgba(6,6,11,.92) 0%,rgba(6,6,11,.78) 34%,rgba(6,6,11,.3) 50%,rgba(6,6,11,0) 62%),linear-gradient(180deg,rgba(6,6,11,.5) 0%,rgba(6,6,11,0) 12%)}
+}
+
+/* ===== Marca (logo) e escolha de ginásio ===== */
+.brand img{width:46px;height:46px;flex:none;display:block}
+.brand .sub{margin-top:0;font-size:.82rem;color:var(--y)}
+.switch{font-family:var(--display);font-weight:700;font-size:.82rem;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:var(--muted);padding:6px 2px;border-bottom:1px solid var(--line-2);white-space:nowrap}
+.switch:hover{color:var(--y);border-color:var(--y)}
+@media (max-width:1100px){.header-actions .switch{display:none}}
+.mobile-menu .bottom .link{font-family:var(--display);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;font-size:.9rem}
+.page-gate{background:#0a0a0b;min-height:100vh;min-height:100svh}
+.gate{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:20px var(--gutter) 24px;text-align:center;background:radial-gradient(90% 70% at 50% 28%,#1a1840 0%,#0a0a0b 62%);overflow:hidden}
+.gate-top{width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.gate-top .lang{margin-left:auto}
+.gate-core{display:flex;flex-direction:column;align-items:center;gap:clamp(14px,2.4vh,26px);width:100%;max-width:880px}
+.gate-logo{width:clamp(110px,18vh,170px);height:auto;filter:drop-shadow(0 0 36px rgba(255,210,31,.28));animation:gateIn .9s var(--ease) both}
+.gate h1{font-size:clamp(2.2rem,6vw,4.6rem);line-height:.95;margin:0;animation:gateIn .9s .12s var(--ease) both}
+.gate .lead{margin:0;color:#d4d4da}
+.gate-cards{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,22px);width:100%;margin-top:clamp(6px,2vh,18px)}
+.gate-card{position:relative;display:grid;gap:6px;justify-items:start;text-align:left;padding:clamp(20px,3.4vw,38px);border-radius:26px;border:1.5px solid var(--line-2);background:rgba(255,255,255,.03);text-decoration:none;color:var(--txt);overflow:hidden;transition:transform .45s var(--ease),border-color .3s,background .3s;animation:gateIn .9s .25s var(--ease) both}
+.gate-card:nth-child(2){animation-delay:.36s;border-color:rgba(255,210,31,.5);background:linear-gradient(135deg,rgba(255,210,31,.16),rgba(255,210,31,.04))}
+.gate-card:hover,.gate-card:focus-visible{transform:translateY(-6px);border-color:var(--y)}
+.gc-name{font-family:var(--display);font-weight:800;font-style:italic;text-transform:uppercase;font-size:clamp(2.4rem,6vw,4.8rem);line-height:.9}
+.gc-sub{color:var(--muted);font-size:.95rem;min-height:2.6em}
+.gc-go{font-family:var(--display);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--y);margin-top:8px;display:inline}
+.gate-card svg{position:absolute;right:clamp(18px,2.6vw,30px);bottom:clamp(20px,3vw,34px);width:26px;height:26px;color:var(--y);transition:transform .35s var(--ease)}
+.gate-card:hover svg{transform:translateX(6px)}
+.gate-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.gate-foot{margin:0;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+@keyframes gateIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@media (max-width:640px){
+  .gate-cards{grid-template-columns:1fr}
+  .gate-card{padding:18px 20px}
+  .gc-sub{min-height:0}
 }

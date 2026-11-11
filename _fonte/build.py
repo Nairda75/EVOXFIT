@@ -14,7 +14,7 @@ OUT = os.path.dirname(HERE)
 S = json.load(open(os.path.join(HERE, 'site.json'), encoding='utf-8'))
 
 NAV = [
-    ("inicio", "index.html", "Início", "Home"),
+    ("inicio", "maia.html", "Início", "Home"),
     ("ginasio", "o-ginasio.html", "O ginásio", "The gym"),
     ("treino", "primeiro-treino.html", "Primeiro treino", "First workout"),
     ("contactos", "contactos.html", "Contactos", "Contact"),
@@ -47,7 +47,7 @@ ICON = {
 }
 
 MARK = '<svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="11" fill="#FFD21F"/><g transform="translate(5.1 0) skewX(-12)" fill="#0a0a0b"><rect x="13" y="11" width="7" height="26"/><rect x="13" y="11" width="23" height="6.5"/><rect x="13" y="20.7" width="18" height="6.5"/><rect x="13" y="30.5" width="23" height="6.5"/></g></svg>'
-BRAND = f'<a class="brand" href="index.html" aria-label="EVOXFIT Maia, página inicial" data-en-aria="EVOXFIT Maia, home">{MARK}<span><span class="word">EVOX<b>FIT</b></span><span class="sub">MAIA</span></span></a>'
+BRAND = '<a class="brand" href="maia.html" aria-label="EVOXFIT Maia, página inicial" data-en-aria="EVOXFIT Maia, home"><img src="assets/img/logo-evoxfit-128.png" width="46" height="46" alt=""><span class="sub">MAIA</span></a>'
 
 def esc(s): return html.escape(s, quote=True)
 
@@ -90,7 +90,7 @@ def head(m):
 <meta property="og:description" content="{esc(m['desc'])}">
 <meta property="og:image" content="assets/og.png">
 <meta property="og:locale" content="pt_PT">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/logo-evoxfit-128.png" type="image/png">
 <link rel="preload" href="assets/fonts/barlow-condensed-latin-800-italic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/barlow-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css">
@@ -114,6 +114,7 @@ def header(active):
 {links}
     </nav>
     <div class="header-actions">
+      <a class="switch" href="index.html" data-en="Switch gym">Mudar de ginásio</a>
       {lang}
       <a class="btn btn--y header-cta" href="primeiro-treino.html"><span data-en="First workout">Primeiro treino</span></a>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-movel" aria-label="Abrir menu" data-en-aria="Open menu">{ICON['menu']}</button>
@@ -129,7 +130,7 @@ def header(active):
 {mlinks}
   </nav>
   <div class="bottom">
-    <div class="row">{lang}<a class="link" href="{S['instagram']}" target="_blank" rel="noopener">Instagram</a></div>
+    <div class="row">{lang}<a class="link" href="index.html" data-en="Switch gym">Mudar de ginásio</a></div>
     <a class="btn btn--y btn--big" href="tel:{S['telefone_e164']}">{ICON['phone']}<span data-en="Call {S['telefone']}">Ligar {S['telefone']}</span></a>
   </div>
 </div>'''
@@ -165,6 +166,7 @@ def footer(active):
           <li><a href="https://wa.me/{S['whatsapp']}?text={WA_MSG_PT.replace(' ', '%20')}" data-wa="{esc(WA_MSG_PT)}" data-wa-en="{esc(WA_MSG_EN)}" target="_blank" rel="noopener">WhatsApp</a></li>
           <li><a href="{S['instagram']}" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="{S['google_ficha']}" target="_blank" rel="noopener" data-en="Google reviews">Avaliações no Google</a></li>
+          <li><a href="index.html" data-en="Switch gym">Mudar de ginásio</a></li>
         </ul>
       </div>
       <div>

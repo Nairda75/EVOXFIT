@@ -1,6 +1,6 @@
 /* EVOXFIT Maia — início: o ginásio em 3D, à noite.
    Cena feita à mão (sem fotografias): começa lá longe, vista de cima, e a cada deslize aproxima-se
-   — parque, entrada, sala principal, máquinas, receção. Sem WebGL ou com "reduzir movimento" não corre. */
+   — parque, entrada, sala principal, máquinas, receção. Sem WebGL não corre; com "reduzir movimento" fica em modo calmo (sem balanço nem pessoas/carros em movimento). */
 import * as THREE from "../vendor/three.module.min.js";
 
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
@@ -14,8 +14,8 @@ function webglOK() {
 
 const sec = document.querySelector("[data-vs]");
 const host = sec && sec.querySelector("[data-gl]");
-const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-if (sec && host && !reduce && webglOK()) {
+const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (sec && host && webglOK()) {
   const fontsReady = (document.fonts && document.fonts.load)
     ? Promise.race([document.fonts.load('italic 800 200px "Barlow Condensed"'), new Promise((r) => setTimeout(r, 1500))]).catch(() => {})
     : Promise.resolve();
@@ -28,8 +28,12 @@ function boot() {
   const INTRO = parseFloat(sec.dataset.intro || "0.1");
   const N = sec.querySelectorAll(".vs-step").length || 5;
 
-  const renderer = new THREE.WebGLRenderer({ antialias: !isMobile, powerPreference: "high-performance" });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 1.75));
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: "high-performance" }); }
+  catch (e) { renderer = new THREE.WebGLRenderer({ antialias: false }); }
+  const DPR = Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 1.5);
+  let pr = DPR, minPR = 0.55;
+  renderer.setPixelRatio(pr);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.05;
@@ -416,7 +420,6 @@ function boot() {
   const L4 = new THREE.PointLight(0x6d5cff, 150, 26, 1.8); L4.position.set(-14, 3.6, -34); scene.add(L4);
   const L5 = new THREE.PointLight(0xfff0d2, 70, 26, 1.8); L5.position.set(8, 1.6, 8); scene.add(L5);
   const L7 = new THREE.PointLight(0xfff4e2, 140, 36, 1.6); L7.position.set(0, 7, 13); scene.add(L7);
-  if (!isMobile) { const L6 = new THREE.PointLight(0xfff0d2, 160, 30, 1.7); L6.position.set(14, 5.6, -20); scene.add(L6); }
 
   /* ---------- Pessoas (silhuetas simples) ---------- */
   function person(shirt, h = 1) {
@@ -441,7 +444,7 @@ function boot() {
   const lift2 = person(0x1c1c24); lift2.position.set(17.4, 0, -20.6); lift2.rotation.y = Math.PI / 2;
 
   function animate(t) {
-    const s = t / 1000;
+    const s = calm ? 3 : t / 1000;
     // pessoas
     const sw = Math.sin(s * 7) * 0.9;
     runner.userData.legL.rotation.x = sw; runner.userData.legR.rotation.x = -sw; runner.userData.armL.rotation.x = -sw * 0.8; runner.userData.armR.rotation.x = sw * 0.8;
@@ -487,8 +490,8 @@ function boot() {
     if (portrait && f !== 1) { tmpV.copy(camPos).sub(camTgt); camPos.copy(camTgt).addScaledVector(tmpV, f); }
     const fov = lerp(KEYS[i].fov, KEYS[i + 1].fov, s) * (portrait ? 1.32 : 1);
     camera.fov = Math.min(fov, 80);
-    const sw = t / 1000, ins = smooth(clamp((6 - camPos.z) / 6));
-    camPos.x += Math.sin(sw * 0.4) * 0.12; camPos.y += Math.sin(sw * 0.55) * 0.07 + Math.sin(bobPh) * 0.045 * ins * bobAmp; camPos.x += Math.cos(bobPh * 0.5) * 0.03 * ins * bobAmp;
+    const sw = calm ? 0 : t / 1000, ins = smooth(clamp((6 - camPos.z) / 6));
+    camPos.x += Math.sin(sw * 0.4) * 0.12; camPos.y += Math.sin(sw * 0.55) * 0.07 + Math.sin(bobPh) * 0.045 * ins * bobAmp * (calm ? 0 : 1); camPos.x += Math.cos(bobPh * 0.5) * 0.03 * ins * bobAmp * (calm ? 0 : 1);
     const o = smooth(clamp((17 - camPos.z) / 8)); doors[0].position.x = -1.15 - o * 1.95; doors[1].position.x = 1.15 + o * 1.95;
     camera.position.copy(camPos); camera.lookAt(camTgt);
     camera.aspect = W0 / H0;
@@ -510,12 +513,23 @@ function boot() {
   window.addEventListener("scroll", read, { passive: true });
   function resize() {
     W0 = Math.max(1, host.clientWidth); H0 = Math.max(1, host.clientHeight);
+    const cap = Math.sqrt(2.4e6 / (W0 * H0));            // limite de pixéis: ecrãs 4K não afogam a placa gráfica
+    pr = Math.max(minPR, Math.min(pr, DPR, cap)); renderer.setPixelRatio(pr);
     renderer.setSize(W0, H0, false); read();
   }
   new ResizeObserver(resize).observe(host); resize(); cur = target;
 
+  // qualidade adaptativa: se o computador não aguenta ~30 fps, baixa a resolução (a cena continua igual)
+  let qAcc = 0, qN = 0;
+  function adapt(raw) {
+    if (raw > 0.25 || raw < 0.004) return;
+    qAcc += raw; qN++;
+    if (qN < 36) return;
+    const avg = qAcc / qN; qAcc = 0; qN = 0;
+    if (avg > 0.033 && pr > minPR + 0.01) { pr = Math.max(minPR, pr * 0.8); renderer.setPixelRatio(pr); renderer.setSize(W0, H0, false); }
+  }
   function frame(now) {
-    const dt = Math.min(0.1, (now - last) / 1000); last = now;
+    const dt = Math.min(0.1, (now - last) / 1000); adapt((now - last) / 1000); last = now;
     const prev = cur; cur += (target - cur) * (1 - Math.exp(-dt * 5.5));
     const sp = Math.abs(cur - prev) / Math.max(dt, 0.001); bobAmp += (clamp(sp * 14) - bobAmp) * 0.15; bobPh += Math.abs(cur - prev) * 900;
     if (Math.abs(target - cur) < 0.00005) cur = target;
@@ -529,6 +543,9 @@ function boot() {
     else if (!on && running) { running = false; cancelAnimationFrame(raf); }
   }, { rootMargin: "100px" }).observe(sec);
   document.addEventListener("visibilitychange", () => { if (document.hidden && running) { cancelAnimationFrame(raf); running = false; } else if (!document.hidden) read(); });
+
+  renderer.domElement.addEventListener("webglcontextlost", (e) => { e.preventDefault(); host.classList.remove("ready"); });
+  renderer.domElement.addEventListener("webglcontextrestored", () => { host.classList.add("ready"); frame(performance.now()); });
 
   frame(performance.now());
   sec.classList.add("gl-on");

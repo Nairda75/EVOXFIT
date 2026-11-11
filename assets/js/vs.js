@@ -55,7 +55,7 @@
 
   /* ---------- Sequência ---------- */
   var steps = [].slice.call(sec.querySelectorAll(".vs-step")), tabs = [].slice.call(sec.querySelectorAll(".vs-tabs button"));
-  var N = steps.length, INTRO = parseFloat(sec.getAttribute("data-intro") || "0.1"), live = !reduce, cur = -2;
+  var N = steps.length, INTRO = parseFloat(sec.getAttribute("data-intro") || "0.1"), live = true, cur = -2;
   if (live) sec.classList.add("vs-live");
 
   function span() { return Math.max(1, sec.offsetHeight - window.innerHeight); }
