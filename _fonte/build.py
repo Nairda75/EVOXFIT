@@ -60,7 +60,10 @@ def subst(text):
         '{{data_av}}': S['avaliacoes_data'],
     }
     for k, v in rep.items(): text = text.replace(k, v)
-    for k, v in ICON.items(): text = text.replace('{{icon:' + k + '}}', v)
+    for k, v in ICON.items():
+        text = text.replace('{{icon:' + k + '}}', v)
+        d = v.replace('<path ', '<path pathLength="100" ').replace('<circle ', '<circle pathLength="100" ').replace('<rect ', '<rect pathLength="100" ').replace('<svg ', '<svg class="draw" ', 1)
+        text = text.replace('{{iconD:' + k + '}}', d)
     return text
 
 WA_MSG_PT = "Olá! Gostava de saber mais sobre o EVOXFIT Maia."
@@ -145,6 +148,71 @@ def final_cta():
   </div>
 </section>'''
 
+
+def uno_band():
+    """Faixa a meio do site: a marca da UNO Studio como marca d'água."""
+    a = '<span>UNO STUDIO</span>' * 8
+    b = '<span>Feito por nós</span><i>✦</i>' * 10
+    return f'''<section class="uno" aria-label="UNO Studio" data-en-aria="UNO Studio">
+  <div class="uno-row uno-row--a" aria-hidden="true" data-uno-row="-1"><div class="uno-shift"><div class="uno-track">{a}</div></div></div>
+  <div class="uno-core wrap">
+    <p class="eyebrow" data-en="Made by UNO Studio">Feito pela UNO Studio</p>
+    <p class="uno-line" data-en="We do things <span class='y'>ourselves.</span> Always.">Fazemos as coisas <span class="y">por nós.</span> Sempre.</p>
+    <p class="uno-sub" data-en="This website was designed and built from scratch, by hand, by our own team." >Este site foi desenhado e programado de raiz, à mão, pela nossa própria equipa.</p>
+  </div>
+  <div class="uno-row uno-row--b" aria-hidden="true" data-uno-row="1"><div class="uno-shift"><div class="uno-track">{b}</div></div></div>
+</section>'''
+
+def contact_block():
+    """Contactos e localização: aparece no fim de TODAS as páginas, antes do rodapé."""
+    wa = f"https://wa.me/{S['whatsapp']}?text={WA_MSG_PT.replace(' ', '%20')}"
+    week = ''.join(f'<li><span data-en="{en}">{pt}</span><b>24h</b></li>' for pt, en in
+                   [("Seg", "Mon"), ("Ter", "Tue"), ("Qua", "Wed"), ("Qui", "Thu"), ("Sex", "Fri"), ("Sáb", "Sat"), ("Dom", "Sun")])
+    return f'''<section class="contact" id="onde" aria-labelledby="contacto-titulo">
+  <div class="wrap contact-wrap">
+    <div class="contact-main">
+      <p class="eyebrow" data-en="Find us">Onde estamos</p>
+      <h2 id="contacto-titulo" data-en="Come see us in <span class='y'>Maia.</span>">Vem ver-nos <span class="y">na Maia.</span></h2>
+      <div class="tabs" data-tabs>
+        <div class="tabs-list" role="tablist" aria-label="Contactos e localização" data-en-aria="Contact and location">
+          <button class="tab" role="tab" type="button" id="ct-t1" aria-controls="ct-p1" aria-selected="true" data-en="Address">Morada</button>
+          <button class="tab" role="tab" type="button" id="ct-t2" aria-controls="ct-p2" aria-selected="false" data-en="Hours">Horário</button>
+          <button class="tab" role="tab" type="button" id="ct-t3" aria-controls="ct-p3" aria-selected="false" data-en="Talk to us">Falar connosco</button>
+          <i class="tabs-ink"></i>
+        </div>
+        <div class="tabs-panels">
+          <div class="tabpanel" role="tabpanel" id="ct-p1" aria-labelledby="ct-t1">
+            <p class="contact-addr"><a href="{S['google_rota']}" target="_blank" rel="noopener">{S['morada']}<br>{S['codigo_postal']}</a></p>
+            <p class="meta"><span data-en="Plus Code">Plus Code</span> {S['plus_code']} · <span data-en="Outdoor parking at the door.">Estacionamento no exterior, à porta.</span></p>
+            <div class="btn-row">
+              <a class="btn btn--y" href="{S['google_rota']}" target="_blank" rel="noopener"><span data-en="Get directions">Como chegar</span>{ICON['arrow']}</a>
+              <a class="btn btn--line" href="{S['google_ficha']}" target="_blank" rel="noopener"><span data-en="Open in Google Maps">Abrir no Google Maps</span></a>
+            </div>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="ct-p2" aria-labelledby="ct-t2">
+            <p class="open-now" data-en="Open now · every day">Aberto agora · todos os dias</p>
+            <ul class="week" aria-label="Horário" data-en-aria="Opening hours">{week}</ul>
+            <p class="meta" data-en="Hours as shown on Google Maps. On public holidays, call to confirm.">Horário conforme o Google Maps. Em feriados, liga para confirmar.</p>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="ct-p3" aria-labelledby="ct-t3">
+            <a class="phone" href="tel:{S['telefone_e164']}">{S['telefone']}</a>
+            <div class="btn-row">
+              <a class="btn btn--y" href="tel:{S['telefone_e164']}">{ICON['phone']}<span data-en="Call now">Ligar agora</span></a>
+              <a class="btn btn--line" href="{wa}" data-wa="{esc(WA_MSG_PT)}" data-wa-en="{esc(WA_MSG_EN)}" target="_blank" rel="noopener">{ICON['wa']}<span>WhatsApp</span></a>
+              <a class="btn btn--line" href="{S['instagram']}" target="_blank" rel="noopener">{ICON['ig']}<span>Instagram</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="real-map">
+      <iframe title="Mapa do EVOXFIT Maia no Google Maps" data-en-title="EVOXFIT Maia on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="{S['google_mapa_embed']}"></iframe>
+      <div class="pin" aria-hidden="true"><b>EVOXFIT</b><i></i></div>
+      <button type="button" class="map-lock" data-en="Tap to explore the map">Toca para explorar o mapa</button>
+    </div>
+  </div>
+</section>'''
+
 def footer(active):
     pages = '\n'.join(f'<li><a href="{href}" data-en="{en}">{pt}</a></li>' for key, href, pt, en in NAV)
     return f'''<footer class="site-footer">
@@ -186,6 +254,7 @@ def footer(active):
 </div>'''}
 <script src="assets/js/config.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/tabs.js" defer></script>
 <script src="assets/vendor/gsap.min.js" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
 <script src="assets/vendor/lenis.min.js" defer></script>
@@ -259,14 +328,14 @@ def build():
         src = open(path, encoding='utf-8').read()
         m = re.match(r'<!--(\{.*?\})-->\s*', src, re.S)
         meta = json.loads(m.group(1)); body = src[m.end():]
-        body = body.replace('{{GALERIA}}', gal).replace('{{FOTOS}}', fotos)
+        body = body.replace('{{GALERIA}}', gal).replace('{{FOTOS}}', fotos).replace('{{UNO}}', uno_band())
         body = subst(body)
         if meta.get('bare'):
-            page = head(meta) + f'\n<body class="{meta.get("body", "page-inner")}">\n' + body + '\n<script src="assets/js/main.js"></script>\n</body>\n</html>\n'
+            page = head(meta) + f'\n<body class="{meta.get("body", "page-inner")}">\n' + body + '\n' + contact_block() + '\n<script src="assets/js/main.js"></script>\n<script src="assets/js/tabs.js" defer></script>\n</body>\n</html>\n'
         else:
             page = (head(meta) + f'\n<body class="{meta.get("body", "page-inner")} page-{meta["nav"]}">\n' + header(meta['nav'])
                     + '\n<main id="conteudo">\n' + body + '\n</main>\n'
-                    + (final_cta() if meta.get('cta', True) else '') + '\n' + footer(meta['nav']) + subst('') + meta.get('extra_js', '') + '\n</body>\n</html>\n')
+                    + (final_cta() if meta.get('cta', True) else '') + '\n' + contact_block() + '\n' + footer(meta['nav']) + subst('') + meta.get('extra_js', '') + '\n</body>\n</html>\n')
             page = subst(page)
         open(os.path.join(OUT, meta['file']), 'w', encoding='utf-8').write(page)
         print('ok', meta['file'])

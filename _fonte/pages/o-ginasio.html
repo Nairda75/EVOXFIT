@@ -9,16 +9,68 @@
 
 <section class="section--tight" aria-label="O que encontras" data-en-aria="What you'll find">
   <div class="wrap">
-    <ol class="zones">
-      <li class="zone"><span class="n">01</span><h3 data-en="Machines">Máquinas</h3><p data-en="Modern, varied equipment, singled out by members as one of the gym's biggest strengths.">Equipamento moderno e variado, apontado pelos sócios como um dos grandes pontos fortes do ginásio.</p><span class="ico">{{icon:dumbbell}}</span></li>
-      <li class="zone"><span class="n">02</span><h3 data-en="Free weights">Peso livre</h3><p data-en="Dumbbells and free weights for the more classic sessions.">Halteres e peso livre para os treinos mais clássicos.</p><span class="ico">{{icon:plate}}</span></li>
-      <li class="zone"><span class="n">03</span><h3 data-en="Space">Espaço</h3><p data-en="A big, well-organised gym, so you can train without bumping into anyone.">Um ginásio grande e bem organizado, para treinares sem andar aos encontrões.</p><span class="ico">{{icon:bolt}}</span></li>
-      <li class="zone"><span class="n">04</span><h3 data-en="Cleanliness">Limpeza</h3><p data-en="Modern facilities that are kept clean, one of the things members notice most.">Instalações modernas e limpas, uma das coisas que os sócios mais notam.</p><span class="ico">{{icon:spark}}</span></li>
-      <li class="zone"><span class="n">05</span><h3 data-en="Atmosphere">Ambiente</h3><p data-en="A friendly team, always ready to help, and a motivating vibe for beginners and veterans alike.">Equipa simpática, sempre pronta a ajudar, e um ambiente motivador para quem está a começar e para quem já treina há anos.</p><span class="ico">{{icon:users}}</span></li>
-      <li class="zone"><span class="n">06</span><h3 data-en="Parking">Estacionamento</h3><p data-en="Outdoor parking. You arrive, park and walk in.">Estacionamento no exterior. Chegas, estacionas e entras.</p><span class="ico">{{icon:parking}}</span></li>
-    </ol>
+    <div class="tabs tabs--v" data-tabs>
+      <div class="tabs-list" role="tablist" aria-label="Zonas do ginásio" data-en-aria="Gym areas">
+        <button class="tab" role="tab" type="button" id="zn-t1" aria-controls="zn-p1" aria-selected="true"><i>01</i><span data-en="Machines">Máquinas</span></button>
+        <button class="tab" role="tab" type="button" id="zn-t2" aria-controls="zn-p2" aria-selected="false"><i>02</i><span data-en="Free weights">Peso livre</span></button>
+        <button class="tab" role="tab" type="button" id="zn-t3" aria-controls="zn-p3" aria-selected="false"><i>03</i><span data-en="Space">Espaço</span></button>
+        <button class="tab" role="tab" type="button" id="zn-t4" aria-controls="zn-p4" aria-selected="false"><i>04</i><span data-en="Cleanliness">Limpeza</span></button>
+        <button class="tab" role="tab" type="button" id="zn-t5" aria-controls="zn-p5" aria-selected="false"><i>05</i><span data-en="Atmosphere">Ambiente</span></button>
+        <button class="tab" role="tab" type="button" id="zn-t6" aria-controls="zn-p6" aria-selected="false"><i>06</i><span data-en="Parking">Estacionamento</span></button>
+        <i class="tabs-ink"></i>
+      </div>
+      <div class="tabs-panels">
+        <div class="tabpanel zone-pane" role="tabpanel" id="zn-p1" aria-labelledby="zn-t1">
+          <span class="big-n" aria-hidden="true">01</span>
+          <span class="ico">{{iconD:dumbbell}}</span>
+          <h3 data-en="Machines">Máquinas</h3>
+          <p data-en="Modern, varied equipment, singled out by members as one of the gym's biggest strengths.">Equipamento moderno e variado, apontado pelos sócios como um dos grandes pontos fortes do ginásio.</p>
+          <div class="chips"><span class="chip"><span data-en="Excellent machines">Máquinas excelentes</span><b>8</b></span><span class="chip"><span data-en="Varied equipment">Equipamento variado</span><b>2</b></span></div>
+          <p class="src" data-en="Topics mentioned in Google reviews, {{data_av}}.">Temas referidos nas avaliações do Google, {{data_av}}.</p>
+        </div>
+        <div class="tabpanel zone-pane" role="tabpanel" id="zn-p2" aria-labelledby="zn-t2">
+          <span class="big-n" aria-hidden="true">02</span>
+          <span class="ico">{{iconD:plate}}</span>
+          <h3 data-en="Free weights">Peso livre</h3>
+          <p data-en="Dumbbells and free weights for the more classic sessions.">Halteres e peso livre para os treinos mais clássicos.</p>
+          
+        </div>
+        <div class="tabpanel zone-pane" role="tabpanel" id="zn-p3" aria-labelledby="zn-t3">
+          <span class="big-n" aria-hidden="true">03</span>
+          <span class="ico">{{iconD:bolt}}</span>
+          <h3 data-en="Space">Espaço</h3>
+          <p data-en="A big, well-organised gym, so you can train without bumping into anyone.">Um ginásio grande e bem organizado, para treinares sem andar aos encontrões.</p>
+          
+        </div>
+        <div class="tabpanel zone-pane" role="tabpanel" id="zn-p4" aria-labelledby="zn-t4">
+          <span class="big-n" aria-hidden="true">04</span>
+          <span class="ico">{{iconD:spark}}</span>
+          <h3 data-en="Cleanliness">Limpeza</h3>
+          <p data-en="Modern facilities that are kept clean, one of the things members notice most.">Instalações modernas e limpas, uma das coisas que os sócios mais notam.</p>
+          <div class="chips"><span class="chip"><span data-en="Modern facilities">Instalações modernas</span><b>3</b></span><span class="chip"><span data-en="Cleanliness">Limpeza</span><b>2</b></span></div>
+          <p class="src" data-en="Topics mentioned in Google reviews, {{data_av}}.">Temas referidos nas avaliações do Google, {{data_av}}.</p>
+        </div>
+        <div class="tabpanel zone-pane" role="tabpanel" id="zn-p5" aria-labelledby="zn-t5">
+          <span class="big-n" aria-hidden="true">05</span>
+          <span class="ico">{{iconD:users}}</span>
+          <h3 data-en="Atmosphere">Ambiente</h3>
+          <p data-en="A friendly team, always ready to help, and a motivating vibe for beginners and veterans alike.">Equipa simpática, sempre pronta a ajudar, e um ambiente motivador para quem está a começar e para quem já treina há anos.</p>
+          <div class="chips"><span class="chip"><span data-en="Friendly staff">Equipa simpática</span><b>8</b></span><span class="chip"><span data-en="Motivating">Motivador</span><b>3</b></span><span class="chip"><span data-en="Ready to help">Pronta a ajudar</span><b>2</b></span></div>
+          <p class="src" data-en="Topics mentioned in Google reviews, {{data_av}}.">Temas referidos nas avaliações do Google, {{data_av}}.</p>
+        </div>
+        <div class="tabpanel zone-pane" role="tabpanel" id="zn-p6" aria-labelledby="zn-t6">
+          <span class="big-n" aria-hidden="true">06</span>
+          <span class="ico">{{iconD:parking}}</span>
+          <h3 data-en="Parking">Estacionamento</h3>
+          <p data-en="Outdoor parking. You arrive, park and walk in.">Estacionamento no exterior. Chegas, estacionas e entras.</p>
+          
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+
+{{UNO}}
 
 {{GALERIA}}
 

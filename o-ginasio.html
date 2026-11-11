@@ -62,15 +62,75 @@
 
 <section class="section--tight" aria-label="O que encontras" data-en-aria="What you'll find">
   <div class="wrap">
-    <ol class="zones">
-      <li class="zone"><span class="n">01</span><h3 data-en="Machines">Máquinas</h3><p data-en="Modern, varied equipment, singled out by members as one of the gym's biggest strengths.">Equipamento moderno e variado, apontado pelos sócios como um dos grandes pontos fortes do ginásio.</p><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></svg></span></li>
-      <li class="zone"><span class="n">02</span><h3 data-en="Free weights">Peso livre</h3><p data-en="Dumbbells and free weights for the more classic sessions.">Halteres e peso livre para os treinos mais clássicos.</p><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></span></li>
-      <li class="zone"><span class="n">03</span><h3 data-en="Space">Espaço</h3><p data-en="A big, well-organised gym, so you can train without bumping into anyone.">Um ginásio grande e bem organizado, para treinares sem andar aos encontrões.</p><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span></li>
-      <li class="zone"><span class="n">04</span><h3 data-en="Cleanliness">Limpeza</h3><p data-en="Modern facilities that are kept clean, one of the things members notice most.">Instalações modernas e limpas, uma das coisas que os sócios mais notam.</p><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg></span></li>
-      <li class="zone"><span class="n">05</span><h3 data-en="Atmosphere">Ambiente</h3><p data-en="A friendly team, always ready to help, and a motivating vibe for beginners and veterans alike.">Equipa simpática, sempre pronta a ajudar, e um ambiente motivador para quem está a começar e para quem já treina há anos.</p><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17.5" cy="9" r="2.5"/><path d="M17 14.5a5 5 0 0 1 4.5 5"/></svg></span></li>
-      <li class="zone"><span class="n">06</span><h3 data-en="Parking">Estacionamento</h3><p data-en="Outdoor parking. You arrive, park and walk in.">Estacionamento no exterior. Chegas, estacionas e entras.</p><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg></span></li>
-    </ol>
+    <div class="tabs tabs--v" data-tabs>
+      <div class="tabs-list" role="tablist" aria-label="Zonas do ginásio" data-en-aria="Gym areas">
+        <button class="tab" role="tab" type="button" id="zn-t1" aria-controls="zn-p1" aria-selected="true"><i>01</i><span data-en="Machines">Máquinas</span></button>
+        <button class="tab" role="tab" type="button" id="zn-t2" aria-controls="zn-p2" aria-selected="false"><i>02</i><span data-en="Free weights">Peso livre</span></button>
+        <button class="tab" role="tab" type="button" id="zn-t3" aria-controls="zn-p3" aria-selected="false"><i>03</i><span data-en="Space">Espaço</span></button>
+        <button class="tab" role="tab" type="button" id="zn-t4" aria-controls="zn-p4" aria-selected="false"><i>04</i><span data-en="Cleanliness">Limpeza</span></button>
+        <button class="tab" role="tab" type="button" id="zn-t5" aria-controls="zn-p5" aria-selected="false"><i>05</i><span data-en="Atmosphere">Ambiente</span></button>
+        <button class="tab" role="tab" type="button" id="zn-t6" aria-controls="zn-p6" aria-selected="false"><i>06</i><span data-en="Parking">Estacionamento</span></button>
+        <i class="tabs-ink"></i>
+      </div>
+      <div class="tabs-panels">
+        <div class="tabpanel zone-pane" role="tabpanel" id="zn-p1" aria-labelledby="zn-t1">
+          <span class="big-n" aria-hidden="true">01</span>
+          <span class="ico"><svg class="draw" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path pathLength="100" d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></svg></span>
+          <h3 data-en="Machines">Máquinas</h3>
+          <p data-en="Modern, varied equipment, singled out by members as one of the gym's biggest strengths.">Equipamento moderno e variado, apontado pelos sócios como um dos grandes pontos fortes do ginásio.</p>
+          <div class="chips"><span class="chip"><span data-en="Excellent machines">Máquinas excelentes</span><b>8</b></span><span class="chip"><span data-en="Varied equipment">Equipamento variado</span><b>2</b></span></div>
+          <p class="src" data-en="Topics mentioned in Google reviews, novembro de 2026.">Temas referidos nas avaliações do Google, novembro de 2026.</p>
+        </div>
+        <div class="tabpanel zone-pane" role="tabpanel" id="zn-p2" aria-labelledby="zn-t2">
+          <span class="big-n" aria-hidden="true">02</span>
+          <span class="ico"><svg class="draw" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle pathLength="100" cx="12" cy="12" r="9"/><circle pathLength="100" cx="12" cy="12" r="3"/><path pathLength="100" d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></span>
+          <h3 data-en="Free weights">Peso livre</h3>
+          <p data-en="Dumbbells and free weights for the more classic sessions.">Halteres e peso livre para os treinos mais clássicos.</p>
+          
+        </div>
+        <div class="tabpanel zone-pane" role="tabpanel" id="zn-p3" aria-labelledby="zn-t3">
+          <span class="big-n" aria-hidden="true">03</span>
+          <span class="ico"><svg class="draw" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path pathLength="100" d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span>
+          <h3 data-en="Space">Espaço</h3>
+          <p data-en="A big, well-organised gym, so you can train without bumping into anyone.">Um ginásio grande e bem organizado, para treinares sem andar aos encontrões.</p>
+          
+        </div>
+        <div class="tabpanel zone-pane" role="tabpanel" id="zn-p4" aria-labelledby="zn-t4">
+          <span class="big-n" aria-hidden="true">04</span>
+          <span class="ico"><svg class="draw" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path pathLength="100" d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path pathLength="100" d="M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg></span>
+          <h3 data-en="Cleanliness">Limpeza</h3>
+          <p data-en="Modern facilities that are kept clean, one of the things members notice most.">Instalações modernas e limpas, uma das coisas que os sócios mais notam.</p>
+          <div class="chips"><span class="chip"><span data-en="Modern facilities">Instalações modernas</span><b>3</b></span><span class="chip"><span data-en="Cleanliness">Limpeza</span><b>2</b></span></div>
+          <p class="src" data-en="Topics mentioned in Google reviews, novembro de 2026.">Temas referidos nas avaliações do Google, novembro de 2026.</p>
+        </div>
+        <div class="tabpanel zone-pane" role="tabpanel" id="zn-p5" aria-labelledby="zn-t5">
+          <span class="big-n" aria-hidden="true">05</span>
+          <span class="ico"><svg class="draw" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle pathLength="100" cx="9" cy="8" r="3.5"/><path pathLength="100" d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle pathLength="100" cx="17.5" cy="9" r="2.5"/><path pathLength="100" d="M17 14.5a5 5 0 0 1 4.5 5"/></svg></span>
+          <h3 data-en="Atmosphere">Ambiente</h3>
+          <p data-en="A friendly team, always ready to help, and a motivating vibe for beginners and veterans alike.">Equipa simpática, sempre pronta a ajudar, e um ambiente motivador para quem está a começar e para quem já treina há anos.</p>
+          <div class="chips"><span class="chip"><span data-en="Friendly staff">Equipa simpática</span><b>8</b></span><span class="chip"><span data-en="Motivating">Motivador</span><b>3</b></span><span class="chip"><span data-en="Ready to help">Pronta a ajudar</span><b>2</b></span></div>
+          <p class="src" data-en="Topics mentioned in Google reviews, novembro de 2026.">Temas referidos nas avaliações do Google, novembro de 2026.</p>
+        </div>
+        <div class="tabpanel zone-pane" role="tabpanel" id="zn-p6" aria-labelledby="zn-t6">
+          <span class="big-n" aria-hidden="true">06</span>
+          <span class="ico"><svg class="draw" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect pathLength="100" x="4" y="3" width="16" height="18" rx="3"/><path pathLength="100" d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg></span>
+          <h3 data-en="Parking">Estacionamento</h3>
+          <p data-en="Outdoor parking. You arrive, park and walk in.">Estacionamento no exterior. Chegas, estacionas e entras.</p>
+          
+        </div>
+      </div>
+    </div>
   </div>
+</section>
+
+<section class="uno" aria-label="UNO Studio" data-en-aria="UNO Studio">
+  <div class="uno-row uno-row--a" aria-hidden="true" data-uno-row="-1"><div class="uno-shift"><div class="uno-track"><span>UNO STUDIO</span><span>UNO STUDIO</span><span>UNO STUDIO</span><span>UNO STUDIO</span><span>UNO STUDIO</span><span>UNO STUDIO</span><span>UNO STUDIO</span><span>UNO STUDIO</span></div></div></div>
+  <div class="uno-core wrap">
+    <p class="eyebrow" data-en="Made by UNO Studio">Feito pela UNO Studio</p>
+    <p class="uno-line" data-en="We do things <span class='y'>ourselves.</span> Always.">Fazemos as coisas <span class="y">por nós.</span> Sempre.</p>
+    <p class="uno-sub" data-en="This website was designed and built from scratch, by hand, by our own team." >Este site foi desenhado e programado de raiz, à mão, pela nossa própria equipa.</p>
+  </div>
+  <div class="uno-row uno-row--b" aria-hidden="true" data-uno-row="1"><div class="uno-shift"><div class="uno-track"><span>Feito por nós</span><i>✦</i><span>Feito por nós</span><i>✦</i><span>Feito por nós</span><i>✦</i><span>Feito por nós</span><i>✦</i><span>Feito por nós</span><i>✦</i><span>Feito por nós</span><i>✦</i><span>Feito por nós</span><i>✦</i><span>Feito por nós</span><i>✦</i><span>Feito por nós</span><i>✦</i><span>Feito por nós</span><i>✦</i></div></div></div>
 </section>
 
 
@@ -96,6 +156,50 @@
     <div class="actions">
       <a class="btn btn--k btn--big" href="primeiro-treino.html"><span data-en="Book my first workout">Marcar o meu primeiro treino</span><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arr"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
       <a class="btn btn--line btn--big" href="tel:+351961382108"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span>961 382 108</span></a>
+    </div>
+  </div>
+</section>
+<section class="contact" id="onde" aria-labelledby="contacto-titulo">
+  <div class="wrap contact-wrap">
+    <div class="contact-main">
+      <p class="eyebrow" data-en="Find us">Onde estamos</p>
+      <h2 id="contacto-titulo" data-en="Come see us in <span class='y'>Maia.</span>">Vem ver-nos <span class="y">na Maia.</span></h2>
+      <div class="tabs" data-tabs>
+        <div class="tabs-list" role="tablist" aria-label="Contactos e localização" data-en-aria="Contact and location">
+          <button class="tab" role="tab" type="button" id="ct-t1" aria-controls="ct-p1" aria-selected="true" data-en="Address">Morada</button>
+          <button class="tab" role="tab" type="button" id="ct-t2" aria-controls="ct-p2" aria-selected="false" data-en="Hours">Horário</button>
+          <button class="tab" role="tab" type="button" id="ct-t3" aria-controls="ct-p3" aria-selected="false" data-en="Talk to us">Falar connosco</button>
+          <i class="tabs-ink"></i>
+        </div>
+        <div class="tabs-panels">
+          <div class="tabpanel" role="tabpanel" id="ct-p1" aria-labelledby="ct-t1">
+            <p class="contact-addr"><a href="https://www.google.com/maps/dir/?api=1&destination=41.2648302,-8.633035" target="_blank" rel="noopener">R. Eng. Frederico Ulrich 1636<br>4470-605 Maia</a></p>
+            <p class="meta"><span data-en="Plus Code">Plus Code</span> 7978+WQ Maia · <span data-en="Outdoor parking at the door.">Estacionamento no exterior, à porta.</span></p>
+            <div class="btn-row">
+              <a class="btn btn--y" href="https://www.google.com/maps/dir/?api=1&destination=41.2648302,-8.633035" target="_blank" rel="noopener"><span data-en="Get directions">Como chegar</span><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arr"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+              <a class="btn btn--line" href="https://www.google.com/maps/place/Evox+Fit+Maia/@41.2648302,-8.633035,17z" target="_blank" rel="noopener"><span data-en="Open in Google Maps">Abrir no Google Maps</span></a>
+            </div>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="ct-p2" aria-labelledby="ct-t2">
+            <p class="open-now" data-en="Open now · every day">Aberto agora · todos os dias</p>
+            <ul class="week" aria-label="Horário" data-en-aria="Opening hours"><li><span data-en="Mon">Seg</span><b>24h</b></li><li><span data-en="Tue">Ter</span><b>24h</b></li><li><span data-en="Wed">Qua</span><b>24h</b></li><li><span data-en="Thu">Qui</span><b>24h</b></li><li><span data-en="Fri">Sex</span><b>24h</b></li><li><span data-en="Sat">Sáb</span><b>24h</b></li><li><span data-en="Sun">Dom</span><b>24h</b></li></ul>
+            <p class="meta" data-en="Hours as shown on Google Maps. On public holidays, call to confirm.">Horário conforme o Google Maps. Em feriados, liga para confirmar.</p>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="ct-p3" aria-labelledby="ct-t3">
+            <a class="phone" href="tel:+351961382108">961 382 108</a>
+            <div class="btn-row">
+              <a class="btn btn--y" href="tel:+351961382108"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span data-en="Call now">Ligar agora</span></a>
+              <a class="btn btn--line" href="https://wa.me/351961382108?text=Olá!%20Gostava%20de%20saber%20mais%20sobre%20o%20EVOXFIT%20Maia." data-wa="Olá! Gostava de saber mais sobre o EVOXFIT Maia." data-wa-en="Hello! I would like to know more about EVOXFIT Maia." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.26 8.26 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 4.54 0 8.24 3.7 8.24 8.24 0 4.55-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.13-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg><span>WhatsApp</span></a>
+              <a class="btn btn--line" href="https://www.instagram.com/evoxfit.maia/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg><span>Instagram</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="real-map">
+      <iframe title="Mapa do EVOXFIT Maia no Google Maps" data-en-title="EVOXFIT Maia on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=41.2648302,-8.633035&z=17&output=embed"></iframe>
+      <div class="pin" aria-hidden="true"><b>EVOXFIT</b><i></i></div>
+      <button type="button" class="map-lock" data-en="Tap to explore the map">Toca para explorar o mapa</button>
     </div>
   </div>
 </section>
@@ -141,6 +245,7 @@
 </div>
 <script src="assets/js/config.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/tabs.js" defer></script>
 <script src="assets/vendor/gsap.min.js" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
 <script src="assets/vendor/lenis.min.js" defer></script>

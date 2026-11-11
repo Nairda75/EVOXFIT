@@ -70,11 +70,17 @@
   if (document.querySelector(".page-hero")) gsap.from(".page-hero .crumb, .page-hero .lead", { y: 26, opacity: 0, duration: 1, ease: "power3.out", stagger: 0.12, delay: 0.5 });
 
   /* ---------- Cartões e listas em cascata ---------- */
-  ["section:not(.vs) .eyebrow", ".zone", ".chip", ".voice", ".side-steps li", ".faq details", ".info li", ".hours li", ".form-card", ".invite .steps li", ".invite .actions > *", ".final-cta .actions > *", ".footer-top > div", ".lead:not(.vs-intro .lead):not(.page-hero .lead)", ".stars", ".score", ".dist > div"].forEach(function (sel) {
+  ["section:not(.vs) .eyebrow", ".zone", ".chip", ".voice", ".side-steps li", ".faq details", ".info li", ".hours li", ".form-card", ".invite .tabs", ".invite .actions > *", ".uno-core > *", ".contact .tabs", ".contact .real-map", ".tabs--v", ".final-cta .actions > *", ".footer-top > div", ".lead:not(.vs-intro .lead):not(.page-hero .lead)", ".stars", ".score", ".dist > div"].forEach(function (sel) {
     ScrollTrigger.batch(sel, {
       start: "top 92%", once: true,
       onEnter: function (els) { gsap.fromTo(els, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", stagger: 0.09, overwrite: true, clearProps: "transform,opacity" }); }
     });
+  });
+
+  /* ---------- Faixa UNO Studio: as filas deslizam em sentidos opostos com o scroll ---------- */
+  gsap.utils.toArray("[data-uno-row]").forEach(function (r) {
+    var d = +r.getAttribute("data-uno-row");
+    gsap.fromTo(r.querySelector(".uno-shift"), { xPercent: -7 * d }, { xPercent: 7 * d, ease: "none", scrollTrigger: { trigger: r.closest(".uno"), start: "top bottom", end: "bottom top", scrub: 0.6 } });
   });
 
   /* ---------- Contadores ---------- */
