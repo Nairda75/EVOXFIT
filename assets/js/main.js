@@ -65,7 +65,7 @@
   /* ---------- Cabeçalho, barra de progresso e botões fixos ---------- */
   var header = document.querySelector(".site-header");
   var dock = document.querySelector(".dock");
-  var bar = document.querySelector("[data-bar]");
+  var bar = document.querySelector("[data-vs]");
   var lastY = window.scrollY;
   function onScroll() {
     var y = window.scrollY, dy = y - lastY;
@@ -114,9 +114,9 @@
     window.addEventListener("pageshow", function (e) { if (e.persisted) { veil.style.display = "none"; } });
   }
 
-  /* ---------- Brilho que segue o rato nos cartões e botões grandes ---------- */
+  /* ---------- Botões grandes: brilho que segue o rato ---------- */
   document.addEventListener("pointermove", function (e) {
-    var el = e.target.closest && e.target.closest(".card, .zone, .btn--big");
+    var el = e.target.closest && e.target.closest(".btn--big");
     if (!el) return;
     var r = el.getBoundingClientRect();
     el.style.setProperty("--mx", (e.clientX - r.left) + "px");
@@ -130,9 +130,9 @@
   });
 
   /* ---------- Galeria (só existe se houver fotografias) ---------- */
-  var grid = document.querySelector(".gallery"), lb = document.querySelector(".lightbox");
+  var grid = document.querySelector("[data-photos]"), lb = document.querySelector(".lightbox");
   if (grid && lb) {
-    var items = Array.prototype.slice.call(grid.querySelectorAll("button")), cur = 0, last = null;
+    var items = Array.prototype.slice.call(grid.querySelectorAll("button[data-full]")), cur = 0, last = null;
     var im = lb.querySelector("img");
     var show = function (i) { cur = (i + items.length) % items.length; im.src = items[cur].dataset.full; im.alt = items[cur].querySelector("img").alt; };
     var close = function () { lb.classList.remove("open"); body.style.overflow = ""; im.removeAttribute("src"); if (last) last.focus(); };
@@ -145,6 +145,22 @@
       if (!lb.classList.contains("open")) return;
       if (e.key === "Escape") close(); else if (e.key === "ArrowLeft") show(cur - 1); else if (e.key === "ArrowRight") show(cur + 1);
     });
+  }
+
+  /* ---------- Fotografias: setas que deslizam a tira ---------- */
+  var strip = document.querySelector("[data-strip]");
+  if (strip) {
+    var prev = document.querySelector("[data-strip-prev]"), next = document.querySelector("[data-strip-next]");
+    var step = function () { var c = strip.children[0]; return c ? c.getBoundingClientRect().width + 14 : 300; };
+    var sync = function () {
+      if (prev) prev.disabled = strip.scrollLeft < 8;
+      if (next) next.disabled = strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 8;
+    };
+    if (prev) prev.addEventListener("click", function () { strip.scrollBy({ left: -step(), behavior: reduce ? "auto" : "smooth" }); });
+    if (next) next.addEventListener("click", function () { strip.scrollBy({ left: step(), behavior: reduce ? "auto" : "smooth" }); });
+    strip.addEventListener("scroll", sync, { passive: true });
+    window.addEventListener("resize", sync);
+    sync();
   }
 
   document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });

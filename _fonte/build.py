@@ -5,7 +5,7 @@ Cada ficheiro em _fonte/pages/*.html começa com um comentário JSON:
 Os dados do ginásio (telefone, morada, nota Google...) estão em _fonte/site.json.
 Placeholders de texto: {{tel}} {{tel_e164}} {{wa}} {{morada}} {{cp}} {{plus}} {{ig}} {{rota}} {{ficha}} {{nota}} {{n}} ...
 Placeholders de ícone: {{icon:phone}} {{icon:arrow}} ...
-Se existirem fotografias em assets/img/gym-*.jpg, a galeria aparece sozinha ({{GALERIA}}).
+Se existirem fotografias em assets/img/gym-*.jpg, aparecem sozinhas na tira do início ({{FOTOS}}) e na galeria de 'O ginásio' ({{GALERIA}}).
 """
 import json, os, re, glob, html
 
@@ -39,6 +39,7 @@ ICON = {
     "spark": svg('<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/>'),
     "users": svg('<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17.5" cy="9" r="2.5"/><path d="M17 14.5a5 5 0 0 1 4.5 5"/>'),
     "bolt": svg('<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>'),
+    "down": svg('<path d="M12 4v15M6 13l6 6 6-6"/>'),
     "left": svg('<path d="M15 5l-7 7 7 7"/>'),
     "right": svg('<path d="M9 5l7 7-7 7"/>'),
     "check": svg('<path d="M5 12.5l4.5 4.5L19 7"/>'),
@@ -141,7 +142,6 @@ def final_cta():
       <a class="btn btn--k btn--big" href="primeiro-treino.html"><span data-en="Book my first workout">Marcar o meu primeiro treino</span>{ICON['arrow']}</a>
       <a class="btn btn--line btn--big" href="tel:{S['telefone_e164']}">{ICON['phone']}<span>{S['telefone']}</span></a>
     </div>
-    <p class="hours-line" data-en="Open 24 hours · 7 days a week">Aberto 24 horas · 7 dias por semana</p>
   </div>
 </section>'''
 
@@ -152,7 +152,7 @@ def footer(active):
     <div class="footer-top">
       <div>
         {BRAND}
-        <p data-en="A gym that never closes. Train when you want, at EVOXFIT Maia.">Um ginásio que nunca fecha. Treina quando quiseres, no EVOXFIT Maia.</p>
+        <p data-en="Train when you want, at EVOXFIT Maia.">Treina quando quiseres, no EVOXFIT Maia.</p>
       </div>
       <div>
         <h3 data-en="Pages">Páginas</h3>
@@ -170,7 +170,6 @@ def footer(active):
       <div>
         <h3 data-en="Find us">Onde estamos</h3>
         <ul>
-          <li data-en="Open 24 hours, every day">Aberto 24 horas, todos os dias</li>
           <li><a href="{S['google_rota']}" target="_blank" rel="noopener">{S['morada']}<br>{S['codigo_postal']}</a></li>
         </ul>
       </div>
@@ -192,21 +191,60 @@ def footer(active):
 <script src="assets/vendor/lenis.min.js" defer></script>
 <script src="assets/js/anim.js" defer></script>'''
 
-def gallery_html():
-    imgs = sorted(glob.glob(os.path.join(OUT, 'assets', 'img', 'gym-*.jpg')))
-    if not imgs: return ''
-    btns = []
+def _imgs():
+    return sorted(glob.glob(os.path.join(OUT, 'assets', 'img', 'gym-*.jpg')))
+
+LIGHTBOX = '''<div class="lightbox" role="dialog" aria-modal="true" aria-label="Fotografia" data-en-aria="Photo"><img alt=""><button class="lb-close" type="button" aria-label="Fechar" data-en-aria="Close">{{icon:close}}</button><button class="lb-prev" type="button" aria-label="Anterior" data-en-aria="Previous">{{icon:left}}</button><button class="lb-next" type="button" aria-label="Seguinte" data-en-aria="Next">{{icon:right}}</button></div>'''
+
+def _photo_buttons(imgs):
+    out = []
     for p in imgs:
         rel = os.path.relpath(p, OUT).replace(os.sep, '/')
-        btns.append(f'<button type="button" data-full="{rel}" aria-label="Ver fotografia" data-en-aria="View photo"><img src="{rel}" alt="Treino no EVOXFIT Maia" data-en-alt="Training at EVOXFIT Maia" loading="lazy" decoding="async"></button>')
+        out.append(f'<button type="button" data-full="{rel}" aria-label="Ver fotografia" data-en-aria="View photo"><img src="{rel}" alt="Treino no EVOXFIT Maia" data-en-alt="Training at EVOXFIT Maia" loading="lazy" decoding="async"></button>')
+    return out
+
+def gallery_html():
+    """Grelha da página 'O ginásio': só aparece quando existem fotografias reais."""
+    imgs = _imgs()
+    if not imgs: return ''
     return ('''<section class="section" aria-labelledby="gal-titulo">
   <div class="wrap">
     <p class="eyebrow" data-en="Inside">Por dentro</p>
     <h2 id="gal-titulo" style="margin-bottom:36px" data-en="See it for yourself.">Vê com os teus olhos.</h2>
-    <div class="gallery">''' + '\n'.join(btns) + '''</div>
+    <div class="gallery" data-photos>''' + '\n'.join(_photo_buttons(imgs)) + '</div>\n  </div>\n</section>\n' + LIGHTBOX)
+
+PLACEHOLDERS = [
+    ("Zona de máquinas", "Machines area"), ("Peso livre", "Free weights"), ("Entrada e receção", "Entrance and reception"),
+    ("Espaço de treino", "Training floor"), ("Exterior e estacionamento", "Outside and parking"), ("A equipa", "The team"),
+]
+
+def fotos_html():
+    """Tira de fotos do início. Sem fotografias reais mostra marcadores a dizer que foto entra em cada sítio."""
+    imgs = _imgs()
+    if imgs:
+        items = '\n'.join(_photo_buttons(imgs)); attr = ' data-photos'; extra = LIGHTBOX
+    else:
+        print('AVISO: sem fotografias em assets/img/gym-*.jpg — a tira do início mostra marcadores.')
+        items = '\n'.join(
+            f'<figure class="ph">{ICON["dumbbell"]}<b data-en="{en}">{pt}</b><span data-en="A real photo of the gym goes here.">Aqui entra uma foto real do ginásio.</span></figure>'
+            for pt, en in PLACEHOLDERS)
+        attr = ''; extra = ''
+    return f'''<section class="section photos" aria-labelledby="fotos-titulo">
+  <div class="wrap head">
+    <div>
+      <p class="eyebrow" data-en="Inside">Por dentro</p>
+      <h2 id="fotos-titulo" data-en="See the <span class='y'>space.</span>">Vê o <span class="y">espaço.</span></h2>
+    </div>
+    <div class="strip-ctl">
+      <button type="button" data-strip-prev aria-label="Anterior" data-en-aria="Previous">{ICON['left']}</button>
+      <button type="button" data-strip-next aria-label="Seguinte" data-en-aria="Next">{ICON['right']}</button>
+    </div>
+  </div>
+  <div class="strip" data-strip{attr}>
+{items}
   </div>
 </section>
-<div class="lightbox" role="dialog" aria-modal="true" aria-label="Fotografia" data-en-aria="Photo"><img alt=""><button class="lb-close" type="button" aria-label="Fechar">{{icon:close}}</button><button class="lb-prev" type="button" aria-label="Anterior">{{icon:left}}</button><button class="lb-next" type="button" aria-label="Seguinte">{{icon:right}}</button></div>''')
+{extra}'''
 
 def write_config_js():
     cfg = {"nome": S['nome'], "wa": S['whatsapp'], "tel": S['telefone_e164'], "telDisplay": S['telefone'],
@@ -216,12 +254,12 @@ def write_config_js():
 
 def build():
     write_config_js()
-    gal = subst(gallery_html())
+    gal = subst(gallery_html()); fotos = subst(fotos_html())
     for path in sorted(glob.glob(os.path.join(HERE, 'pages', '*.html'))):
         src = open(path, encoding='utf-8').read()
         m = re.match(r'<!--(\{.*?\})-->\s*', src, re.S)
         meta = json.loads(m.group(1)); body = src[m.end():]
-        body = body.replace('{{GALERIA}}', gal)
+        body = body.replace('{{GALERIA}}', gal).replace('{{FOTOS}}', fotos)
         body = subst(body)
         if meta.get('bare'):
             page = head(meta) + f'\n<body class="{meta.get("body", "page-inner")}">\n' + body + '\n<script src="assets/js/main.js"></script>\n</body>\n</html>\n'

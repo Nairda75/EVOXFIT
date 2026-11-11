@@ -52,152 +52,175 @@
   </div>
 </div>
 <main id="conteudo">
-<section class="bar" data-bar aria-label="O ginásio, carregado à medida que desces" data-en-aria="The gym, loaded as you scroll">
-  <div class="bar-sticky">
-    <div class="bar-canvas" aria-hidden="true"></div>
-    <div class="bar-fallback" aria-hidden="true">
-      <svg viewBox="0 0 960 360" fill="none">
-        <rect x="40" y="172" width="880" height="16" rx="8" fill="#c9c9cf"/>
-        <g fill="#18181c" stroke="#ffd21f" stroke-width="3">
-          <rect data-pair="3" x="170" y="130" width="26" height="100" rx="6"/><rect data-pair="2" x="204" y="96" width="26" height="168" rx="6"/><rect data-pair="1" x="238" y="62" width="30" height="236" rx="6"/><rect data-pair="0" x="276" y="40" width="34" height="280" rx="6"/>
-          <rect data-pair="0" x="650" y="40" width="34" height="280" rx="6"/><rect data-pair="1" x="692" y="62" width="30" height="236" rx="6"/><rect data-pair="2" x="730" y="96" width="26" height="168" rx="6"/><rect data-pair="3" x="764" y="130" width="26" height="100" rx="6"/>
-        </g>
-      </svg>
-    </div>
-    <div class="bar-vignette"></div>
+<section class="vs" data-vs aria-label="EVOXFIT, ponto a ponto, contra um ginásio tradicional" data-en-aria="EVOXFIT, point by point, against a traditional gym">
+  <div class="vs-sticky">
 
-    <div class="bar-hud" aria-hidden="true">
-      <div class="kg"><span class="kg-num" data-kg>20</span><span class="kg-unit">KG</span></div>
-      <div class="kg-meter"><i data-meter></i></div>
-      <div class="kg-label" data-en="Load on the bar">Carga na barra</div>
-    </div>
-
-    <div class="bar-intro">
+    <div class="vs-intro">
       <div class="wrap">
-        <p class="eyebrow" data-en="Gym · Maia · Open 24 hours">Ginásio · Maia · Aberto 24 horas</p>
-        <h1 data-en="Train when <span class='y'>you want.</span>">Treina quando <span class="y">quiseres.</span></h1>
-        <p class="lead" data-en="The gym that never closes, in Maia. Quality machines, plenty of space and parking at the door.">O ginásio que nunca fecha, na Maia. Máquinas de qualidade, espaço de sobra e estacionamento à porta.</p>
-        <div class="actions">
-          <a class="btn btn--y btn--big" href="primeiro-treino.html"><span data-en="Book my first workout">Marcar primeiro treino</span><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arr"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
-          <a class="btn btn--line btn--big" href="tel:+351961382108"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span>961 382 108</span></a>
+        <div class="vs-copy-intro">
+          <p class="eyebrow" data-en="Gym · Maia">Ginásio · Maia</p>
+          <h1><span class="vs-24">24H</span><span class="vs-joke" data-en="Not even the rooster gets up this early.">Nem o galo madruga tanto.</span></h1>
+          <p class="vs-now"><i></i><span data-now>Sim, a porta está aberta.</span></p>
+          <p class="lead" data-en="Top machines, plenty of space and a team that helps. All that's missing is your first workout.">Máquinas de topo, espaço de sobra e uma equipa que ajuda. Só falta o teu primeiro treino.</p>
+          <div class="actions">
+            <a class="btn btn--y btn--big" href="primeiro-treino.html"><span data-en="Book my first workout">Marcar primeiro treino</span><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arr"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+            <button class="btn btn--line" type="button" data-vs-go="1"><span data-en="See what makes us different">Ver o que nos distingue</span><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15M6 13l6 6 6-6"/></svg></button>
+          </div>
+          <p class="vs-proof">
+            <a href="#avaliacoes"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8L12 2.8Z"/></svg><span><b>4,7</b> <span data-en="on Google · 32 reviews">no Google · 32 avaliações</span></span></a>
+            <a href="tel:+351961382108"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span>961 382 108</span></a>
+          </p>
+        </div>
+        <div class="vs-dial dial" aria-hidden="true">
+          <svg viewBox="0 0 400 400">
+            <g data-ticks></g>
+            <circle class="track" cx="200" cy="200" r="135"/>
+            <circle class="arc" data-arc cx="200" cy="200" r="135" transform="rotate(-90 200 200)"/>
+            <g class="hand-g" data-hand><line class="hand" x1="200" y1="92" x2="200" y2="72"/><circle class="dot" cx="200" cy="65" r="9"/></g>
+          </svg>
+          <div class="dial-time"><b data-time>00:00</b><small data-en="Right now">Agora mesmo</small></div>
         </div>
       </div>
     </div>
 
-    <ol class="bar-chapters">
-      <li class="bar-chapter" data-from="0.08" data-to="0.30">
-        <span class="num">01</span>
-        <h2 data-en="24 hours. <span class='y'>7 days.</span>">24 horas. <span class="y">7 dias.</span></h2>
-        <p data-en="At 6 in the morning or 1 at night, the door is open. Your schedule is the one that counts.">Às 6 da manhã ou à 1 da noite, a porta está aberta. O horário que conta é o teu.</p>
-      </li>
-      <li class="bar-chapter" data-from="0.32" data-to="0.52">
-        <span class="num">02</span>
-        <h2 data-en="Machines that <span class='y'>deliver.</span>">Máquinas que <span class="y">respondem.</span></h2>
-        <p data-en="Quality equipment is the thing members praise the most in their Google reviews.">O equipamento de qualidade é o que mais se elogia nas avaliações dos sócios no Google.</p>
-      </li>
-      <li class="bar-chapter" data-from="0.54" data-to="0.74">
-        <span class="num">03</span>
-        <h2 data-en="Room to <span class='y'>breathe.</span>">Espaço para <span class="y">respirar.</span></h2>
-        <p data-en="A big gym with modern facilities, kept clean and well organised.">Um ginásio grande, com instalações modernas, limpo e bem organizado.</p>
-      </li>
-      <li class="bar-chapter" data-from="0.76" data-to="0.90">
-        <span class="num">04</span>
-        <h2 data-en="A vibe that <span class='y'>pushes you.</span>">Um ambiente que <span class="y">te empurra.</span></h2>
-        <p data-en="Friendly people, always ready to help, and an atmosphere that makes you want one more rep.">Gente simpática, sempre pronta a ajudar, e um ambiente que te faz querer mais uma repetição.</p>
-      </li>
-      <li class="bar-chapter" data-from="0.92" data-to="1.01">
-        <span class="num">GO</span>
-        <h2 data-en="Loaded. <span class='y'>Your turn.</span>">Carregada. <span class="y">Agora és tu.</span></h2>
-        <p data-en="Outdoor parking, 24/7 access. All that's missing is your first workout.">Estacionamento no exterior, acesso 24/7. Só falta o teu primeiro treino.</p>
-        <div class="actions"><a class="btn btn--y" href="primeiro-treino.html"><span data-en="Book my first workout">Marcar primeiro treino</span><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arr"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
-      </li>
-    </ol>
+    <div class="vs-stage">
+      <ol class="vs-steps">
+        <li class="vs-step">
+          <div class="wrap">
+            <div class="vs-copy">
+              <span class="num">01 / 05</span>
+              <h2 data-en="Machines that <span class='y'>deliver.</span>">Máquinas que <span class="y">respondem.</span></h2>
+              <p data-en="The most praised thing in members' Google reviews: modern, varied equipment.">É o que mais se elogia nas avaliações dos sócios no Google: equipamento moderno e variado.</p>
+            </div>
+            <div class="vs-vs">
+              <div class="vs-card vs-trad"><span class="mk"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5l14 14M19 5L5 19"/></svg></span><span class="tag" data-en="Traditional gym">Ginásio tradicional</span><p data-en="The same few machines, and a queue for the good one.">As mesmas máquinas de sempre e fila para a melhor.</p></div>
+              <div class="vs-card vs-evox"><span class="mk"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span><span class="tag">EVOXFIT</span><p data-en="Excellent, modern equipment with real variety.">Equipamento excelente, moderno e com variedade a sério.</p></div>
+              <p class="note-small" data-en="Generic comparison with a traditional gym.">Comparação genérica com um ginásio tradicional.</p>
+            </div>
+          </div>
+        </li>
+        <li class="vs-step">
+          <div class="wrap">
+            <div class="vs-copy">
+              <span class="num">02 / 05</span>
+              <h2 data-en="Room <span class='y'>to spare.</span>">Espaço <span class="y">de sobra.</span></h2>
+              <p data-en="A big, well-organised gym, so you spend your time training and not waiting.">Um ginásio grande e bem organizado, para passares o tempo a treinar e não à espera.</p>
+            </div>
+            <div class="vs-vs">
+              <div class="vs-card vs-trad"><span class="mk"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5l14 14M19 5L5 19"/></svg></span><span class="tag" data-en="Traditional gym">Ginásio tradicional</span><p data-en="Training elbow to elbow, waiting for your turn.">Treinar ombro com ombro, à espera da vez.</p></div>
+              <div class="vs-card vs-evox"><span class="mk"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span><span class="tag">EVOXFIT</span><p data-en="Space to move, with everything within reach.">Espaço para te moveres, com tudo à mão.</p></div>
+              <p class="note-small" data-en="Generic comparison with a traditional gym.">Comparação genérica com um ginásio tradicional.</p>
+            </div>
+          </div>
+        </li>
+        <li class="vs-step">
+          <div class="wrap">
+            <div class="vs-copy">
+              <span class="num">03 / 05</span>
+              <h2 data-en="People who <span class='y'>actually help.</span>">Gente que <span class="y">ajuda mesmo.</span></h2>
+              <p data-en="A friendly team is one of the most mentioned things in reviews, for beginners and regulars alike.">Uma equipa simpática é das coisas mais referidas nas avaliações, para quem começa e para quem já treina.</p>
+            </div>
+            <div class="vs-vs">
+              <div class="vs-card vs-trad"><span class="mk"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5l14 14M19 5L5 19"/></svg></span><span class="tag" data-en="Traditional gym">Ginásio tradicional</span><p data-en="You walk in and nobody shows you anything.">Entras e ninguém te explica nada.</p></div>
+              <div class="vs-card vs-evox"><span class="mk"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span><span class="tag">EVOXFIT</span><p data-en="A welcoming team, ready to help whenever you ask.">Uma equipa acolhedora, pronta a ajudar sempre que pedes.</p></div>
+              <p class="note-small" data-en="Generic comparison with a traditional gym.">Comparação genérica com um ginásio tradicional.</p>
+            </div>
+          </div>
+        </li>
+        <li class="vs-step">
+          <div class="wrap">
+            <div class="vs-copy">
+              <span class="num">04 / 05</span>
+              <h2 data-en="A vibe <span class='y'>that pushes you.</span>">Um ambiente <span class="y">que te empurra.</span></h2>
+              <p data-en="Members call it the American-style concept Greater Porto was missing: modern, clean, motivating.">Os sócios chamam-lhe o conceito ao estilo americano que faltava na Grande Porto: moderno, limpo e motivador.</p>
+            </div>
+            <div class="vs-vs">
+              <div class="vs-card vs-trad"><span class="mk"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5l14 14M19 5L5 19"/></svg></span><span class="tag" data-en="Traditional gym">Ginásio tradicional</span><p data-en="Flat atmosphere, you train out of obligation.">Ambiente morno, treinas por obrigação.</p></div>
+              <div class="vs-card vs-evox"><span class="mk"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span><span class="tag">EVOXFIT</span><p data-en="An atmosphere that makes you want one more rep.">Um ambiente que te faz querer mais uma repetição.</p></div>
+              <p class="note-small" data-en="Generic comparison with a traditional gym.">Comparação genérica com um ginásio tradicional.</p>
+            </div>
+          </div>
+        </li>
+        <li class="vs-step">
+          <div class="wrap">
+            <div class="vs-copy">
+              <span class="num">05 / 05</span>
+              <h2 data-en="Arrive, park, <span class='y'>train.</span>">Chegar, estacionar, <span class="y">treinar.</span></h2>
+              <p data-en="Outdoor parking at the door, and your first workout booked in a few taps on WhatsApp.">Estacionamento no exterior, à porta, e o primeiro treino marcado em poucos toques no WhatsApp.</p>
+              <div class="actions"><a class="btn btn--y" href="primeiro-treino.html"><span data-en="Book my first workout">Marcar primeiro treino</span><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arr"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+            </div>
+            <div class="vs-vs">
+              <div class="vs-card vs-trad"><span class="mk"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5l14 14M19 5L5 19"/></svg></span><span class="tag" data-en="Traditional gym">Ginásio tradicional</span><p data-en="Circling the block for a parking spot.">Dar voltas ao quarteirão à procura de lugar.</p></div>
+              <div class="vs-card vs-evox"><span class="mk"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span><span class="tag">EVOXFIT</span><p data-en="Park outside, walk in and start.">Estacionas à porta, entras e começas.</p></div>
+              <p class="note-small" data-en="Generic comparison with a traditional gym.">Comparação genérica com um ginásio tradicional.</p>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
 
-    <ol class="bar-dots" aria-label="Capítulos" data-en-aria="Chapters">
-      <li><button type="button" data-goto="0.2"><span data-en="24 / 7">24 / 7</span><i></i></button></li>
-      <li><button type="button" data-goto="0.42"><span data-en="Machines">Máquinas</span><i></i></button></li>
-      <li><button type="button" data-goto="0.64"><span data-en="Space">Espaço</span><i></i></button></li>
-      <li><button type="button" data-goto="0.83"><span data-en="Vibe">Ambiente</span><i></i></button></li>
-      <li><button type="button" data-goto="0.97"><span data-en="Go">Começar</span><i></i></button></li>
-    </ol>
-
-    <div class="bar-scroll" aria-hidden="true"><span data-en="Scroll to load the bar">Desce para carregar a barra</span><i></i></div>
-    <p class="bar-note" data-en="3D illustration. The weights are just for show.">Ilustração 3D. As anilhas são só para animar.</p>
+    <nav class="vs-tabs" aria-label="Diferenças" data-en-aria="Differences">
+      <button type="button" data-vs-go="1" data-en="Machines">Máquinas</button>
+      <button type="button" data-vs-go="2" data-en="Space">Espaço</button>
+      <button type="button" data-vs-go="3" data-en="Team">Equipa</button>
+      <button type="button" data-vs-go="4" data-en="Vibe">Ambiente</button>
+      <button type="button" data-vs-go="5" data-en="Getting here">Chegar</button>
+    </nav>
   </div>
 </section>
 
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span data-en="Open 24h">Aberto 24h</span><span data-en="7 days a week">7 dias por semana</span><span data-en="Top machines">Máquinas de topo</span><span data-en="Parking at the door">Estacionamento à porta</span>
-    <span data-en="Open 24h">Aberto 24h</span><span data-en="7 days a week">7 dias por semana</span><span data-en="Top machines">Máquinas de topo</span><span data-en="Parking at the door">Estacionamento à porta</span>
-  </div>
-</div>
-
-<section class="section" aria-labelledby="why-titulo">
-  <div class="wrap">
-    <div class="why-head">
-      <div>
-        <p class="eyebrow" data-en="Why EVOXFIT">Porquê o EVOXFIT</p>
-        <h2 id="why-titulo" data-en="Everything you need. <span class='y'>Whenever.</span>">Tudo o que precisas. <span class="y">A qualquer hora.</span></h2>
+<section class="section alt hora" data-hora aria-labelledby="hora-titulo">
+  <div class="wrap hora-grid">
+    <div>
+      <p class="eyebrow" data-en="Pick your time">Escolhe a tua hora</p>
+      <h2 id="hora-titulo" data-en="What time <span class='y'>suits you?</span>">A que horas <span class="y">te dá jeito?</span></h2>
+      <div class="slots" role="radiogroup" aria-label="Hora do treino" data-en-aria="Workout time">
+        <button type="button" class="slot" role="radio" aria-checked="false" data-h="6" data-t="Antes do trabalho" data-t-en="Before work" data-m="Treino feito antes do pequeno-almoço e o resto do dia já é bónus." data-m-en="Workout done before breakfast and the rest of the day is a bonus."><time>06:00</time><span data-en="Before work">Antes do trabalho</span></button>
+        <button type="button" class="slot" role="radio" aria-checked="false" data-h="12.5" data-t="Na pausa de almoço" data-t-en="On your lunch break" data-m="Entras, treinas e voltas ao trabalho com outra energia." data-m-en="Walk in, train and go back to work with a different energy."><time>12:30</time><span data-en="On your lunch break">Na pausa de almoço</span></button>
+        <button type="button" class="slot" role="radio" aria-checked="true" data-h="18.5" data-t="Depois do trabalho" data-t-en="After work" data-m="Sem pressas: a hora é a que te der jeito." data-m-en="No rush: the time is whatever suits you."><time>18:30</time><span data-en="After work">Depois do trabalho</span></button>
+        <button type="button" class="slot" role="radio" aria-checked="false" data-h="22" data-t="Turno tardio, dia comprido" data-t-en="Late shift, long day" data-m="Se o dia correu mal, ainda dá para o salvar." data-m-en="If the day went badly, there's still time to save it."><time>22:00</time><span data-en="Late shift, long day">Turno tardio, dia comprido</span></button>
+        <button type="button" class="slot" role="radio" aria-checked="false" data-h="3" data-t="Insónias produtivas" data-t-en="Productive insomnia" data-m="Se o sono não vem, a porta está aberta." data-m-en="If sleep won't come, the door is open."><time>03:00</time><span data-en="Productive insomnia">Insónias produtivas</span></button>
       </div>
-      <p class="lead" data-en="No opening hours to plan around. Just a well-equipped, clean, motivating gym that's always there for you.">Sem horários para combinar. Só um ginásio bem equipado, limpo e motivante, sempre à tua espera.</p>
     </div>
-    <div class="cards">
-      <article class="card"><span class="idx">01</span><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3 data-en="24 hours, 7 days">24 horas, 7 dias</h3><p data-en="Early bird or night owl, the gym fits your life and not the other way round.">Madrugador ou noctívago, o ginásio adapta-se à tua vida e não o contrário.</p></article>
-      <article class="card"><span class="idx">02</span><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></svg></div><h3 data-en="Top machines">Máquinas de topo</h3><p data-en="The most mentioned strength in reviews: excellent, modern equipment with plenty of variety.">O ponto forte mais referido nas avaliações: equipamento excelente, moderno e variado.</p></article>
-      <article class="card"><span class="idx">03</span><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></div><h3 data-en="Space to train">Espaço para treinar</h3><p data-en="A spacious, well-organised gym, so you spend your time training, not waiting.">Um ginásio amplo e bem organizado, para passares o tempo a treinar e não à espera.</p></article>
-      <article class="card"><span class="idx">04</span><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg></div><h3 data-en="Clean and modern">Limpo e moderno</h3><p data-en="Members highlight modern facilities that are kept tidy.">Os sócios destacam as instalações modernas e a limpeza.</p></article>
-      <article class="card"><span class="idx">05</span><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17.5" cy="9" r="2.5"/><path d="M17 14.5a5 5 0 0 1 4.5 5"/></svg></div><h3 data-en="Friendly team">Equipa simpática</h3><p data-en="Welcoming staff who are ready to help, whether you're a beginner or a regular.">Uma equipa acolhedora e pronta a ajudar, sejas principiante ou habitué.</p></article>
-      <article class="card"><span class="idx">06</span><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg></div><h3 data-en="Parking at the door">Estacionamento à porta</h3><p data-en="Outdoor parking, so you can arrive, train and leave without the hassle.">Estacionamento no exterior, para chegares, treinares e saíres sem complicações.</p></article>
-    </div>
-  </div>
-</section>
-
-<section class="clock" data-clock data-phase="0" aria-labelledby="clock-titulo">
-  <div class="clock-pin">
-    <div class="inner">
-      <div class="clock-copy">
-        <p class="eyebrow" data-en="24 / 7">24 / 7</p>
-        <h2 id="clock-titulo" data-en="A gym that doesn't <span class='y'>watch the clock.</span>">Um ginásio que não <span class="y">olha para o relógio.</span></h2>
-        <ol class="clock-slots">
-          <li class="clock-slot on" data-at="0"><time>00:00</time><h3 data-en="Midnight.">Meia-noite.</h3><p data-en="The gym never closes. If the day went badly, there's still time to save it.">O ginásio não fecha. Se o dia correu mal, ainda dá para o salvar.</p></li>
-          <li class="clock-slot" data-at="6"><time>06:00</time><h3 data-en="Before the day starts.">Antes de o dia começar.</h3><p data-en="Workout done before breakfast and the rest of the day is a bonus.">Treino feito antes do pequeno-almoço e o resto do dia já é bónus.</p></li>
-          <li class="clock-slot" data-at="12"><time>12:00</time><h3 data-en="At lunchtime.">À hora de almoço.</h3><p data-en="A break that pays off: walk in, train, go back to work with a different energy.">Uma pausa que rende: entras, treinas e voltas ao trabalho com outra energia.</p></li>
-          <li class="clock-slot" data-at="18"><time>18:00</time><h3 data-en="After work.">Depois do trabalho.</h3><p data-en="No rush and no clock-watching. The time is whatever suits you.">Sem pressas e sem olhar para o relógio. A hora é a que te der jeito.</p></li>
-          <li class="clock-slot" data-at="23"><time>23:00</time><h3 data-en="You still have time.">Ainda vais a tempo.</h3><p data-en="Late shift, long day? The door is still open.">Turno tardio, dia comprido? A porta continua aberta.</p></li>
-        </ol>
-      </div>
+    <div class="hora-card">
       <div class="dial" aria-hidden="true">
         <svg viewBox="0 0 400 400">
           <g data-ticks></g>
           <circle class="track" cx="200" cy="200" r="135"/>
           <circle class="arc" data-arc cx="200" cy="200" r="135" transform="rotate(-90 200 200)"/>
-          <g data-hand><line class="hand" x1="200" y1="92" x2="200" y2="72"/><circle class="dot" cx="200" cy="65" r="9"/></g>
+          <g class="hand-g" data-hand><line class="hand" x1="200" y1="92" x2="200" y2="72"/><circle class="dot" cx="200" cy="65" r="9"/></g>
         </svg>
-        <div class="dial-time"><b data-time>00:00</b><small data-en="Open now">Aberto agora</small></div>
+        <div class="dial-time"><b data-time>18:30</b><small data-label>Depois do trabalho</small></div>
       </div>
+      <p class="hora-msg" data-msg aria-live="polite"></p>
+      <a class="btn btn--y btn--big" data-cta href="primeiro-treino.html?h=18.5"><span data-cta-text>Marcar para as 18:30</span><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arr"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
 </section>
 
-<section class="hours-vs" aria-labelledby="vs-titulo">
-  <div class="wrap">
-    <h2 id="vs-titulo" data-en="Training with <span class='y'>no timetable.</span>">Treinar <span class="y">sem horário.</span></h2>
-    <div class="track-row"><div class="lab"><span>EVOXFIT</span><em data-en="24 hours · every day">24 horas · todos os dias</em></div><div class="hbar full"><i></i></div></div>
-    <div class="track-row"><div class="lab"><span data-en="A gym with fixed hours">Um ginásio de horário fixo</span><em data-en="e.g. 7am to 11pm">ex.: 07h às 23h</em></div><div class="hbar part"><i></i></div><div class="scale"><span>00h</span><span>06h</span><span>12h</span><span>18h</span><span>24h</span></div></div>
-    <p class="note-small" data-en="Illustrative example of a gym with limited opening hours.">Exemplo ilustrativo de um ginásio com horário limitado.</p>
+<section class="section photos" aria-labelledby="fotos-titulo">
+  <div class="wrap head">
+    <div>
+      <p class="eyebrow" data-en="Inside">Por dentro</p>
+      <h2 id="fotos-titulo" data-en="See the <span class='y'>space.</span>">Vê o <span class="y">espaço.</span></h2>
+    </div>
+    <div class="strip-ctl">
+      <button type="button" data-strip-prev aria-label="Anterior" data-en-aria="Previous"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button type="button" data-strip-next aria-label="Seguinte" data-en-aria="Next"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+  </div>
+  <div class="strip" data-strip>
+<figure class="ph"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></svg><b data-en="Machines area">Zona de máquinas</b><span data-en="A real photo of the gym goes here.">Aqui entra uma foto real do ginásio.</span></figure>
+<figure class="ph"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></svg><b data-en="Free weights">Peso livre</b><span data-en="A real photo of the gym goes here.">Aqui entra uma foto real do ginásio.</span></figure>
+<figure class="ph"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></svg><b data-en="Entrance and reception">Entrada e receção</b><span data-en="A real photo of the gym goes here.">Aqui entra uma foto real do ginásio.</span></figure>
+<figure class="ph"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></svg><b data-en="Training floor">Espaço de treino</b><span data-en="A real photo of the gym goes here.">Aqui entra uma foto real do ginásio.</span></figure>
+<figure class="ph"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></svg><b data-en="Outside and parking">Exterior e estacionamento</b><span data-en="A real photo of the gym goes here.">Aqui entra uma foto real do ginásio.</span></figure>
+<figure class="ph"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></svg><b data-en="The team">A equipa</b><span data-en="A real photo of the gym goes here.">Aqui entra uma foto real do ginásio.</span></figure>
   </div>
 </section>
 
-<section aria-label="Números" data-en-aria="Numbers">
-  <div class="stats wrap" style="padding:0">
-    <div class="stat"><strong data-count="24">24</strong><span data-en="hours a day">horas por dia</span></div>
-    <div class="stat"><strong data-count="7">7</strong><span data-en="days a week">dias por semana</span></div>
-    <div class="stat"><strong data-count="4.7" data-dec="1">4,7</strong><span data-en="on Google (32 reviews)">no Google (32 avaliações)</span></div>
-  </div>
-</section>
 
-<section class="section alt" aria-labelledby="av-titulo">
+<section class="section" id="avaliacoes" aria-labelledby="av-titulo">
   <div class="wrap reviews">
     <div>
       <p class="eyebrow" data-en="Reviews">Avaliações</p>
@@ -217,7 +240,6 @@
       <div class="chips" aria-label="Temas mais referidos" data-en-aria="Most mentioned topics">
         <span class="chip"><span data-en="Excellent machines">Máquinas excelentes</span><b>8</b></span>
         <span class="chip"><span data-en="Friendly staff">Equipa simpática</span><b>8</b></span>
-        <span class="chip"><span data-en="Open 24 hours">Aberto 24 horas</span><b>3</b></span>
         <span class="chip"><span data-en="Modern facilities">Instalações modernas</span><b>3</b></span>
         <span class="chip"><span data-en="Motivating">Motivador</span><b>3</b></span>
         <span class="chip"><span data-en="Cleanliness">Limpeza</span><b>2</b></span>
@@ -227,7 +249,7 @@
       <div class="voices">
         <div class="voice"><p data-en="The American-style concept Greater Porto was missing.">O conceito ao estilo americano que faltava na Grande Porto.</p><span data-en="Google review, summarised">Avaliação no Google, resumida</span></div>
         <div class="voice"><p data-en="Went in to try it out and came away convinced: big, clean and well organised.">Entrou para experimentar e ficou convencida: grande, limpo e bem organizado.</p><span data-en="Google review, summarised">Avaliação no Google, resumida</span></div>
-        <div class="voice"><p data-en="Excellent machines, outdoor parking, and you can train at any hour.">Máquinas excelentes, estacionamento no exterior e treina-se a qualquer hora.</p><span data-en="Google review, summarised">Avaliação no Google, resumida</span></div>
+        <div class="voice"><p data-en="Excellent machines and outdoor parking.">Máquinas excelentes e estacionamento no exterior.</p><span data-en="Google review, summarised">Avaliação no Google, resumida</span></div>
       </div>
       <a class="link" href="https://www.google.com/maps/place/Evox+Fit+Maia/@41.2648302,-8.633035,17z" target="_blank" rel="noopener" data-en="Read all reviews on Google">Ler todas as avaliações no Google</a>
     </div>
@@ -259,7 +281,7 @@
       <ul class="info">
         <li><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-6.2-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.8" r="2.3"/></svg><div><b data-en="Address">Morada</b><a href="https://www.google.com/maps/dir/?api=1&destination=41.2648302,-8.633035" target="_blank" rel="noopener">R. Eng. Frederico Ulrich 1636<br>4470-605 Maia</a></div></li>
         <li><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><div><b data-en="Phone">Telefone</b><a href="tel:+351961382108">961 382 108</a></div></li>
-        <li><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b data-en="Opening hours">Horário</b><span class="open-now" data-en="Open now · 24 hours, every day">Aberto agora · 24 horas, todos os dias</span></div></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b data-en="Opening hours">Horário</b><span class="open-now" data-en="Open now · every day">Aberto agora · todos os dias</span> <a class="mini" href="contactos.html" data-en="See the full week">Ver a semana toda</a></div></li>
       </ul>
       <div class="btn-row">
         <a class="btn btn--y" href="https://www.google.com/maps/dir/?api=1&destination=41.2648302,-8.633035" target="_blank" rel="noopener"><span data-en="Get directions">Como chegar</span><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arr"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
@@ -282,7 +304,6 @@
       <a class="btn btn--k btn--big" href="primeiro-treino.html"><span data-en="Book my first workout">Marcar o meu primeiro treino</span><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arr"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
       <a class="btn btn--line btn--big" href="tel:+351961382108"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span>961 382 108</span></a>
     </div>
-    <p class="hours-line" data-en="Open 24 hours · 7 days a week">Aberto 24 horas · 7 dias por semana</p>
   </div>
 </section>
 <footer class="site-footer">
@@ -290,7 +311,7 @@
     <div class="footer-top">
       <div>
         <a class="brand" href="index.html" aria-label="EVOXFIT Maia, página inicial" data-en-aria="EVOXFIT Maia, home"><svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="11" fill="#FFD21F"/><g transform="translate(5.1 0) skewX(-12)" fill="#0a0a0b"><rect x="13" y="11" width="7" height="26"/><rect x="13" y="11" width="23" height="6.5"/><rect x="13" y="20.7" width="18" height="6.5"/><rect x="13" y="30.5" width="23" height="6.5"/></g></svg><span><span class="word">EVOX<b>FIT</b></span><span class="sub">MAIA</span></span></a>
-        <p data-en="A gym that never closes. Train when you want, at EVOXFIT Maia.">Um ginásio que nunca fecha. Treina quando quiseres, no EVOXFIT Maia.</p>
+        <p data-en="Train when you want, at EVOXFIT Maia.">Treina quando quiseres, no EVOXFIT Maia.</p>
       </div>
       <div>
         <h3 data-en="Pages">Páginas</h3>
@@ -311,7 +332,6 @@
       <div>
         <h3 data-en="Find us">Onde estamos</h3>
         <ul>
-          <li data-en="Open 24 hours, every day">Aberto 24 horas, todos os dias</li>
           <li><a href="https://www.google.com/maps/dir/?api=1&destination=41.2648302,-8.633035" target="_blank" rel="noopener">R. Eng. Frederico Ulrich 1636<br>4470-605 Maia</a></li>
         </ul>
       </div>
@@ -332,7 +352,7 @@
 <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
 <script src="assets/vendor/lenis.min.js" defer></script>
 <script src="assets/js/anim.js" defer></script>
-<script type="module" src="assets/js/hero.js"></script>
-<script src="assets/js/clock.js" defer></script>
+<script src="assets/js/vs.js" defer></script>
+<script src="assets/js/hora.js" defer></script>
 </body>
 </html>

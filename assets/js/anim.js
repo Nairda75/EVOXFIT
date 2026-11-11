@@ -50,10 +50,10 @@
     });
     el.dataset.split = "1";
   }
-  var heads = gsap.utils.toArray("main h1, main h2:not(.sr-only), .final-cta h2").filter(function (h) { return !h.closest(".bar-chapter"); });
+  var heads = gsap.utils.toArray("main h1, main h2:not(.sr-only), .final-cta h2").filter(function (h) { return !h.closest(".vs-step"); });
   heads.forEach(function (h) {
     split(h);
-    var hero = !!h.closest(".bar-intro, .page-hero");
+    var hero = !!h.closest(".vs-intro, .page-hero");
     gsap.from(h.querySelectorAll(".wi"), {
       yPercent: 120, rotate: 5, duration: 1.1, ease: "expo.out", stagger: 0.07, delay: hero ? 0.25 : 0,
       scrollTrigger: hero ? null : { trigger: h, start: "top 88%", once: true }
@@ -66,11 +66,11 @@
 
   /* ---------- Entradas do topo ---------- */
   gsap.from(".site-header .wrap > *", { y: -24, opacity: 0, duration: 0.8, ease: "power3.out", stagger: 0.08, delay: 0.1 });
-  if (document.querySelector(".bar-intro")) gsap.from(".bar-intro .eyebrow, .bar-intro .lead, .bar-intro .actions > *, .bar-hud", { y: 34, opacity: 0, duration: 1, ease: "power3.out", stagger: 0.12, delay: 0.55 });
+  if (document.querySelector(".vs-intro")) gsap.from(".vs-intro .eyebrow, .vs-now, .vs-intro .lead, .vs-intro .actions > *, .vs-proof, .vs-dial", { y: 34, opacity: 0, duration: 1, ease: "power3.out", stagger: 0.12, delay: 0.55 });
   if (document.querySelector(".page-hero")) gsap.from(".page-hero .crumb, .page-hero .lead", { y: 26, opacity: 0, duration: 1, ease: "power3.out", stagger: 0.12, delay: 0.5 });
 
   /* ---------- Cartões e listas em cascata ---------- */
-  ["section:not(.bar) .eyebrow", ".card", ".zone", ".chip", ".voice", ".side-steps li", ".faq details", ".info li", ".stat", ".hours li", ".track-row", ".form-card", ".invite .steps li", ".invite .actions > *", ".final-cta .actions > *", ".final-cta .hours-line", ".footer-top > div", ".lead:not(.bar-intro .lead):not(.page-hero .lead)", ".stars", ".score", ".dist > div"].forEach(function (sel) {
+  ["section:not(.vs) .eyebrow", ".zone", ".chip", ".voice", ".side-steps li", ".faq details", ".info li", ".hours li", ".form-card", ".invite .steps li", ".invite .actions > *", ".final-cta .actions > *", ".footer-top > div", ".lead:not(.vs-intro .lead):not(.page-hero .lead)", ".stars", ".score", ".dist > div"].forEach(function (sel) {
     ScrollTrigger.batch(sel, {
       start: "top 92%", once: true,
       onEnter: function (els) { gsap.fromTo(els, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", stagger: 0.09, overwrite: true, clearProps: "transform,opacity" }); }
@@ -86,27 +86,11 @@
       onUpdate: function () { el.textContent = fmt(o.v, dec); }, onComplete: function () { el.textContent = fmt(end, dec); el.dataset.done = "1"; } });
   });
 
-  /* ---------- Barras (avaliações e horários) ---------- */
+  /* ---------- Barras das avaliações ---------- */
   gsap.utils.toArray(".dist .b i").forEach(function (el, i) {
     var w = parseFloat(el.style.getPropertyValue("--w")) || 0;
     gsap.to(el, { scaleX: w, duration: 1.5, delay: i * 0.08, ease: "expo.out", scrollTrigger: { trigger: el, start: "top 94%", once: true } });
   });
-  gsap.utils.toArray(".hbar i").forEach(function (el, i) {
-    gsap.to(el, { scaleX: 1, duration: 1.8, ease: "expo.out", delay: i * 0.3, scrollTrigger: { trigger: el, start: "top 90%", once: true } });
-  });
-
-  /* ---------- Faixa em movimento: acelera quando se faz scroll ---------- */
-  var track = document.querySelector(".marquee-track");
-  if (track) {
-    var tw = gsap.to(track, { xPercent: -50, ease: "none", duration: 32, repeat: -1 }), idle;
-    ScrollTrigger.create({
-      start: 0, end: "max",
-      onUpdate: function (self) {
-        gsap.to(tw, { timeScale: 1 + Math.min(6, Math.abs(self.getVelocity()) / 350), duration: 0.25, overwrite: true });
-        clearTimeout(idle); idle = setTimeout(function () { gsap.to(tw, { timeScale: 1, duration: 0.9 }); }, 160);
-      }
-    });
-  }
 
   window.addEventListener("load", function () { ScrollTrigger.refresh(); });
 })();

@@ -13,7 +13,7 @@ Os `.html` na raiz são **gerados**. Edita a fonte e volta a gerar:
 - `python3 _fonte/build.py` — regenera `index.html`, `o-ginasio.html`, `primeiro-treino.html`, `contactos.html`, `404.html` e `assets/js/config.js`.
 
 ## Fotos e logótipo
-- Põe fotos reais do ginásio em `assets/img/gym-1.jpg`, `gym-2.jpg`… e volta a gerar: a galeria aparece sozinha na página "O ginásio".
+- Põe fotos reais do ginásio em `assets/img/gym-1.jpg`, `gym-2.jpg`… e corre `python3 _fonte/build.py`: a tira "Vê o espaço" do início e a galeria de "O ginásio" passam a usá-las (até lá, a tira mostra marcadores a dizer que foto entra em cada sítio).
 - O logótipo atual é um wordmark provisório (`assets/favicon.svg` + texto). Troca quando houver o oficial.
 
 ## O que ainda precisa de confirmação com o ginásio
@@ -22,5 +22,8 @@ Os `.html` na raiz são **gerados**. Edita a fonte e volta a gerar:
 - Planos, preços, modalidades e aulas (não inventados; há espaço para uma secção "Planos").
 - A nota 4,7 / 32 avaliações é de novembro de 2026; atualizar em `site.json`.
 
-## Animações
-Herói 3D com three.js (barra que carrega com o scroll), GSAP + ScrollTrigger + Lenis, relógio de 24h ligado ao scroll. Respeita "reduzir movimento" e tem alternativa SVG sem WebGL.
+## Início
+- Primeiro ecrã: "24H" (a única vez que o site o diz em grande), uma piada e o relógio com a hora do visitante.
+- Ao deslizar, a secção prende ao ecrã e mostra 5 diferenças EVOXFIT vs ginásio tradicional (`assets/js/vs.js`). Os botões levam a cada uma.
+- "A que horas te dá jeito?" (`assets/js/hora.js`): escolhe uma hora e segue para o formulário já preenchida.
+- GSAP + ScrollTrigger + Lenis para as entradas. Respeita "reduzir movimento" (a sequência passa a lista normal).

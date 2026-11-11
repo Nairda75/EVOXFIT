@@ -47,6 +47,9 @@
     dataIn.style.display = checked("dia") === "outro" ? "" : "none";
     prev.textContent = message();
   }
+  var qh = parseFloat(new URLSearchParams(location.search).get("h"));
+  if (!isNaN(qh) && qh >= 0 && qh <= 23.5) hora.value = String(Math.round(qh * 2) / 2);
+
   form.addEventListener("input", update);
   form.addEventListener("change", update);
   document.addEventListener("evox:lang", update);
