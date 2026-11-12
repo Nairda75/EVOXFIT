@@ -12,19 +12,23 @@ Os `.html` na raiz são **gerados**. Edita a fonte e volta a gerar:
 - `_fonte/pages/*.html` — texto de cada página (PT no HTML, EN em `data-en="…"`).
 - `python3 _fonte/build.py` — regenera `index.html` (escolha), `aveiro.html` (em preparação), `maia.html`, `o-ginasio.html`, `primeiro-treino.html`, `contactos.html`, `404.html` e `assets/js/config.js`.
 
-## Fotos e logótipo
-- Põe fotos reais do ginásio em `assets/img/gym-1.jpg`, `gym-2.jpg`… e corre `python3 _fonte/build.py`: a tira "Vê o espaço" do início e a galeria de "O ginásio" passam a usá-las (até lá, a tira mostra marcadores a dizer que foto entra em cada sítio).
-- O logótipo atual é um wordmark provisório (`assets/favicon.svg` + texto). Troca quando houver o oficial.
+## Imagens e logótipo
+- As imagens `assets/img/ev-*.jpg` são **ilustrativas**: renders estilizados do ginásio criados para esta proposta (a preto e branco com toque amarelo). Estão identificadas como "Imagem ilustrativa" no site.
+- Quando houver fotografias reais, põe-nas em `assets/img/gym-1.jpg`, `gym-2.jpg`… e corre `python3 _fonte/build.py`: aparece uma tira de fotografias no início e uma galeria em "O ginásio". Para trocar as imagens ilustrativas por fotos reais nas secções principais, substitui os ficheiros `ev-*.jpg` (mesmos nomes).
+- `assets/img/logo-evoxfit.png` é o logótipo deles (sem "Maia"); o site não usa a tipografia da marca: usa Archivo + IBM Plex Mono e elementos de marca próprios (régua de carga, X, selo circular, relógio de 24 h, cantos de enquadramento).
 
 ## O que ainda precisa de confirmação com o ginásio
 - Que o 961 382 108 tem WhatsApp (o formulário de primeiro treino abre uma conversa nesse número).
 - Se o primeiro treino é gratuito/experimental, para ajustar a frase "Condições e valores confirmados diretamente com a equipa".
 - Planos, preços, modalidades e aulas (não inventados; há espaço para uma secção "Planos").
 - A nota 4,7 / 32 avaliações é de novembro de 2026; atualizar em `site.json`.
+- Aveiro: página em preparação (faltam dados e fotografias).
 
-## Início
-- Primeiro ecrã: "24H" (a única vez que o site o diz em grande), uma piada e o relógio com a hora do visitante.
-- Ao deslizar, a secção prende ao ecrã e mostra 5 diferenças EVOXFIT vs ginásio tradicional (`assets/js/vs.js`). Os botões levam a cada uma.
-- "A que horas te dá jeito?" (`assets/js/hora.js`): escolhe uma hora e segue para o formulário já preenchida.
-- GSAP + ScrollTrigger + Lenis para as entradas. Com "reduzir movimento" a cena 3D mantém-se em modo calmo (sem balanço nem movimento de pessoas/carros).
-- Se mexeres em `assets/js/gym3d.js`, corre `_fonte/bundle.sh` (gera `gym3d.bundle.js`, que é o que a página carrega e funciona também a abrir os ficheiros diretamente). A resolução 3D adapta-se sozinha ao desempenho do computador.
+## Estrutura do início
+Herói com o slogan → faixa em movimento → declaração e números → "Cinco diferenças" (imagem que muda com o texto) → escolha do horário (`assets/js/hora.js`, relógio de 24 h) → atalhos → avaliações → onde estamos (mapa) → chamada final.
+
+## Abertura UNO Studio
+Animação de ~5 s (marketing & digital → "Criámos este website para…") mostrada uma vez por sessão na primeira página (`index.html` ou `maia.html`). Tem botão "Saltar", respeita "reduzir movimento" e pode rever-se com `maia.html?intro=1` (ligação "Ver abertura" no rodapé). O "UNO." é um wordmark tipográfico provisório: trocar pelo logótipo oficial da UNO Studio.
+
+## Sem bibliotecas
+O site não carrega bibliotecas de animação nem 3D: só HTML, CSS e JS próprios (`main.js`, `anim.js`, `hora.js`, `treino.js`). A cena 3D usada para gerar as imagens está em `_fonte/render/gym3d.js` (`_fonte/bundle.sh` gera o pacote para renderizar); a versão anterior com o 3D ao deslizar está no ramo `redesign-3d-slides`.

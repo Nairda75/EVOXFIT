@@ -1,4 +1,36 @@
-/* EVOXFIT Fitness Health Club Maia — "A que horas te dá jeito?": escolhe uma hora e segue para o formulário já preenchida */
+/* EVOXFIT Fitness Health Club Maia — "Qual o horário mais conveniente?": escolhe uma hora e segue para o formulário já preenchida */
+(function () {
+  "use strict";
+  var NS = "http://www.w3.org/2000/svg", R = 135, CIRC = 2 * Math.PI * R;
+  function p2(n) { return (n < 10 ? "0" : "") + n; }
+  /* Mostrador de 24 horas (régua de marcas, arco e ponteiro) */
+  window.EVOXDial = {
+    build: function (root) {
+      var g = root.querySelector("[data-ticks]");
+      if (!g || g.childNodes.length) return;
+      for (var i = 0; i < 24; i++) {
+        var a = (i / 24) * Math.PI * 2 - Math.PI / 2, big = i % 6 === 0, r1 = big ? 152 : 154, r2 = big ? 172 : 164;
+        var ln = document.createElementNS(NS, "line");
+        ln.setAttribute("x1", (200 + Math.cos(a) * r1).toFixed(2)); ln.setAttribute("y1", (200 + Math.sin(a) * r1).toFixed(2));
+        ln.setAttribute("x2", (200 + Math.cos(a) * r2).toFixed(2)); ln.setAttribute("y2", (200 + Math.sin(a) * r2).toFixed(2));
+        ln.setAttribute("class", "tick" + (big ? " big" : ""));
+        g.appendChild(ln);
+        if (big) {
+          var tx = document.createElementNS(NS, "text");
+          tx.setAttribute("x", (200 + Math.cos(a) * 190).toFixed(2)); tx.setAttribute("y", (200 + Math.sin(a) * 190 + 5).toFixed(2));
+          tx.textContent = p2(i); g.appendChild(tx);
+        }
+      }
+      var arc = root.querySelector("[data-arc]");
+      arc.style.strokeDasharray = CIRC.toFixed(2); arc.style.strokeDashoffset = CIRC.toFixed(2);
+    },
+    set: function (root, hours) {
+      var f = Math.min(1, Math.max(0, hours / 24));
+      root.querySelector("[data-arc]").style.strokeDashoffset = (CIRC * (1 - f)).toFixed(2);
+      root.querySelector("[data-hand]").style.transform = "rotate(" + (f * 360).toFixed(2) + "deg)";
+    }
+  };
+})();
 (function () {
   "use strict";
   var sec = document.querySelector("[data-hora]");

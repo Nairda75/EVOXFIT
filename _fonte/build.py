@@ -47,7 +47,7 @@ ICON = {
 }
 
 MARK = '<svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="11" fill="#FFD21F"/><g transform="translate(5.1 0) skewX(-12)" fill="#0a0a0b"><rect x="13" y="11" width="7" height="26"/><rect x="13" y="11" width="23" height="6.5"/><rect x="13" y="20.7" width="18" height="6.5"/><rect x="13" y="30.5" width="23" height="6.5"/></g></svg>'
-BRAND = '<a class="brand" href="maia.html" aria-label="EVOXFIT Fitness Health Club Maia, página inicial" data-en-aria="EVOXFIT Fitness Health Club Maia, home"><img src="assets/img/logo-evoxfit-128.png" width="46" height="46" alt=""><span class="sub">MAIA</span></a>'
+BRAND = '<a class="brand" href="maia.html" aria-label="EVOXFIT Fitness Health Club Maia, página inicial" data-en-aria="EVOXFIT Fitness Health Club Maia, home"><img src="assets/img/logo-evoxfit-128.png" width="44" height="44" alt=""><span class="sub">MAIA</span></a>'
 
 def esc(s): return html.escape(s, quote=True)
 
@@ -84,53 +84,76 @@ def head(m):
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{esc(m['title'])}</title>
 <meta name="description" content="{esc(m['desc'])}">
-<meta name="theme-color" content="#0a0a0b">
+<meta name="theme-color" content="#050506">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{esc(m['title'])}">
 <meta property="og:description" content="{esc(m['desc'])}">
 <meta property="og:image" content="assets/og.png">
 <meta property="og:locale" content="pt_PT">
 <link rel="icon" href="assets/img/logo-evoxfit-128.png" type="image/png">
-<link rel="preload" href="assets/fonts/barlow-condensed-latin-800-italic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/barlow-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
+<script>(function(d){{d.classList.add("js-anim");try{{if(sessionStorage.getItem("uno-intro")&&!/[?&]intro=1/.test(location.search))d.classList.add("no-intro")}}catch(e){{}}}})(document.documentElement)</script>
 <link rel="stylesheet" href="assets/css/style.css">
 {ld}
 </head>'''
 
+SEAL = ('<div class="seal" aria-hidden="true"><svg viewBox="0 0 100 100"><defs><path id="seal-c" d="M50 50m-41 0a41 41 0 1 1 82 0a41 41 0 1 1-82 0"/></defs>'
+        '<g class="ring"><text><textPath href="#seal-c" textLength="256" lengthAdjust="spacing" data-en="TRAIN · WE\'VE GOT THE REST · 24 H · ">TREINE · O RESTO É CONNOSCO · 24 H · </textPath></text></g>'
+        '<g fill="currentColor"><rect x="30" y="40" width="5" height="20"/><rect x="36.5" y="44" width="4" height="12"/><rect x="40.5" y="48.6" width="19" height="2.8"/><rect x="59.5" y="44" width="4" height="12"/><rect x="65" y="40" width="5" height="20"/></g></svg></div>')
+XMARK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="square"/></svg>'
+TICKER = [("24 horas", "24 hours", 0), ("Todos os dias", "Every day", 1), ("Estacionamento exterior", "Outdoor parking", 0), ("Equipamento moderno", "Modern equipment", 1),
+          ("Espaço amplo", "Spacious floor", 0), ("Equipa disponível", "Available team", 1), ("Maia", "Maia", 0)]
+
+def ticker():
+    one = '<span>' + ''.join(f'<b class="{"o" if o else ""}" data-en="{en}">{pt}</b>{XMARK}' for pt, en, o in TICKER) + '</span>'
+    return f'<div class="ticker" aria-hidden="true"><div class="ticker-track">{one}{one}</div></div>'
+
+UNO = f'''<div class="uno" data-uno role="dialog" aria-label="UNO Studio" aria-modal="true">
+  <div class="xgrid"></div>
+  <div class="uno-top"><span><b>UNO Studio</b> · <span data-en="Marketing &amp; digital">Marketing &amp; digital</span></span><button class="uno-skip" type="button" data-uno-skip data-en="Skip">Saltar</button></div>
+  <div class="uno-stage">
+    <div class="uno-words" data-uno-words aria-hidden="true">
+      <span data-en="Strategy">Estratégia</span><span class="o" data-en="Content">Conteúdo</span><span data-en="Image">Imagem</span><span class="o" data-en="Websites">Websites</span><span data-en="Results">Resultados</span>
+    </div>
+    <div class="uno-brand" data-uno-brand>
+      <div class="uno-mark" aria-label="UNO">UNO<i></i></div>
+      <div class="uno-tag" data-en="Digital marketing studio">Estúdio de marketing digital</div>
+      <div class="uno-for" data-en="We created this website for EVOXFIT Fitness Health Club">Criámos este website para o EVOXFIT Fitness Health Club</div>
+    </div>
+  </div>
+  <div class="uno-bot"><span class="uno-count"><b data-uno-count>000</b> / 100</span><span>EVOXFIT Fitness Health Club</span></div>
+  <div class="uno-bar" data-uno-bar></div>
+</div>'''
+
 def header(active):
-    links = '\n'.join(
-        f'<a href="{href}"{" aria-current=\"page\"" if key == active else ""} data-en="{en}">{pt}</a>'
-        for key, href, pt, en in NAV if key != 'treino')
     mlinks = '\n'.join(
         f'<a href="{href}"{" aria-current=\"page\"" if key == active else ""}><i>0{i+1}</i><span data-en="{en}">{pt}</span></a>'
         for i, (key, href, pt, en) in enumerate(NAV))
+    mlinks += '\n<a href="index.html"><i>05</i><span data-en="Switch gym">Mudar de ginásio</span></a>'
     lang = '<div class="lang" role="group" aria-label="Idioma" data-en-aria="Language"><button type="button" data-lang="pt" aria-pressed="true">PT</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>'
     return f'''<a class="skip" href="#conteudo" data-en="Skip to content">Saltar para o conteúdo</a>
 <div class="progress" aria-hidden="true"></div>
-<header class="site-header">
-  <div class="wrap">
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-movel"><span class="bars" aria-hidden="true"></span><span data-en="Menu">Menu</span></button>
     {BRAND}
-    <nav class="nav" aria-label="Principal" data-en-aria="Main">
-{links}
-    </nav>
-    <div class="header-actions">
-      <a class="switch" href="index.html" data-en="Switch gym">Mudar de ginásio</a>
+    <div class="hdr-r">
       {lang}
-      <a class="btn btn--y header-cta" href="primeiro-treino.html"><span data-en="First workout">Primeiro treino</span></a>
-      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-movel" aria-label="Abrir menu" data-en-aria="Open menu">{ICON['menu']}</button>
+      <a class="btn btn--y btn--sm hdr-cta" href="primeiro-treino.html"><span data-en="First workout">Primeiro treino</span></a>
     </div>
   </div>
 </header>
-<div class="mobile-menu" id="menu-movel" aria-label="Menu" data-en-aria="Menu">
+<div class="mobile-menu" id="menu-movel" role="dialog" aria-label="Menu" data-en-aria="Menu">
   <div class="top">
+    <button class="close-btn" type="button">{ICON['close']}<span data-en="Close">Fechar</span></button>
     {BRAND}
-    <button class="close-btn" type="button" aria-label="Fechar menu" data-en-aria="Close menu">{ICON['close']}</button>
+    <span style="width:84px" aria-hidden="true"></span>
   </div>
   <nav aria-label="Menu" data-en-aria="Menu">
 {mlinks}
   </nav>
   <div class="bottom">
-    <div class="row">{lang}<a class="link" href="index.html" data-en="Switch gym">Mudar de ginásio</a></div>
+    <div class="row">{lang}<a class="link" href="{S['google_rota']}" target="_blank" rel="noopener" data-en="Get directions">Como chegar</a></div>
     <a class="btn btn--y btn--big" href="tel:{S['telefone_e164']}">{ICON['phone']}<span data-en="Call {S['telefone']}">Ligar {S['telefone']}</span></a>
   </div>
 </div>'''
@@ -138,10 +161,11 @@ def header(active):
 def final_cta():
     return f'''<section class="final-cta" aria-labelledby="final-titulo">
   <div class="wrap">
-    <h2 id="final-titulo" data-en="Schedule your first workout.">Agende o seu primeiro treino.</h2>
-    <div class="actions">
+    <p class="eyebrow" style="color:var(--ink)" data-en="First workout">Primeiro treino</p>
+    <h2 id="final-titulo" class="rv" data-en="Schedule your first workout.">Agende o seu primeiro treino.</h2>
+    <div class="actions rv" style="--d:.1s">
       <a class="btn btn--k btn--big" href="primeiro-treino.html"><span data-en="Book first workout">Marcar primeiro treino</span>{ICON['arrow']}</a>
-      <a class="btn btn--line btn--big" href="tel:{S['telefone_e164']}">{ICON['phone']}<span>{S['telefone']}</span></a>
+      <a class="btn btn--big" href="tel:{S['telefone_e164']}">{ICON['phone']}<span>{S['telefone']}</span></a>
     </div>
   </div>
 </section>'''
@@ -150,6 +174,7 @@ def footer(active):
     pages = '\n'.join(f'<li><a href="{href}" data-en="{en}">{pt}</a></li>' for key, href, pt, en in NAV)
     return f'''<footer class="site-footer">
   <div class="wrap">
+    <div class="wordmark" aria-hidden="true">EVOXFIT</div>
     <div class="footer-top">
       <div>
         {BRAND}
@@ -177,8 +202,8 @@ def footer(active):
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© <span data-year>2026</span> EVOXFIT Fitness Health Club Maia</span>
-      <span data-en="Website by UNO Studio">Website por UNO Studio</span>
+      <span>© <span data-year>2026</span> EVOXFIT Fitness Health Club Maia · <span data-en="Illustrative images created for this proposal.">Imagens ilustrativas criadas para esta proposta.</span></span>
+      <span class="uno-credit"><span><span data-en="Website by">Website por</span> <b>UNO Studio</b> · <span data-en="Digital marketing">Marketing digital</span></span><a href="maia.html?intro=1" data-en="Replay intro">Ver abertura</a></span>
     </div>
   </div>
 </footer>
@@ -188,9 +213,6 @@ def footer(active):
 </div>'''}
 <script src="assets/js/config.js"></script>
 <script src="assets/js/main.js"></script>
-<script src="assets/vendor/gsap.min.js" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js" defer></script>
-<script src="assets/vendor/lenis.min.js" defer></script>
 <script src="assets/js/anim.js" defer></script>'''
 
 def _imgs():
@@ -215,22 +237,13 @@ def gallery_html():
     <h2 id="gal-titulo" style="margin-bottom:36px" data-en="Discover the facilities.">Conheça as instalações.</h2>
     <div class="gallery" data-photos>''' + '\n'.join(_photo_buttons(imgs)) + '</div>\n  </div>\n</section>\n' + LIGHTBOX)
 
-PLACEHOLDERS = [
-    ("Zona de máquinas", "Machines area"), ("Peso livre", "Free weights"), ("Entrada e receção", "Entrance and reception"),
-    ("Espaço de treino", "Training floor"), ("Exterior e estacionamento", "Outside and parking"), ("A equipa", "The team"),
-]
-
 def fotos_html():
-    """Tira de fotos do início. Sem fotografias reais mostra marcadores a dizer que foto entra em cada sítio."""
+    """Tira de fotos do início: só aparece quando existirem fotografias reais em assets/img/gym-*.jpg."""
     imgs = _imgs()
-    if imgs:
-        items = '\n'.join(_photo_buttons(imgs)); attr = ' data-photos'; extra = LIGHTBOX
-    else:
-        print('AVISO: sem fotografias em assets/img/gym-*.jpg — a tira do início mostra marcadores.')
-        items = '\n'.join(
-            f'<figure class="ph">{ICON["dumbbell"]}<b data-en="{en}">{pt}</b><span data-en="Photograph of the gym coming soon.">Fotografia do ginásio em breve.</span></figure>'
-            for pt, en in PLACEHOLDERS)
-        attr = ''; extra = ''
+    if not imgs:
+        print('AVISO: sem fotografias reais em assets/img/gym-*.jpg — o site usa as imagens ilustrativas ev-*.jpg.')
+        return ''
+    items = '\n'.join(_photo_buttons(imgs))
     return f'''<section class="section photos" aria-labelledby="fotos-titulo">
   <div class="wrap head">
     <div>
@@ -242,11 +255,11 @@ def fotos_html():
       <button type="button" data-strip-next aria-label="Seguinte" data-en-aria="Next">{ICON['right']}</button>
     </div>
   </div>
-  <div class="strip" data-strip{attr}>
+  <div class="strip" data-strip data-photos>
 {items}
   </div>
 </section>
-{extra}'''
+{LIGHTBOX}'''
 
 def write_config_js():
     cfg = {"nome": S['nome'], "wa": S['whatsapp'], "tel": S['telefone_e164'], "telDisplay": S['telefone'],
@@ -261,12 +274,12 @@ def build():
         src = open(path, encoding='utf-8').read()
         m = re.match(r'<!--(\{.*?\})-->\s*', src, re.S)
         meta = json.loads(m.group(1)); body = src[m.end():]
-        body = body.replace('{{GALERIA}}', gal).replace('{{FOTOS}}', fotos)
+        body = body.replace('{{GALERIA}}', gal).replace('{{FOTOS}}', fotos).replace('{{SEAL}}', SEAL).replace('{{TICKER}}', ticker())
         body = subst(body)
         if meta.get('bare'):
-            page = head(meta) + f'\n<body class="{meta.get("body", "page-inner")}">\n' + body + '\n<script src="assets/js/main.js"></script>\n</body>\n</html>\n'
+            page = head(meta) + f'\n<body class="{meta.get("body", "page-inner")}">\n' + (UNO if meta.get('intro') else '') + body + '\n<script src="assets/js/config.js"></script>\n<script src="assets/js/main.js"></script>\n</body>\n</html>\n'
         else:
-            page = (head(meta) + f'\n<body class="{meta.get("body", "page-inner")} page-{meta["nav"]}">\n' + header(meta['nav'])
+            page = (head(meta) + f'\n<body class="{meta.get("body", "page-inner")} page-{meta["nav"]}">\n' + (UNO if meta.get('intro') else '') + header(meta['nav'])
                     + '\n<main id="conteudo">\n' + body + '\n</main>\n'
                     + (final_cta() if meta.get('cta', True) else '') + '\n' + footer(meta['nav']) + subst('') + meta.get('extra_js', '') + '\n</body>\n</html>\n')
             page = subst(page)

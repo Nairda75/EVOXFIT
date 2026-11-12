@@ -54,34 +54,32 @@
     body.classList.toggle("menu-open", open);
     if (openBtn) openBtn.setAttribute("aria-expanded", open ? "true" : "false");
     body.style.overflow = open ? "hidden" : "";
-    if (window.__lenis) { if (open) window.__lenis.stop(); else window.__lenis.start(); }
     if (open && closeBtn) closeBtn.focus(); else if (!open && openBtn && openBtn.offsetParent) openBtn.focus();
   }
   if (openBtn) openBtn.addEventListener("click", function () { setMenu(true); });
   if (closeBtn) closeBtn.addEventListener("click", function () { setMenu(false); });
   if (menu) menu.querySelectorAll("nav a").forEach(function (a) { a.addEventListener("click", function () { if (a.getAttribute("href").charAt(0) === "#") setMenu(false); }); });
+  window.addEventListener("pageshow", function () { if (menu && menu.classList.contains("open")) setMenu(false); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && menu && menu.classList.contains("open")) setMenu(false); });
 
   /* ---------- Cabeçalho, barra de progresso e botões fixos ---------- */
-  var header = document.querySelector(".site-header");
+  var header = document.querySelector(".hdr");
   var dock = document.querySelector(".dock");
-  var bar = document.querySelector("[data-vs]");
-  var lastY = window.scrollY;
+  var lastY = window.scrollY, ticking = false;
   function onScroll() {
+    ticking = false;
     var y = window.scrollY, dy = y - lastY;
     var max = Math.max(1, doc.scrollHeight - window.innerHeight);
     doc.style.setProperty("--p", Math.min(1, y / max).toFixed(4));
-    var heroEnd = bar ? bar.offsetTop + bar.offsetHeight - window.innerHeight * 0.9 : 0;
-    var past = !bar || y > heroEnd;
-    if (header && bar) header.classList.toggle("solid", past);
     if (header) {
-      if (y < 80 || dy < -4 || (bar && !past)) header.classList.remove("away");
-      else if (dy > 6 && y > 300 && !(menu && menu.classList.contains("open"))) header.classList.add("away");
+      header.classList.toggle("solid", y > 40);
+      if (y < 120 || dy < -4) header.classList.remove("away");
+      else if (dy > 6 && !(menu && menu.classList.contains("open"))) header.classList.add("away");
     }
-    if (dock) dock.classList.toggle("show", y > 260);
+    if (dock) dock.classList.toggle("show", y > 360);
     lastY = y;
   }
-  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   window.addEventListener("resize", onScroll);
   onScroll();
 
@@ -113,15 +111,6 @@
     });
     window.addEventListener("pageshow", function (e) { if (e.persisted) { veil.style.display = "none"; } });
   }
-
-  /* ---------- Botões grandes: brilho que segue o rato ---------- */
-  document.addEventListener("pointermove", function (e) {
-    var el = e.target.closest && e.target.closest(".btn--big");
-    if (!el) return;
-    var r = el.getBoundingClientRect();
-    el.style.setProperty("--mx", (e.clientX - r.left) + "px");
-    el.style.setProperty("--my", (e.clientY - r.top) + "px");
-  }, { passive: true });
 
   /* ---------- Mapa: só fica interativo depois de tocar ---------- */
   document.querySelectorAll(".real-map").forEach(function (m) {
@@ -161,6 +150,45 @@
     strip.addEventListener("scroll", sync, { passive: true });
     window.addEventListener("resize", sync);
     sync();
+  }
+
+  /* ---------- Abertura UNO Studio (uma vez por sessão; "Saltar" ou Esc fecham) ---------- */
+  var uno = document.querySelector("[data-uno]");
+  function ready(delay) { setTimeout(function () { body.classList.add("is-ready"); }, delay || 0); }
+  if (!uno) { ready(sstore("evox-nav") === "1" ? 700 : 150); }
+  else if (doc.classList.contains("no-intro") || reduce) { uno.parentNode.removeChild(uno); sstore("uno-intro", "1"); ready(sstore("evox-nav") === "1" ? 700 : 150); }
+  else {
+    sstore("uno-intro", "1");
+    body.style.overflow = "hidden";
+    var words = [].slice.call(uno.querySelectorAll("[data-uno-words] span")), box = uno.querySelector("[data-uno-words]");
+    var brand = uno.querySelector("[data-uno-brand]"), cnt = uno.querySelector("[data-uno-count]"), bar = uno.querySelector("[data-uno-bar]");
+    var skip = uno.querySelector("[data-uno-skip]"), DUR = 4900, T0 = performance.now(), finished = false, timers = [], raf = 0;
+    function at(ms, fn) { timers.push(setTimeout(fn, ms)); }
+    words.forEach(function (w, i) {
+      var t = 350 + i * 580;
+      at(t, function () { w.classList.add("in"); });
+      at(t + 340, function () { w.classList.remove("in"); w.classList.add("out"); });
+    });
+    at(350 + words.length * 580 + 20, function () { box.style.display = "none"; brand.classList.add("in"); });
+    function frame(now) {
+      var p = Math.min(1, (now - T0) / DUR), e = 1 - Math.pow(1 - p, 2.2);
+      cnt.textContent = ("00" + Math.round(e * 100)).slice(-3);
+      bar.style.transform = "scaleX(" + e.toFixed(4) + ")";
+      if (p < 1 && !finished) raf = requestAnimationFrame(frame);
+    }
+    raf = requestAnimationFrame(frame);
+    function finish() {
+      if (finished) return; finished = true;
+      timers.forEach(clearTimeout); cancelAnimationFrame(raf);
+      cnt.textContent = "100"; bar.style.transform = "scaleX(1)";
+      uno.classList.add("out");
+      ready(520);
+      setTimeout(function () { if (uno.parentNode) uno.parentNode.removeChild(uno); body.style.overflow = ""; }, 1100);
+    }
+    at(DUR + 250, finish);
+    skip.addEventListener("click", finish);
+    skip.focus();
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") finish(); });
   }
 
   document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });

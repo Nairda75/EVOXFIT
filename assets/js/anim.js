@@ -1,96 +1,78 @@
-/* EVOXFIT Maia — animações (GSAP + ScrollTrigger + Lenis no computador).
-   Tudo respeita "reduzir movimento" do sistema. Sem GSAP o site continua a funcionar. */
+/* EVOXFIT Fitness Health Club Maia — animações leves ao deslizar (sem bibliotecas): revelações, contadores, paralaxe e secção "Porquê o EVOXFIT". */
 (function () {
   "use strict";
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  var hasIO = "IntersectionObserver" in window;
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function en() { return window.EVOXLANG === "en"; }
 
-  /* Botões grandes: efeito magnético (só com rato) */
-  function magnetic() {
-    if (!window.gsap || !finePointer || reduce) return;
-    document.querySelectorAll(".btn--big").forEach(function (b) {
-      b.addEventListener("pointermove", function (e) {
-        var r = b.getBoundingClientRect();
-        gsap.to(b, { x: (e.clientX - r.left - r.width / 2) * 0.16, y: (e.clientY - r.top - r.height / 2) * 0.28, duration: 0.4, ease: "power3.out" });
-      });
-      b.addEventListener("pointerleave", function () { gsap.to(b, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1,.4)" }); });
-    });
+  /* ---------- Revelações ---------- */
+  var rv = [].slice.call(document.querySelectorAll(".rv, .clip, .dist"));
+  if (!hasIO || reduce) rv.forEach(function (el) { el.classList.add("in"); });
+  else {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    rv.forEach(function (el) { io.observe(el); });
   }
-
-  if (reduce || !window.gsap || !window.ScrollTrigger) return;
-  gsap.registerPlugin(ScrollTrigger);
-  document.documentElement.classList.add("js-anim");
-
-  /* ---------- Scroll suave no computador ---------- */
-  if (finePointer && window.Lenis) {
-    var lenis = new Lenis({ duration: 1.1, smoothWheel: true });
-    window.__lenis = lenis;
-    lenis.on("scroll", ScrollTrigger.update);
-    gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
-    gsap.ticker.lagSmoothing(0);
-  }
-  magnetic();
-
-  /* ---------- Títulos: as palavras sobem uma a uma ---------- */
-  function split(el) {
-    if (el.dataset.split === "1") return;
-    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), nodes = [], n;
-    while ((n = walker.nextNode())) nodes.push(n);
-    nodes.forEach(function (t) {
-      if (!t.textContent.trim()) return;
-      var frag = document.createDocumentFragment();
-      t.textContent.split(/(\s+)/).forEach(function (part) {
-        if (!part) return;
-        if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
-        var w = document.createElement("span"); w.className = "w";
-        var i = document.createElement("span"); i.className = "wi"; i.textContent = part;
-        w.appendChild(i); frag.appendChild(w);
-      });
-      t.parentNode.replaceChild(frag, t);
-    });
-    el.dataset.split = "1";
-  }
-  var heads = gsap.utils.toArray("main h1, main h2:not(.sr-only), .final-cta h2").filter(function (h) { return !h.closest(".vs-step"); });
-  heads.forEach(function (h) {
-    split(h);
-    var hero = !!h.closest(".vs-intro, .page-hero");
-    gsap.from(h.querySelectorAll(".wi"), {
-      yPercent: 120, rotate: 5, duration: 1.1, ease: "expo.out", stagger: 0.07, delay: hero ? 0.25 : 0,
-      scrollTrigger: hero ? null : { trigger: h, start: "top 88%", once: true }
-    });
-  });
-  document.addEventListener("evox:lang", function () {
-    heads.forEach(function (h) { h.dataset.split = "0"; split(h); gsap.set(h.querySelectorAll(".wi"), { yPercent: 0, rotate: 0 }); });
-    document.querySelectorAll("[data-count]").forEach(function (el) { if (el.dataset.done) el.textContent = fmt(+el.dataset.count, +(el.dataset.dec || 0)); });
-  });
-
-  /* ---------- Entradas do topo ---------- */
-  gsap.from(".site-header .wrap > *", { y: -24, opacity: 0, duration: 0.8, ease: "power3.out", stagger: 0.08, delay: 0.1 });
-  if (document.querySelector(".vs-intro")) gsap.from(".vs-intro .eyebrow, .vs-now, .vs-intro .lead, .vs-intro .actions > *, .vs-proof, .vs-dial", { y: 34, opacity: 0, duration: 1, ease: "power3.out", stagger: 0.12, delay: 0.55 });
-  if (document.querySelector(".page-hero")) gsap.from(".page-hero .crumb, .page-hero .lead", { y: 26, opacity: 0, duration: 1, ease: "power3.out", stagger: 0.12, delay: 0.5 });
-
-  /* ---------- Cartões e listas em cascata ---------- */
-  ["section:not(.vs) .eyebrow", ".zone", ".chip", ".voice", ".side-steps li", ".faq details", ".info li", ".hours li", ".form-card", ".invite .steps li", ".invite .actions > *", ".final-cta .actions > *", ".footer-top > div", ".lead:not(.vs-intro .lead):not(.page-hero .lead)", ".stars", ".score", ".dist > div"].forEach(function (sel) {
-    ScrollTrigger.batch(sel, {
-      start: "top 92%", once: true,
-      onEnter: function (els) { gsap.fromTo(els, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", stagger: 0.09, overwrite: true, clearProps: "transform,opacity" }); }
-    });
-  });
 
   /* ---------- Contadores ---------- */
-  function fmt(v, dec) { return v.toLocaleString(window.EVOXLANG === "en" ? "en-GB" : "pt-PT", { minimumFractionDigits: dec, maximumFractionDigits: dec }); }
-  gsap.utils.toArray("[data-count]").forEach(function (el) {
-    var end = +el.dataset.count, dec = +(el.dataset.dec || 0), o = { v: 0 };
-    el.textContent = fmt(0, dec);
-    gsap.to(o, { v: end, duration: end > 10 ? 2.2 : 1.7, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 92%", once: true },
-      onUpdate: function () { el.textContent = fmt(o.v, dec); }, onComplete: function () { el.textContent = fmt(end, dec); el.dataset.done = "1"; } });
-  });
+  var counts = [].slice.call(document.querySelectorAll("[data-count]"));
+  function fmt(v, dec) { var t = v.toFixed(dec); return en() ? t : t.replace(".", ","); }
+  counts.forEach(function (el) { el._v = parseFloat(el.dataset.count); el._d = parseInt(el.dataset.dec || "0", 10); });
+  function runCount(el) {
+    if (reduce) { el.textContent = fmt(el._v, el._d); return; }
+    var t0 = performance.now(), D = 1400;
+    (function step(now) {
+      var p = Math.min(1, (now - t0) / D), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(el._v * e, el._d);
+      if (p < 1) requestAnimationFrame(step); else el._done = true;
+    })(t0);
+  }
+  if (hasIO) {
+    var co = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { runCount(e.target); co.unobserve(e.target); } });
+    }, { threshold: 0.6 });
+    counts.forEach(function (el) { co.observe(el); });
+  }
+  document.addEventListener("evox:lang", function () { counts.forEach(function (el) { if (el._done) el.textContent = fmt(el._v, el._d); }); });
 
-  /* ---------- Barras das avaliações ---------- */
-  gsap.utils.toArray(".dist .b i").forEach(function (el, i) {
-    var w = parseFloat(el.style.getPropertyValue("--w")) || 0;
-    gsap.to(el, { scaleX: w, duration: 1.5, delay: i * 0.08, ease: "expo.out", scrollTrigger: { trigger: el, start: "top 94%", once: true } });
-  });
+  /* ---------- Paralaxe suave ---------- */
+  var par = [].slice.call(document.querySelectorAll("[data-par]")), pTick = false;
+  function doPar() {
+    pTick = false;
+    var vh = window.innerHeight;
+    par.forEach(function (el) {
+      var r = el.parentNode.getBoundingClientRect();
+      if (r.bottom < -100 || r.top > vh + 100) return;
+      var k = parseFloat(el.dataset.par) || 0.1, y = (r.top + r.height / 2 - vh / 2) * -k;
+      el.style.transform = "translate3d(0," + y.toFixed(1) + "px,0) scale(1.14)";
+    });
+  }
+  if (par.length && !reduce) {
+    window.addEventListener("scroll", function () { if (!pTick) { pTick = true; requestAnimationFrame(doPar); } }, { passive: true });
+    window.addEventListener("resize", doPar);
+    doPar();
+  }
 
-  window.addEventListener("load", function () { ScrollTrigger.refresh(); });
+  /* ---------- Porquê o EVOXFIT: a imagem muda com o texto ---------- */
+  var items = [].slice.call(document.querySelectorAll(".why-item")), imgs = [].slice.call(document.querySelectorAll(".why-pic img"));
+  function activate(i) {
+    items.forEach(function (it, k) { it.classList.toggle("on", k === i); });
+    imgs.forEach(function (im, k) { im.classList.toggle("on", k === i); });
+  }
+  if (items.length && hasIO) {
+    var wo = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) activate(items.indexOf(e.target)); });
+    }, { rootMargin: "-45% 0px -45% 0px", threshold: 0 });
+    items.forEach(function (it) { wo.observe(it); });
+  }
+
+  /* ---------- Estado "aberto agora" ---------- */
+  var now = [].slice.call(document.querySelectorAll("[data-now]"));
+  function tick() {
+    var d = new Date(), t = pad(d.getHours()) + ":" + pad(d.getMinutes());
+    now.forEach(function (el) { el.textContent = en() ? "Open now (" + t + ") · 24-hour access" : "Aberto agora (" + t + ") · Acesso 24 horas"; });
+  }
+  if (now.length) { tick(); setInterval(tick, 20000); document.addEventListener("evox:lang", tick); }
 })();
