@@ -704,3 +704,31 @@ html.calmo.js-anim .rv,html.calmo.js-anim .gate-card,html.calmo.js-anim .gate-he
 .sheet--dark .real-map,.sheet--2 .real-map{background:var(--card);border-color:var(--line)}
 .sheet--dark .avatar,.sheet--2 .avatar{background:var(--card2);color:var(--txt)}
 .sheet--dark .hours-card h3,.sheet--2 .hours-card h3{border-color:var(--line)}
+
+/* Botões: micro-animações que mostram que se pode clicar */
+:is(.btn,.menu-btn,.close-btn,.lang button,.book-day,.book-slot,.disc-tabs button,.lightbox button,.strip-ctl button,.faq summary::after){transition:transform .3s var(--ease),scale .2s var(--ease),background .25s,color .25s,border-color .25s,box-shadow .3s}
+:is(.btn,.menu-btn,.close-btn,.lang button,.book-day:not([disabled]),.book-slot,.disc-tabs button,.lightbox button,.strip-ctl button,.circ):active{scale:.94}
+@media (hover:hover) and (pointer:fine){
+  .btn{position:relative;overflow:hidden;isolation:isolate}
+  .btn::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(105deg,transparent 32%,rgba(255,255,255,.4) 50%,transparent 68%);transform:translateX(-130%);transition:transform .75s var(--ease)}
+  .btn:hover::before{transform:translateX(130%)}
+  .btn--y:hover{box-shadow:0 10px 26px -8px rgba(255,210,31,.7)}
+  .btn--ink:hover{box-shadow:0 10px 24px -10px rgba(0,0,0,.7)}
+  .btn--line:hover,.btn--ghost:hover{border-color:var(--y);background:rgba(255,210,31,.14)}
+  .lang button:hover:not([aria-pressed=true]){color:var(--txt);background:rgba(255,255,255,.14)}
+  .menu-btn:hover,.close-btn:hover{scale:1.1;rotate:8deg;box-shadow:0 0 0 6px rgba(255,210,31,.25)}
+  .lightbox button:hover,.strip-ctl button:hover{scale:1.12;box-shadow:0 0 0 6px rgba(255,210,31,.25)}
+  .disc-tabs button:hover{transform:translateY(-3px)}
+  .faq summary:hover{color:var(--y)}
+  .faq summary:hover::after{scale:1.18}
+  .hdr-nav a{transition:background .25s,color .25s,transform .25s var(--ease)}
+  .hdr-nav a:hover{transform:translateY(-2px)}
+  .footer-top li a{display:inline-block;transition:transform .3s var(--ease),color .2s}
+  .footer-top li a:hover{transform:translateX(5px)}
+  .uno-link{transition:opacity .2s,color .2s,letter-spacing .3s}
+  .uno-link:hover{letter-spacing:.04em}
+  .gc-go .circ{transition:transform .5s var(--ease),background .25s}
+  .pick label:hover{transform:translateY(-2px)}
+  .pick label{transition:transform .25s var(--ease)}
+  .map-lock:hover{letter-spacing:.03em}
+}
