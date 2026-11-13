@@ -81,6 +81,33 @@ def hours_html():
     return ('<div class="hours-card"><h3 data-en="Gym access">Acesso ao ginásio</h3><ul class="hours"><li><span data-en="Every day">Todos os dias</span><b data-en="24 hours">24 horas</b></li></ul></div>'
             f'<div class="hours-card"><h3 data-en="Reception">Receção</h3><ul class="hours" data-en="{esc(rows_en)}">{rows_pt}</ul></div>')
 
+
+ABB_PT = {1: "Seg", 2: "Ter", 3: "Qua", 4: "Qui", 5: "Sex", 6: "Sáb", 0: "Dom"}
+ABB_EN = {1: "Mon", 2: "Tue", 3: "Wed", 4: "Thu", 5: "Fri", 6: "Sat", 0: "Sun"}
+
+def rec_line():
+    """Resumo curto do horário da receção, ex.: Seg–Sex 08:00–21:00 · Sáb 09:00–13:00."""
+    def lab(a, b, ab): return ab[a] if a == b else ab[a] + '–' + ab[b]
+    sp = [(a, b, k) for a, b, k in _spans(REC['dias']) if k]
+    pt = ' · '.join(f'{lab(a, b, ABB_PT)} {k.replace("; ", " e ")}' for a, b, k in sp)
+    en = ' · '.join(f'{lab(a, b, ABB_EN)} {k.replace("; ", " and ")}' for a, b, k in sp)
+    return f'<span data-en="{esc(en)}">{pt}</span>'
+
+def eq_legend():
+    out = []
+    for g in EQ['grupos']:
+        n = sum(x['n'] for x in g['itens'])
+        out.append(f'<li class="lg lg--{g["id"]}"><i></i><span data-en="{esc(g["en"])}">{g["pt"]}</span><b>{n}</b></li>')
+    return '<ul class="disc-legend">' + ''.join(out) + '</ul>'
+
+def rec_core():
+    w = REC['dias'].get('1') or next((v for v in REC['dias'].values() if v), [])
+    if not w: return '—'
+    return w[0][0][:2] + '–' + w[-1][1][:2]
+
+def rating_num():
+    return float(str(S['nota']).replace(',', '.'))
+
 def eq_total():
     return sum(i['n'] for g in EQ['grupos'] for i in g['itens'])
 
@@ -137,7 +164,7 @@ def subst(text):
         '{{ig}}': S['instagram'], '{{rota}}': S['google_rota'], '{{ficha}}': S['google_ficha'],
         '{{mapa}}': S['google_mapa_embed'], '{{nota}}': S['nota'], '{{n}}': str(S['n_avaliacoes']),
         '{{data_av}}': S['avaliacoes_data'], '{{EQ_TOTAL}}': str(eq_total()),
-        '{{BOOK}}': book_html('link'), '{{BOOK_FORM}}': book_html('form'), '{{HOURS}}': hours_html(),
+        '{{REC_LINE}}': rec_line(), '{{REC_CORE}}': rec_core(), '{{EQ_LEGEND}}': eq_legend(), '{{BOOK}}': book_html('link'), '{{BOOK_FORM}}': book_html('form'), '{{HOURS}}': hours_html(),
         '{{EQ_SUMMARY}}': eq_summary(), '{{EQ_LIST}}': eq_list(), '{{PORTFOLIO_LINK}}': portfolio_link('uno-link'), '{{EQ_FULL}}': eq_full(), '{{EQ_TAG}}': eq_tag(), '{{RECECAO_TAG}}': rec_tag(), '{{TEAM}}': team_html(),
         '{{PORTEFOLIO}}': S.get('portefolio_url') or '#uno',
     }
@@ -354,7 +381,8 @@ def fotos_html():
 def write_config_js():
     cfg = {"nome": S['nome'], "wa": S['whatsapp'], "tel": S['telefone_e164'], "telDisplay": S['telefone'],
            "rota": S['google_rota'], "ig": S['instagram'], "rececao": REC['dias'], "rececaoExemplo": bool(REC.get('exemplo')),
-           "rececaoNota": {"pt": REC.get('nota_pt', ''), "en": REC.get('nota_en', '')}}
+           "rececaoNota": {"pt": REC.get('nota_pt', ''), "en": REC.get('nota_en', '')},
+           "equip": [{"id": g["id"], "n": sum(x["n"] for x in g["itens"])} for g in EQ["grupos"]], "nota": rating_num(), "avaliacoes": S["n_avaliacoes"]}
     with open(os.path.join(OUT, 'assets', 'js', 'config.js'), 'w', encoding='utf-8') as f:
         f.write('/* Gerado por _fonte/build.py a partir de _fonte/site.json — não editar à mão */\nwindow.EVOX = ' + json.dumps(cfg, ensure_ascii=False) + ';\n')
 

@@ -76,7 +76,7 @@
       if (y < 120 || dy < -4) header.classList.remove("away");
       else if (dy > 6 && !(menu && menu.classList.contains("open"))) header.classList.add("away");
     }
-    if (dock) { var jr = document.querySelector(".vs-live"); dock.classList.toggle("show", y > 360 && (!jr || jr.getBoundingClientRect().bottom < window.innerHeight * 0.55)); }
+    if (dock) { var jr = document.querySelector(".disc-live"); dock.classList.toggle("show", y > 360 && (!jr || jr.getBoundingClientRect().bottom < window.innerHeight * 0.55)); }
     lastY = y;
   }
   window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
