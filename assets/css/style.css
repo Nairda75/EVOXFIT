@@ -326,6 +326,17 @@ h3{font-size:clamp(20px,1.7vw,26px);letter-spacing:-.01em;line-height:1.15}
   .disc-live .disc-hint{left:clamp(20px,3vw,48px);bottom:32px;transform:none;align-items:flex-start}
 }
 
+@media (min-width:861px) and (max-width:1279px){
+  .disc-live .disc-tabs{left:26px;right:26px;bottom:176px;width:auto;justify-content:flex-start}
+}
+@media (min-width:861px){
+  .disc:not(.disc-live) .disc-card{overflow:clip}
+  .disc:not(.disc-live) .disc-grid{align-items:stretch}
+  .disc:not(.disc-live) .disc-viz{position:sticky;top:0;align-self:start;height:100svh}
+  .disc:not(.disc-live) .disc-frame{aspect-ratio:auto;height:100%}
+  .disc:not(.disc-live) .disc-text{padding-top:120px}
+}
+
 @media (max-width:860px){
   .disc:not(.disc-live) .disc-viz{height:auto}
   .disc:not(.disc-live) .disc-frame{aspect-ratio:4/3}
@@ -658,7 +669,39 @@ a.fact:hover{transform:translateY(-4px)}
 .sheet:not(.sheet--dark):not(.sheet--2):not(.sheet--y) .y{color:#a67f00}
 .sheet:not(.sheet--dark):not(.sheet--2):not(.sheet--y) .eyebrow{color:var(--ink)}
 
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
-  .js-anim .rv,.js-anim .gate-card,.js-anim .gate-head,.js-anim .gate-intro{opacity:1;transform:none}
-}
+html.calmo *,html.calmo *::before,html.calmo *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+html.calmo.js-anim .rv,html.calmo.js-anim .gate-card,html.calmo.js-anim .gate-head,html.calmo.js-anim .gate-intro{opacity:1;transform:none}
+
+/* Cursor: disco calibrado (main.js) */
+.plate-cursor{position:fixed;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;z-index:2147483000;pointer-events:none;opacity:0;transition:opacity .2s;will-change:transform}
+.plate-cursor.show{opacity:1}
+.plate-cursor .pc-s{display:block;width:100%;height:100%;transition:transform .28s var(--ease,cubic-bezier(.2,.7,.2,1));filter:drop-shadow(0 2px 5px rgba(0,0,0,.4))}
+.plate-cursor .pc-r{display:block;width:100%;height:100%}
+.plate-cursor.hot .pc-s{transform:scale(1.5)}
+.plate-cursor.down .pc-s{transform:scale(.8)}
+.plate-cursor.hot.down .pc-s{transform:scale(1.2)}
+html.has-plate,html.has-plate *{cursor:none!important}
+html.has-plate input:not([type=radio]):not([type=checkbox]):not([type=button]):not([type=submit]),html.has-plate textarea{cursor:text!important}
+
+
+/* Escolha do ginásio: versão minimalista */
+.gate{gap:clamp(10px,1.6vw,20px)}
+.gate-head{background:transparent;padding:6px 6px 0}
+.gate-head .gname small{display:none}
+.gate-intro{justify-content:flex-start;padding:clamp(6px,1.4vw,18px) 6px 0}
+.gate-intro h1{font-size:clamp(22px,2.6vw,38px);font-weight:800;letter-spacing:-.02em}
+.gate-card{padding:clamp(22px,3vw,48px);background:var(--bg2);color:var(--txt)}
+.gate-card--aveiro{background:var(--paper);color:var(--ink)}
+.gate-card--aveiro::before,.gate-card--aveiro .bg{display:none}
+.gate-card--maia::after{background:linear-gradient(0deg,rgba(18,18,22,.8),rgba(18,18,22,.35))}
+.gate-card--maia::after,.gate-card--maia .bg{opacity:0;transition:opacity .8s var(--ease)}
+.gate-card--maia:hover::after,.gate-card--maia:focus-visible::after,.gate-card--maia:hover .bg,.gate-card--maia:focus-visible .bg{opacity:1}
+.gate-card--maia .bg img{filter:grayscale(.2)}
+.gc-mid{margin-top:auto}
+.gc-where{display:block;margin-top:12px;font:500 12px/1.3 var(--mono);letter-spacing:.16em;text-transform:uppercase;opacity:.65}
+.gc-go{justify-content:flex-end}
+.gc-go>span:first-child{margin-right:auto;font:500 12px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;opacity:.65}
+.gc-go .circ{width:48px;height:48px;background:transparent;color:inherit;border:1.5px solid currentColor}
+.gate-card:hover .circ{background:var(--y);border-color:var(--y);color:var(--ink)}
+.gate-foot{padding:0 6px}
+.gate-foot>span:first-child{font:500 11px/1 var(--mono);letter-spacing:.28em}

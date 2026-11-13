@@ -1,11 +1,11 @@
 /* EVOXFIT Fitness Health Club Maia — início: visita 3D ao ginásio (gym3d.bundle.js) + painel de números e texto por passos.
    O 3D vive numa janela arredondada; o texto fica ao lado, nunca por cima da animação.
-   Sem JS, sem WebGL ou com "reduzir movimento": a janela mostra uma imagem e os passos aparecem em lista. */
+   Sem JS ou sem WebGL (ou com ?calmo no endereço): a janela mostra uma imagem e os passos aparecem em lista. */
 (function () {
   "use strict";
   var sec = document.querySelector("[data-disc]");
   if (!sec) return;
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var reduce = /[?&]calmo\b/.test(location.search);
   var C = window.EVOX || {};
   function en() { return window.EVOXLANG === "en"; }
   function pad(n) { return (n < 10 ? "0" : "") + n; }

@@ -1,7 +1,7 @@
 /* EVOXFIT Fitness Health Club Maia — animações leves ao deslizar (sem bibliotecas): revelações, contadores, paralaxe e estado "aberto agora". */
 (function () {
   "use strict";
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var reduce = /[?&]calmo\b/.test(location.search);
   var hasIO = "IntersectionObserver" in window;
   var C = window.EVOX || {};
   function pad(n) { return (n < 10 ? "0" : "") + n; }

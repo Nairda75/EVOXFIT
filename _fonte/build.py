@@ -298,7 +298,7 @@ def footer(active):
     <div class="footer-top">
       <div class="foot-brand">
         {BRAND}
-        <p data-en="Train. We've got the rest.">Treine. O resto é connosco.</p>
+        <p data-en="WE GOT THIS">WE GOT THIS</p>
         <p class="small">{S['morada']}, {S['codigo_postal']}</p>
       </div>
       <div><h3 data-en="Pages">Páginas</h3><ul>{pages}</ul></div>

@@ -40,3 +40,9 @@ Sem animação de abertura. Sem marca de água lateral; faixa UNO no rodapé e l
 
 ## Sem bibliotecas
 Só HTML, CSS e JS próprios (`main.js`, `anim.js`, `disco.js` (+ o pacote three.js `gym3d.bundle.js`), `agendar.js`, `treino.js`). A versão anterior está na etiqueta `v2-uno-intro` e a versão anterior com o 3D a ecrã inteiro em `redesign-3d-slides` e na etiqueta `v4-3d-hero`.
+
+## Notas (atualização)
+- Slogan: **WE GOT THIS** (PT e EN).
+- Animações/3D: já não são desligadas por "reduzir movimento" do sistema (causava o problema no PC). Para uma versão calma, abrir qualquer página com `?calmo`.
+- Cursor: disco calibrado (peso) pequeno, roda ao mover; desativado em ecrãs táteis.
+- Escolha de ginásio (`index`): versão minimalista.
