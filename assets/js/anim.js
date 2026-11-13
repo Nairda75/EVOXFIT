@@ -1,13 +1,14 @@
-/* EVOXFIT Fitness Health Club Maia — animações leves ao deslizar (sem bibliotecas): revelações, contadores, paralaxe e secção "Porquê o EVOXFIT". */
+/* EVOXFIT Fitness Health Club Maia — animações leves ao deslizar (sem bibliotecas): revelações, contadores, paralaxe e estado "aberto agora". */
 (function () {
   "use strict";
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var hasIO = "IntersectionObserver" in window;
+  var C = window.EVOX || {};
   function pad(n) { return (n < 10 ? "0" : "") + n; }
   function en() { return window.EVOXLANG === "en"; }
 
   /* ---------- Revelações ---------- */
-  var rv = [].slice.call(document.querySelectorAll(".rv, .clip, .dist"));
+  var rv = [].slice.call(document.querySelectorAll(".rv, .dist"));
   if (!hasIO || reduce) rv.forEach(function (el) { el.classList.add("in"); });
   else {
     var io = new IntersectionObserver(function (es) {
@@ -21,7 +22,7 @@
   function fmt(v, dec) { var t = v.toFixed(dec); return en() ? t : t.replace(".", ","); }
   counts.forEach(function (el) { el._v = parseFloat(el.dataset.count); el._d = parseInt(el.dataset.dec || "0", 10); });
   function runCount(el) {
-    if (reduce) { el.textContent = fmt(el._v, el._d); return; }
+    if (reduce) { el.textContent = fmt(el._v, el._d); el._done = true; return; }
     var t0 = performance.now(), D = 1400;
     (function step(now) {
       var p = Math.min(1, (now - t0) / D), e = 1 - Math.pow(1 - p, 3);
@@ -55,24 +56,20 @@
     doPar();
   }
 
-  /* ---------- Porquê o EVOXFIT: a imagem muda com o texto ---------- */
-  var items = [].slice.call(document.querySelectorAll(".why-item")), imgs = [].slice.call(document.querySelectorAll(".why-pic img"));
-  function activate(i) {
-    items.forEach(function (it, k) { it.classList.toggle("on", k === i); });
-    imgs.forEach(function (im, k) { im.classList.toggle("on", k === i); });
+  /* ---------- Estado "aberto agora" e horário da receção de hoje ---------- */
+  var now = [].slice.call(document.querySelectorAll("[data-now]")), rec = [].slice.call(document.querySelectorAll("[data-rec-today]"));
+  function parse(t) { var p = t.split(":"); return (+p[0]) + (+p[1] || 0) / 60; }
+  function recText(d) {
+    var w = (C.rececao || {})[String(d.getDay())] || [], h = d.getHours() + d.getMinutes() / 60;
+    if (!w.length) return en() ? "Reception closed today" : "Receção fechada hoje";
+    var span = w.map(function (x) { return x[0] + "–" + x[1]; }).join(" · ");
+    var open = w.some(function (x) { return h >= parse(x[0]) && h < parse(x[1]); });
+    return (en() ? (open ? "Reception open now · " : "Reception today · ") : (open ? "Receção aberta agora · " : "Receção hoje · ")) + span;
   }
-  if (items.length && hasIO) {
-    var wo = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) activate(items.indexOf(e.target)); });
-    }, { rootMargin: "-45% 0px -45% 0px", threshold: 0 });
-    items.forEach(function (it) { wo.observe(it); });
-  }
-
-  /* ---------- Estado "aberto agora" ---------- */
-  var now = [].slice.call(document.querySelectorAll("[data-now]"));
   function tick() {
     var d = new Date(), t = pad(d.getHours()) + ":" + pad(d.getMinutes());
     now.forEach(function (el) { el.textContent = en() ? "Open now (" + t + ") · 24-hour access" : "Aberto agora (" + t + ") · Acesso 24 horas"; });
+    rec.forEach(function (el) { el.textContent = recText(d); });
   }
-  if (now.length) { tick(); setInterval(tick, 20000); document.addEventListener("evox:lang", tick); }
+  if (now.length || rec.length) { tick(); setInterval(tick, 20000); document.addEventListener("evox:lang", tick); }
 })();

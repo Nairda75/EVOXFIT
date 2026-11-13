@@ -1,5 +1,6 @@
 <!--{"file":"contactos.html","title":"Contactos e como chegar | EVOXFIT Fitness Health Club Maia","title_en":"Contact and directions | EVOXFIT Fitness Health Club Maia","desc":"EVOXFIT Fitness Health Club Maia, R. Eng. Frederico Ulrich 1636, 4470-605 Maia. Telefone 961 382 108. Ginásio aberto 24 horas, todos os dias.","nav":"contactos","body":"page-inner","cta":true,"ldjson":true}-->
-<section class="page-hero">
+<section class="phero">
+  <div class="phero-bg" aria-hidden="true"><img src="assets/img/ev-fachada.jpg" alt="" width="1920" height="1080" fetchpriority="high"></div>
   <div class="wrap">
     <nav class="crumb" aria-label="Localização" data-en-aria="Breadcrumb"><a href="maia.html" data-en="Home">Início</a><span>/</span><span data-en="Contact">Contactos</span></nav>
     <h1 data-en="Get in <span class='y'>touch.</span>">Fale <span class="y">connosco.</span></h1>
@@ -7,7 +8,7 @@
   </div>
 </section>
 
-<section class="section" aria-label="Contactos" data-en-aria="Contact details">
+<section class="sheet" aria-label="Contactos" data-en-aria="Contact details">
   <div class="wrap contact-grid">
     <div>
       <p class="eyebrow" data-en="Phone">Telefone</p>
@@ -19,27 +20,22 @@
       <ul class="info">
         <li>{{icon:pin}}<div><b data-en="Address">Morada</b><a href="{{rota}}" target="_blank" rel="noopener">{{morada}}<br>{{cp}}</a></div></li>
         <li>{{icon:pin}}<div><b>Plus Code</b><span>{{plus}}</span></div></li>
+        <li>{{icon:parking}}<div><b data-en="Parking">Estacionamento</b><span data-en="Outdoor parking next to the gym">Estacionamento exterior junto ao ginásio</span></div></li>
         <li>{{icon:ig}}<div><b>Instagram</b><a href="{{ig}}" target="_blank" rel="noopener">@evoxfit.maia</a></div></li>
         <li>{{icon:star}}<div><b data-en="Google reviews">Avaliações no Google</b><a href="{{ficha}}" target="_blank" rel="noopener" data-en="{{nota}} out of 5 · {{n}} reviews">{{nota}} em 5 · {{n}} avaliações</a></div></li>
       </ul>
     </div>
-    <div>
+    <div id="horario">
       <p class="eyebrow" data-en="Opening hours">Horário</p>
-      <ul class="hours">
-        <li><span data-en="Monday">Segunda</span><span data-en="24 hours">24 horas</span></li>
-        <li><span data-en="Tuesday">Terça</span><span data-en="24 hours">24 horas</span></li>
-        <li><span data-en="Wednesday">Quarta</span><span data-en="24 hours">24 horas</span></li>
-        <li><span data-en="Thursday">Quinta</span><span data-en="24 hours">24 horas</span></li>
-        <li><span data-en="Friday">Sexta</span><span data-en="24 hours">24 horas</span></li>
-        <li><span data-en="Saturday">Sábado</span><span data-en="24 hours">24 horas</span></li>
-        <li><span data-en="Sunday">Domingo</span><span data-en="24 hours">24 horas</span></li>
-      </ul>
-      <p class="small" style="margin-top:16px" data-en="Hours as shown on Google Maps. On public holidays, please call to confirm.">Horário conforme o Google Maps. Em feriados, contacte-nos para confirmar.</p>
+      <div class="hours-wrap" style="grid-template-columns:1fr">{{HOURS}}</div>
+      <p style="margin-top:16px">{{RECECAO_TAG}}</p>
+      <p class="small" style="margin-top:12px" data-en="First workouts are booked within the reception hours. On public holidays, please call to confirm.">Os primeiros treinos são marcados dentro do horário da receção. Em feriados, contacte-nos para confirmar.</p>
+      <a class="btn btn--y" style="margin-top:20px" href="primeiro-treino.html"><span data-en="Book first workout">Marcar primeiro treino</span>{{icon:arrow}}</a>
     </div>
   </div>
 </section>
 
-<section class="section--tight" style="padding-top:0" aria-label="Mapa" data-en-aria="Map">
+<section class="sheet sheet--tight" aria-label="Mapa" data-en-aria="Map">
   <div class="wrap">
     <div class="real-map" style="min-height:min(70vh,560px)">
       <iframe title="Mapa do EVOXFIT Fitness Health Club Maia no Google Maps" data-en-title="EVOXFIT Fitness Health Club Maia on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="{{mapa}}"></iframe>

@@ -1,0 +1,28 @@
+<!--{"file":"maquinas.html","title":"Máquinas e equipamento | EVOXFIT Fitness Health Club Maia","title_en":"Equipment | EVOXFIT Fitness Health Club Maia","desc":"Que máquinas tem o EVOXFIT Fitness Health Club Maia e quantas: máquinas guiadas, peso livre, cardio e treino funcional.","nav":"maquinas","body":"page-inner","cta":true}-->
+<section class="phero">
+  <div class="phero-bg" aria-hidden="true"><img src="assets/img/ev-equipamento.jpg" alt="" width="1920" height="1080" fetchpriority="high"></div>
+  <div class="wrap">
+    <nav class="crumb" aria-label="Localização" data-en-aria="Breadcrumb"><a href="maia.html" data-en="Home">Início</a><span>/</span><span data-en="Equipment">Máquinas</span></nav>
+    <h1 data-en="Machines and <span class='y'>equipment.</span>">Máquinas e <span class="y">equipamento.</span></h1>
+    <p class="lead" data-en="Which machines the gym has and how many, by training zone.">As máquinas que o ginásio tem e quantas, por zona de treino.</p>
+    <div class="tags">{{EQ_TAG}}</div>
+  </div>
+</section>
+
+<section class="sheet sheet--dark sheet--tight" aria-label="Total de equipamento" data-en-aria="Equipment total">
+  <div class="wrap">
+    <div class="eq-big">
+      <span class="num" data-count="{{EQ_TOTAL}}">{{EQ_TOTAL}}</span>
+      <p class="lead" style="max-width:34ch" data-en="units of equipment across four training zones.">unidades de equipamento distribuídas por quatro zonas de treino.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sheet" aria-labelledby="zonas-titulo">
+  <div class="wrap">
+    <p class="eyebrow" data-en="By zone">Por zona</p>
+    <h2 id="zonas-titulo" class="sr-only" data-en="Equipment by zone">Equipamento por zona</h2>
+    {{EQ_FULL}}
+    <p class="small" style="margin-top:22px" data-en="Equipment and quantities may vary. To confirm a specific machine, call {{tel}}.">O equipamento e as quantidades podem variar. Para confirmar uma máquina específica, contacte o {{tel}}.</p>
+  </div>
+</section>

@@ -1,26 +1,39 @@
-<!--{"file":"index.html","title":"EVOXFIT | Escolha o seu ginásio","title_en":"EVOXFIT | Select your gym","desc":"EVOXFIT Fitness Health Club: Aveiro e Maia. Escolha o seu ginásio.","nav":"inicio","body":"page-gate","bare":true,"gate":true,"intro":true}-->
+<!--{"file":"index.html","title":"EVOXFIT Fitness Health Club | Escolha o seu ginásio","title_en":"EVOXFIT Fitness Health Club | Select your gym","desc":"EVOXFIT Fitness Health Club: Aveiro e Maia. Escolha o seu ginásio.","nav":"inicio","body":"page-gate","bare":true,"intro":true}-->
 <main class="gate" id="conteudo">
-  <div class="gate-top">
-    <h1 class="gl" data-en="Select your gym.">Escolha o seu ginásio.</h1>
-    <img class="gate-logo" src="assets/img/logo-evoxfit.png" width="84" height="84" alt="EVOXFIT Fitness Health Club">
+  <header class="gate-head">
+    <img src="assets/img/logo-evoxfit-128.png" width="46" height="46" alt="">
+    <span class="gname">EVOXFIT Fitness Health Club<small>AVEIRO · MAIA</small></span>
     <div class="lang" role="group" aria-label="Idioma" data-en-aria="Language"><button type="button" data-lang="pt" aria-pressed="true">PT</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
+  </header>
+
+  <div class="gate-intro">
+    <h1 data-en="Select <span class='y'>your gym.</span>">Escolha o <span class="y">seu ginásio.</span></h1>
+    <p data-en="Two EVOXFIT clubs. Choose the one closest to you: Aveiro or Maia.">Dois clubes EVOXFIT. Escolha o que lhe fica mais perto: Aveiro ou Maia.</p>
   </div>
-  <p class="gate-slogan" data-en="Train. We've got the rest.">Treine. O resto é connosco.</p>
+
   <div class="gate-split">
-    <a class="gate-panel pending" href="aveiro.html">
-      <div class="bg"></div><div class="xg xgrid"></div>
-      <span class="gp-k" data-en="Page in preparation">Página em preparação</span>
-      <h2>Aveiro</h2>
-      <p class="gp-s" data-en="Coming soon">Brevemente</p>
-      <span class="gp-go"><span data-en="Enter">Entrar</span>{{icon:arrow}}</span>
+    <a class="gate-card gate-card--aveiro" href="aveiro.html" aria-label="EVOXFIT Aveiro, página em preparação" data-en-aria="EVOXFIT Aveiro, page in preparation">
+      <div class="bg" aria-hidden="true"></div>
+      <div class="gc-top"><span class="gc-idx" data-en="Club 01">Clube 01</span><span class="gc-state" data-en="Coming soon">Brevemente</span></div>
+      <div class="gc-mid">
+        <h2 class="gc-name">Aveiro</h2>
+        <p class="gc-where">{{icon:pin}}<span data-en="Aveiro district">Distrito de Aveiro</span></p>
+        <div class="gc-facts"><span data-en="Page in preparation">Página em preparação</span><span data-en="Online applications soon">Candidaturas online em breve</span></div>
+      </div>
+      <div class="gc-go"><span data-en="View page">Ver página</span><span class="circ">{{icon:arrow}}</span></div>
     </a>
-    <a class="gate-panel" href="maia.html">
-      <div class="bg"><img src="assets/img/ev-fachada.jpg" alt="" width="1920" height="1080"></div>
-      <span class="gp-k">24 H · <span data-en="Open now">Aberto</span></span>
-      <h2>Maia</h2>
-      <p class="gp-s">{{morada}}</p>
-      <span class="gp-go"><span data-en="Enter">Entrar</span>{{icon:arrow}}</span>
+
+    <a class="gate-card gate-card--maia" href="maia.html" aria-label="EVOXFIT Maia, entrar" data-en-aria="EVOXFIT Maia, enter">
+      <div class="bg" aria-hidden="true"><img src="assets/img/ev-fachada.jpg" alt="" width="1920" height="1080"></div>
+      <div class="gc-top"><span class="gc-idx" data-en="Club 02">Clube 02</span><span class="gc-state"><i></i><span data-en="Open 24 h">Aberto 24 h</span></span></div>
+      <div class="gc-mid">
+        <h2 class="gc-name">Maia</h2>
+        <p class="gc-where">{{icon:pin}}<span data-en="Maia, Greater Porto">Maia, Grande Porto</span></p>
+        <div class="gc-facts"><span data-en="Open 24 hours">24 horas</span><span data-en="{{nota}} on Google">{{nota}} no Google</span><span data-en="First workout by booking">Primeiro treino por marcação</span></div>
+      </div>
+      <div class="gc-go"><span data-en="Enter">Entrar</span><span class="circ">{{icon:arrow}}</span></div>
     </a>
   </div>
-  <p class="gate-foot"><span data-en="Website by UNO Studio · Digital marketing">Website por UNO Studio · Marketing digital</span></p>
+
+  <p class="gate-foot"><span data-en="Train. We've got the rest.">Treine. O resto é connosco.</span>{{PORTFOLIO_LINK}}</p>
 </main>

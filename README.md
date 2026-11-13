@@ -8,27 +8,34 @@ Abre `index.html` (página de escolha Aveiro/Maia) diretamente, ou serve a pasta
 ## Editar conteúdo
 Os `.html` na raiz são **gerados**. Edita a fonte e volta a gerar:
 
-- `_fonte/site.json` — telefone, morada, coordenadas, links do Google, nota e nº de avaliações.
+- `_fonte/site.json` — telefone, morada, coordenadas, links do Google, nota e nº de avaliações, **horário da receção** (`rececao.dias`, 0 = domingo), **equipamento** (`equipamento.grupos`: zonas, máquinas e quantidades) e `portefolio_url` (ligação para o portefólio da UNO Studio; vazio = aponta para o rodapé).
 - `_fonte/pages/*.html` — texto de cada página (PT no HTML, EN em `data-en="…"`).
-- `python3 _fonte/build.py` — regenera `index.html` (escolha), `aveiro.html` (em preparação), `maia.html`, `o-ginasio.html`, `primeiro-treino.html`, `contactos.html`, `404.html` e `assets/js/config.js`.
+- `python3 _fonte/build.py` — regenera todas as páginas e `assets/js/config.js`.
+
+Páginas: `index` (escolha Aveiro/Maia, na horizontal), `aveiro` (em preparação), `maia` (início em slides), `o-ginasio`, `maquinas`, `equipa`, `primeiro-treino`, `contactos`, `404`.
+
+## Dados de exemplo (a substituir)
+- `rececao` e `equipamento` têm `"exemplo": true` e aparecem no site com uma etiqueta "de exemplo". Quando os valores forem os reais, passar a `false` (a etiqueta desaparece).
+- A página Equipa tem nomes/fotografias provisórios (`team_html()` em `_fonte/build.py`).
+- A marcação do primeiro treino (`assets/js/agendar.js`) só oferece os dias e horas (de 30 em 30 min) em que a receção está aberta; domingo fechado nos valores de exemplo.
 
 ## Imagens e logótipo
-- As imagens `assets/img/ev-*.jpg` são **ilustrativas**: renders estilizados do ginásio criados para esta proposta (a preto e branco com toque amarelo). Estão identificadas como "Imagem ilustrativa" no site.
-- Quando houver fotografias reais, põe-nas em `assets/img/gym-1.jpg`, `gym-2.jpg`… e corre `python3 _fonte/build.py`: aparece uma tira de fotografias no início e uma galeria em "O ginásio". Para trocar as imagens ilustrativas por fotos reais nas secções principais, substitui os ficheiros `ev-*.jpg` (mesmos nomes).
-- `assets/img/logo-evoxfit.png` é o logótipo deles (sem "Maia"); o site não usa a tipografia da marca: usa Archivo + IBM Plex Mono e elementos de marca próprios (régua de carga, X, selo circular, relógio de 24 h, cantos de enquadramento).
+- As imagens `assets/img/ev-*.jpg` são **ilustrativas** (renders criados para esta proposta), identificadas como tal no site.
+- Fotografias reais: pôr em `assets/img/evox-1.jpg`, `evox-2.jpg`… (ou `gym-*.jpg`) e correr o build: aparece uma tira no início e uma galeria em "O ginásio".
+- `assets/img/logo-evoxfit.png` é o logótipo deles (sem "Maia"); o design não foi alterado.
 
 ## O que ainda precisa de confirmação com o ginásio
-- Que o 961 382 108 tem WhatsApp (o formulário de primeiro treino abre uma conversa nesse número).
-- Se o primeiro treino é gratuito/experimental, para ajustar a frase "Condições e valores confirmados diretamente com a equipa".
-- Planos, preços, modalidades e aulas (não inventados; há espaço para uma secção "Planos").
+- Que o 961 382 108 tem WhatsApp (o formulário abre uma conversa nesse número).
+- Horário real da receção, lista e quantidades reais de máquinas, equipa.
+- Se o primeiro treino é gratuito/experimental; planos e preços (não inventados).
 - A nota 4,7 / 32 avaliações é de novembro de 2026; atualizar em `site.json`.
 - Aveiro: página em preparação (faltam dados e fotografias).
 
-## Estrutura do início
-Herói com o slogan → faixa em movimento → declaração e números → "Cinco diferenças" (imagem que muda com o texto) → escolha do horário (`assets/js/hora.js`, relógio de 24 h) → atalhos → avaliações → onde estamos (mapa) → chamada final.
+## Estrutura do início (Maia)
+Slides ao deslizar (`assets/js/journey.js`: slogan, 24 h/receção, máquinas, equipa, primeiro treino; cada ecrã sobe como uma folha arredondada e o anterior escurece) → dados essenciais → marcação por horas da receção → zonas de máquinas → cinco diferenças → equipa → avaliações → onde estamos (horários e mapa) → chamada final.
 
-## Abertura UNO Studio
-Animação de ~5 s (marketing & digital → "Criámos este website para…") mostrada uma vez por sessão na primeira página (`index.html` ou `maia.html`). Tem botão "Saltar", respeita "reduzir movimento" e pode rever-se com `maia.html?intro=1` (ligação "Ver abertura" no rodapé). O "UNO." é um wordmark tipográfico provisório: trocar pelo logótipo oficial da UNO Studio.
+## UNO Studio
+Abertura de ~4 s (uma vez por sessão; "Saltar" ou Esc fecham; rever com `maia.html?intro=1`), marca de água vertical "UNO · STUDIO" em todas as páginas, faixa UNO no rodapé e ligação pequena "Portefólio UNO Studio" (definir `portefolio_url`). O "UNO." é um wordmark tipográfico provisório.
 
 ## Sem bibliotecas
-O site não carrega bibliotecas de animação nem 3D: só HTML, CSS e JS próprios (`main.js`, `anim.js`, `hora.js`, `treino.js`). A cena 3D usada para gerar as imagens está em `_fonte/render/gym3d.js` (`_fonte/bundle.sh` gera o pacote para renderizar); a versão anterior com o 3D ao deslizar está no ramo `redesign-3d-slides`.
+Só HTML, CSS e JS próprios (`main.js`, `anim.js`, `journey.js`, `agendar.js`, `treino.js`). A versão anterior está na etiqueta `v2-uno-intro` e a do 3D em `redesign-3d-slides`.

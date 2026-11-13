@@ -76,7 +76,7 @@
       if (y < 120 || dy < -4) header.classList.remove("away");
       else if (dy > 6 && !(menu && menu.classList.contains("open"))) header.classList.add("away");
     }
-    if (dock) dock.classList.toggle("show", y > 360);
+    if (dock) { var jr = document.querySelector(".journey:not(.static)"); dock.classList.toggle("show", y > 360 && (!jr || jr.getBoundingClientRect().bottom < window.innerHeight * 0.55)); }
     lastY = y;
   }
   window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
@@ -136,10 +136,10 @@
     });
   }
 
-  /* ---------- Fotografias: setas que deslizam a tira ---------- */
-  var strip = document.querySelector("[data-strip]");
-  if (strip) {
-    var prev = document.querySelector("[data-strip-prev]"), next = document.querySelector("[data-strip-next]");
+  /* ---------- Tiras deslizantes (setas) ---------- */
+  document.querySelectorAll("[data-strip]").forEach(function (strip) {
+    var id = strip.getAttribute("data-strip");
+    var prev = document.querySelector('[data-strip-prev="' + id + '"]'), next = document.querySelector('[data-strip-next="' + id + '"]');
     var step = function () { var c = strip.children[0]; return c ? c.getBoundingClientRect().width + 14 : 300; };
     var sync = function () {
       if (prev) prev.disabled = strip.scrollLeft < 8;
@@ -150,7 +150,7 @@
     strip.addEventListener("scroll", sync, { passive: true });
     window.addEventListener("resize", sync);
     sync();
-  }
+  });
 
   /* ---------- Abertura UNO Studio (uma vez por sessão; "Saltar" ou Esc fecham) ---------- */
   var uno = document.querySelector("[data-uno]");
@@ -160,16 +160,10 @@
   else {
     sstore("uno-intro", "1");
     body.style.overflow = "hidden";
-    var words = [].slice.call(uno.querySelectorAll("[data-uno-words] span")), box = uno.querySelector("[data-uno-words]");
-    var brand = uno.querySelector("[data-uno-brand]"), cnt = uno.querySelector("[data-uno-count]"), bar = uno.querySelector("[data-uno-bar]");
-    var skip = uno.querySelector("[data-uno-skip]"), DUR = 4900, T0 = performance.now(), finished = false, timers = [], raf = 0;
+    var card = uno.querySelector("[data-uno-card]"), cnt = uno.querySelector("[data-uno-count]"), bar = uno.querySelector("[data-uno-bar]");
+    var skip = uno.querySelector("[data-uno-skip]"), DUR = 3900, T0 = performance.now(), finished = false, timers = [], raf = 0;
     function at(ms, fn) { timers.push(setTimeout(fn, ms)); }
-    words.forEach(function (w, i) {
-      var t = 350 + i * 580;
-      at(t, function () { w.classList.add("in"); });
-      at(t + 340, function () { w.classList.remove("in"); w.classList.add("out"); });
-    });
-    at(350 + words.length * 580 + 20, function () { box.style.display = "none"; brand.classList.add("in"); });
+    at(500, function () { card.classList.add("in"); });
     function frame(now) {
       var p = Math.min(1, (now - T0) / DUR), e = 1 - Math.pow(1 - p, 2.2);
       cnt.textContent = ("00" + Math.round(e * 100)).slice(-3);
@@ -183,7 +177,7 @@
       cnt.textContent = "100"; bar.style.transform = "scaleX(1)";
       uno.classList.add("out");
       ready(520);
-      setTimeout(function () { if (uno.parentNode) uno.parentNode.removeChild(uno); body.style.overflow = ""; }, 1100);
+      setTimeout(function () { if (uno.parentNode) uno.parentNode.removeChild(uno); body.style.overflow = ""; }, 1150);
     }
     at(DUR + 250, finish);
     skip.addEventListener("click", finish);

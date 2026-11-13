@@ -1,141 +1,168 @@
-<!--{"file":"maia.html","title":"EVOXFIT Fitness Health Club | Ginásio 24 horas na Maia","title_en":"EVOXFIT Fitness Health Club Maia | 24-hour gym in Maia","desc":"Ginásio aberto 24 horas, todos os dias, na Maia. Equipamento de qualidade, espaço amplo e estacionamento junto à entrada. Marque o seu primeiro treino.","nav":"inicio","body":"page-home","cta":true,"ldjson":true,"intro":true,"extra_js":"\n<script src=\"assets/js/hora.js\" defer></script>"}-->
-<section class="hero grain" aria-label="EVOXFIT Fitness Health Club Maia">
-  <div class="hero-bg" aria-hidden="true"><picture><source media="(max-width:760px)" srcset="assets/img/ev-hero-m.jpg"><img data-par="0.12" src="assets/img/ev-hero.jpg" alt="" width="1920" height="1080" fetchpriority="high"></picture></div>
-  <div class="hero-seal" aria-hidden="true">{{SEAL}}</div>
-  <div class="wrap hero-in">
-    <p class="kick"><span data-en="Fitness Health Club · Maia · 24 H">Fitness Health Club · Maia · 24 H</span></p>
-    <h1>
-      <span class="ln"><span data-en="Train.">Treine.</span></span>
-      <span class="ln"><span class="o" data-en="We've got">O resto</span></span>
-      <span class="ln"><span class="y" data-en="the rest.">é connosco.</span></span>
-    </h1>
-    <div class="hero-row">
-      <div class="hero-meta">
-        <span class="live"><i></i><span data-now>Aberto 24 horas.</span></span>
-        <span>{{morada}}, Maia</span>
+<!--{"file":"maia.html","title":"EVOXFIT Fitness Health Club | Ginásio 24 horas na Maia","title_en":"EVOXFIT Fitness Health Club Maia | 24-hour gym in Maia","desc":"Ginásio aberto 24 horas, todos os dias, na Maia. Equipamento de qualidade, espaço amplo e estacionamento junto à entrada. Marque o seu primeiro treino nas horas da receção.","nav":"inicio","body":"page-home","cta":true,"ldjson":true,"intro":true,"extra_js":"\n<script src=\"assets/js/journey.js\" defer></script>"}-->
+<section class="journey" data-journey style="--n:5" aria-label="EVOXFIT Fitness Health Club Maia" data-en-aria="EVOXFIT Fitness Health Club Maia">
+  <div class="j-stage">
+
+    <article class="j-layer" data-layer data-title="Início" data-title-en="Start">
+      <div class="j-media"><picture><source media="(max-width:760px)" srcset="assets/img/ev-hero-m.jpg"><img src="assets/img/ev-hero.jpg" alt="" width="1920" height="1080" fetchpriority="high"></picture></div>
+      <div class="j-copy">
+        <p class="j-k j-in" style="--i:0" data-en="Fitness Health Club · Maia">Fitness Health Club · Maia</p>
+        <h1 class="j-h j-in" style="--i:1"><span class="l1" data-en="Train.">Treine.</span><span class="l2" data-en="We've got the rest.">O resto é connosco.</span></h1>
+        <p class="j-p j-in" style="--i:2" data-en="A gym open 24 hours in Maia. Book your first workout within the reception hours.">Ginásio aberto 24 horas na Maia. Marque o primeiro treino nas horas da receção.</p>
+        <div class="j-chips j-in" style="--i:3">
+          <a class="pillchip" href="{{rota}}" target="_blank" rel="noopener">{{icon:pin}}<span>{{morada}}</span></a>
+          <span class="pillchip">{{icon:star}}<span data-en="{{nota}} on Google · {{n}} reviews">{{nota}} no Google · {{n}} avaliações</span></span>
+        </div>
+        <div class="j-actions j-in" style="--i:4">
+          <a class="btn btn--y btn--big" href="primeiro-treino.html"><span data-en="Book first workout">Marcar primeiro treino</span>{{icon:arrow}}</a>
+          <a class="btn btn--big" href="#marcar"><span data-en="See times">Ver horários</span></a>
+        </div>
       </div>
-      <div class="btn-row">
-        <a class="btn btn--y btn--big" href="primeiro-treino.html"><span data-en="Book first workout">Marcar primeiro treino</span>{{icon:arrow}}</a>
-        <a class="btn btn--big" href="o-ginasio.html"><span data-en="The gym">O ginásio</span></a>
+      <div class="j-shade" data-shade></div>
+    </article>
+
+    <article class="j-layer" data-layer data-title="Horário" data-title-en="Hours">
+      <div class="j-media"><img src="assets/img/ev-fachada.jpg" alt="" width="1920" height="1080" loading="lazy" decoding="async"></div>
+      <div class="j-copy">
+        <p class="j-k j-in" style="--i:0" data-en="Opening hours">Horário</p>
+        <h2 class="j-h j-h--m j-in" style="--i:1"><span class="l1" data-en="Open">Aberto</span><span class="l2" data-en="24 hours.">24 horas.</span></h2>
+        <p class="j-p j-in" style="--i:2" data-en="Access to the gym every day, at any hour. The reception has its own hours, and first workouts are booked within them.">Acesso ao ginásio todos os dias, a qualquer hora. A receção tem horário próprio, e é nesse horário que se marcam os primeiros treinos.</p>
+        <div class="j-chips j-in" style="--i:3">
+          <span class="pillchip"><i class="live"></i><span data-now>Aberto 24 horas.</span></span>
+          <span class="pillchip">{{icon:desk}}<span data-rec-today>Receção</span></span>
+        </div>
+        <div class="j-actions j-in" style="--i:4">
+          <a class="btn btn--y" href="#marcar"><span data-en="Choose a time">Escolher horário</span>{{icon:arrow}}</a>
+          <a class="btn" href="contactos.html#horario"><span data-en="Full hours">Horário completo</span></a>
+        </div>
       </div>
+      <div class="j-shade" data-shade></div>
+    </article>
+
+    <article class="j-layer" data-layer data-title="Máquinas" data-title-en="Equipment">
+      <div class="j-media"><img src="assets/img/ev-equipamento.jpg" alt="" width="1920" height="1080" loading="lazy" decoding="async"></div>
+      <div class="j-copy">
+        <p class="j-k j-in" style="--i:0" data-en="Equipment">Equipamento</p>
+        <h2 class="j-h j-h--m j-in" style="--i:1"><span class="l1" data-en="Machines and">Máquinas e</span><span class="l2" data-en="free weights.">peso livre.</span></h2>
+        <p class="j-p j-in" style="--i:2" data-en="Guided machines, free weights, cardio and functional training, with room to train without waiting.">Máquinas guiadas, peso livre, cardio e treino funcional, com espaço para treinar sem esperas.</p>
+        <div class="j-chips j-in" style="--i:3">
+          <span class="pillchip">{{icon:dumbbell}}<span data-en="Guided machines">Máquinas guiadas</span></span>
+          <span class="pillchip"><span data-en="Free weights">Peso livre</span></span>
+          <span class="pillchip"><span>Cardio</span></span>
+          <span class="pillchip"><span data-en="Functional">Funcional</span></span>
+        </div>
+        <div class="j-actions j-in" style="--i:4">
+          <a class="btn btn--y" href="maquinas.html"><span data-en="See all machines">Ver todas as máquinas</span>{{icon:arrow}}</a>
+        </div>
+      </div>
+      <div class="j-shade" data-shade></div>
+    </article>
+
+    <article class="j-layer" data-layer data-title="Equipa" data-title-en="Team">
+      <div class="j-media"><img src="assets/img/ev-equipa.jpg" alt="" width="1920" height="1080" loading="lazy" decoding="async"></div>
+      <div class="j-copy">
+        <p class="j-k j-in" style="--i:0" data-en="Team">Equipa</p>
+        <h2 class="j-h j-h--m j-in" style="--i:1"><span class="l1" data-en="An available">Uma equipa</span><span class="l2" data-en="team.">disponível.</span></h2>
+        <p class="j-p j-in" style="--i:2" data-en="Friendly and helpful, according to member reviews on Google.">Simpática e prestável, segundo as avaliações dos sócios no Google.</p>
+        <div class="j-actions j-in" style="--i:3">
+          <a class="btn btn--y" href="equipa.html"><span data-en="Meet the team">Conhecer a equipa</span>{{icon:arrow}}</a>
+        </div>
+      </div>
+      <div class="j-shade" data-shade></div>
+    </article>
+
+    <article class="j-layer" data-layer data-title="Primeiro treino" data-title-en="First workout">
+      <div class="j-media"><picture><source media="(max-width:760px)" srcset="assets/img/ev-treino-m.jpg"><img src="assets/img/ev-treino.jpg" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture></div>
+      <div class="j-copy">
+        <p class="j-k j-in" style="--i:0" data-en="First workout">Primeiro treino</p>
+        <h2 class="j-h j-in" style="--i:1"><span class="l1" data-en="Start">Comece</span><span class="l2" data-en="today.">hoje.</span></h2>
+        <p class="j-p j-in" style="--i:2" data-en="Choose a day and a time within the reception hours. We confirm by message.">Escolha um dia e uma hora dentro do horário da receção. Confirmamos por mensagem.</p>
+        <div class="j-actions j-in" style="--i:3">
+          <a class="btn btn--y btn--big" href="#marcar"><span data-en="Choose day and time">Escolher dia e hora</span>{{icon:arrow}}</a>
+          <a class="btn btn--big" href="tel:{{tel_e164}}">{{icon:phone}}<span>{{tel}}</span></a>
+        </div>
+      </div>
+      <div class="j-shade" data-shade></div>
+    </article>
+
+    <div class="j-ui" aria-hidden="false">
+      <div class="j-count" aria-hidden="true"><b data-j-cur>01</b> / 05</div>
+      <div class="j-dots" data-j-dots role="group" aria-label="Passos" data-en-aria="Steps"></div>
+      <div class="j-bar" aria-hidden="true"><i data-j-bar></i></div>
+      <div class="j-hint" data-j-hint aria-hidden="true"><span data-en="Scroll">Deslize</span>{{icon:arrow}}</div>
     </div>
   </div>
 </section>
 
-{{TICKER}}
-
-<section class="statement">
+<section class="sheet sheet--tight" aria-label="Informação essencial" data-en-aria="Key information">
   <div class="wrap">
-    <p class="big rv" data-en="A gym open 24 hours, with space, modern equipment and an available team. <em>We've got the rest.</em>">Um ginásio aberto 24 horas, com espaço, equipamento moderno e uma equipa disponível. <em>O resto é connosco.</em></p>
-    <div class="stats">
-      <div class="stat rv"><b>24<small>H</small></b><span data-en="Open every day of the week, without interruption.">Aberto todos os dias da semana, sem interrupções.</span></div>
-      <div class="stat rv" style="--d:.1s"><b data-count="4.7" data-dec="1">{{nota}}</b><span data-en="Rating on Google, from {{n}} reviews.">Nota no Google, com base em {{n}} avaliações.</span></div>
-      <div class="stat rv" style="--d:.2s"><b><span data-count="29">29</span><small>/{{n}}</small></b><span data-en="Reviews with five stars.">Avaliações com cinco estrelas.</span></div>
+    <div class="facts">
+      <a class="fact rv" href="{{rota}}" target="_blank" rel="noopener"><span class="ic">{{icon:pin}}</span><div><b data-en="Location">Localização</b><span data-en="Maia, Greater Porto">Maia, Grande Porto</span><small>{{morada}}</small></div></a>
+      <a class="fact rv" style="--d:.06s" href="contactos.html#horario"><span class="ic">{{icon:clock}}</span><div><b data-en="Hours">Horário</b><span data-en="Open 24 hours">Aberto 24 horas</span><small data-rec-today>Receção</small></div></a>
+      <a class="fact rv" style="--d:.12s" href="maquinas.html"><span class="ic">{{icon:dumbbell}}</span><div><b data-en="Equipment">Equipamento</b><span data-en="Machines and free weights">Máquinas e peso livre</span><small data-en="See the full list">Ver lista completa</small></div></a>
+      <a class="fact rv" style="--d:.18s" href="#avaliacoes"><span class="ic">{{icon:star}}</span><div><b data-en="Google rating">Nota no Google</b><span data-en="{{nota}} out of 5">{{nota}} em 5</span><small data-en="{{n}} reviews">{{n}} avaliações</small></div></a>
     </div>
   </div>
 </section>
 
-<section class="section why" aria-labelledby="why-titulo">
-  <div class="wrap">
-    <div class="why-head">
-      <div>
-        <p class="eyebrow" data-en="Why EVOXFIT">Porquê o EVOXFIT</p>
-        <h2 id="why-titulo" class="rv" data-en="Five <span class='o'>differences.</span>">Cinco <span class="o">diferenças.</span></h2>
-      </div>
-      <p data-en="Generic comparison with traditional gyms.">Comparação genérica com ginásios tradicionais.</p>
-    </div>
-    <div class="why-grid">
-      <div class="why-pic frame" aria-hidden="true">
-        <img class="on" data-i="0" src="assets/img/ev-entrada.jpg" alt="" loading="lazy" decoding="async">
-        <img data-i="1" src="assets/img/ev-ambiente.jpg" alt="" loading="lazy" decoding="async">
-        <img data-i="2" src="assets/img/ev-espaco.jpg" alt="" loading="lazy" decoding="async">
-        <img data-i="3" src="assets/img/ev-equipamento.jpg" alt="" loading="lazy" decoding="async">
-        <img data-i="4" src="assets/img/ev-equipa.jpg" alt="" loading="lazy" decoding="async">
-        <span class="cap" data-en="Illustrative image">Imagem ilustrativa</span>
-        <span class="fc"></span>
-      </div>
-      <div class="why-list">
-        <article class="why-item on" data-i="0">
-          <div class="mimg frame"><img src="assets/img/ev-entrada.jpg" alt="" loading="lazy" decoding="async"><span class="fc"></span></div>
-          <span class="num">01 / 05</span>
-          <h3 data-en="Parking at the entrance">Estacionamento à entrada</h3>
-          <p data-en="Outdoor parking next to the entrance, and first-workout booking through WhatsApp.">Estacionamento exterior junto à entrada e marcação do primeiro treino através de WhatsApp.</p>
-          <div class="vs"><div><span class="tag" data-en="Traditional gym">Ginásio tradicional</span><p data-en="Scarce parking, far from the entrance.">Estacionamento escasso ou distante da entrada.</p></div><div class="evox"><span class="tag">EVOXFIT</span><p data-en="Outdoor parking next to the entrance.">Estacionamento exterior junto à entrada.</p></div></div>
-        </article>
-        <article class="why-item" data-i="1">
-          <div class="mimg frame"><img src="assets/img/ev-ambiente.jpg" alt="" loading="lazy" decoding="async"><span class="fc"></span></div>
-          <span class="num">02 / 05</span>
-          <h3 data-en="An atmosphere that motivates">Um ambiente que motiva</h3>
-          <p data-en="Members describe it as the American-style concept Greater Porto was missing: modern, clean and motivating.">Os sócios descrevem-no como o conceito de estilo americano que faltava na Grande Porto: moderno, limpo e motivador.</p>
-          <div class="vs"><div><span class="tag" data-en="Traditional gym">Ginásio tradicional</span><p data-en="An uninspiring atmosphere.">Ambiente pouco estimulante.</p></div><div class="evox"><span class="tag">EVOXFIT</span><p data-en="A modern, motivating atmosphere.">Ambiente moderno e motivador.</p></div></div>
-        </article>
-        <article class="why-item" data-i="2">
-          <div class="mimg frame"><img src="assets/img/ev-espaco.jpg" alt="" loading="lazy" decoding="async"><span class="fc"></span></div>
-          <span class="num">03 / 05</span>
-          <h3 data-en="Generous space">Espaço amplo</h3>
-          <p data-en="A large, well-organised facility, designed for comfortable training without waiting.">Instalação ampla e bem organizada, pensada para treinar com conforto e sem esperas.</p>
-          <div class="vs"><div><span class="tag" data-en="Traditional gym">Ginásio tradicional</span><p data-en="Crowded rooms and waiting between machines.">Salas sobrelotadas e esperas entre equipamentos.</p></div><div class="evox"><span class="tag">EVOXFIT</span><p data-en="A spacious floor with equipment within reach.">Área ampla, com o equipamento ao alcance.</p></div></div>
-        </article>
-        <article class="why-item" data-i="3">
-          <div class="mimg frame"><img src="assets/img/ev-equipamento.jpg" alt="" loading="lazy" decoding="async"><span class="fc"></span></div>
-          <span class="num">04 / 05</span>
-          <h3 data-en="Quality equipment">Equipamento de qualidade</h3>
-          <p data-en="The most praised aspect in members' Google reviews: modern, varied equipment.">É o aspeto mais elogiado nas avaliações dos sócios no Google: equipamento moderno e variado.</p>
-          <div class="vs"><div><span class="tag" data-en="Traditional gym">Ginásio tradicional</span><p data-en="Limited or outdated equipment.">Equipamento limitado ou desatualizado.</p></div><div class="evox"><span class="tag">EVOXFIT</span><p data-en="Modern, varied equipment.">Equipamento moderno e variado.</p></div></div>
-        </article>
-        <article class="why-item" data-i="4">
-          <div class="mimg frame"><img src="assets/img/ev-equipa.jpg" alt="" loading="lazy" decoding="async"><span class="fc"></span></div>
-          <span class="num">05 / 05</span>
-          <h3 data-en="An attentive, available team">Equipa atenta e disponível</h3>
-          <p data-en="The team's friendliness and availability are among the most frequent mentions in reviews.">A simpatia e a disponibilidade da equipa estão entre as referências mais frequentes nas avaliações.</p>
-          <div class="vs"><div><span class="tag" data-en="Traditional gym">Ginásio tradicional</span><p data-en="Little guidance when joining.">Pouco acompanhamento na integração.</p></div><div class="evox"><span class="tag">EVOXFIT</span><p data-en="A team available to answer any question.">Equipa disponível para esclarecer qualquer dúvida.</p></div></div>
-        </article>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section alt hora" data-hora aria-labelledby="hora-titulo">
-  <div class="wrap hora-grid">
+<section class="sheet sheet--dark" id="marcar" aria-labelledby="marcar-titulo">
+  <div class="wrap split">
     <div>
-      <p class="eyebrow" data-en="Choose your time">Escolha o horário</p>
-      <h2 id="hora-titulo" class="rv" data-en="Which time suits you <span class='y'>best?</span>">Qual o horário <span class="y">mais conveniente?</span></h2>
-      <div class="slots" role="radiogroup" aria-label="Hora do treino" data-en-aria="Workout time">
-        <button type="button" class="slot" role="radio" aria-checked="false" data-h="6" data-t="Antes do trabalho" data-t-en="Before work" data-m="Treino concluído antes do início do dia de trabalho." data-m-en="Workout completed before the working day begins."><b data-en="Before work">Antes do trabalho</b><i>06:00</i></button>
-        <button type="button" class="slot" role="radio" aria-checked="false" data-h="12.5" data-t="Na pausa de almoço" data-t-en="During the lunch break" data-m="Uma sessão eficiente, compatível com a pausa de almoço." data-m-en="An efficient session that fits the lunch break."><b data-en="Lunch break">Pausa de almoço</b><i>12:30</i></button>
-        <button type="button" class="slot" role="radio" aria-checked="true" data-h="18.5" data-t="Depois do trabalho" data-t-en="After work" data-m="Sem pressa: o horário é o que lhe for mais conveniente." data-m-en="No rush: the time is whichever suits you best."><b data-en="After work">Depois do trabalho</b><i>18:30</i></button>
-        <button type="button" class="slot" role="radio" aria-checked="false" data-h="22" data-t="Final de turno" data-t-en="End of shift" data-m="O acesso 24 horas permite treinar mesmo após turnos longos." data-m-en="24-hour access allows training even after long shifts."><b data-en="End of shift">Final de turno</b><i>22:00</i></button>
-        <button type="button" class="slot" role="radio" aria-checked="false" data-h="3" data-t="Madrugada" data-t-en="Early hours" data-m="O ginásio está aberto 24 horas, incluindo de madrugada." data-m-en="The gym is open 24 hours, including the early hours."><b data-en="Early hours">Madrugada</b><i>03:00</i></button>
-      </div>
+      <p class="eyebrow" data-en="First workout">Primeiro treino</p>
+      <h2 id="marcar-titulo" class="rv" data-en="Book within <span class='y'>reception hours.</span>">Marque nas <span class="y">horas da receção.</span></h2>
+      <p class="lead rv" style="margin-top:22px;--d:.08s" data-en="Choose the day and time. Only times when the reception is open are available.">Escolha o dia e a hora. Só estão disponíveis as horas em que a receção está aberta.</p>
+      <p class="rv" style="margin:22px 0 0;--d:.14s">{{RECECAO_TAG}}</p>
+      <p class="small rv" style="margin-top:22px;--d:.18s" data-en="Location: {{morada}}, Maia.">Localização: {{morada}}, Maia.</p>
     </div>
-    <div class="hora-card">
-      <div class="dial" aria-hidden="true">
-        <svg viewBox="0 0 400 400">
-          <g data-ticks></g>
-          <circle class="track" cx="200" cy="200" r="135"/>
-          <circle class="arc" data-arc cx="200" cy="200" r="135" transform="rotate(-90 200 200)"/>
-          <g class="hand-g" data-hand><line class="hand" x1="200" y1="92" x2="200" y2="72"/><circle class="dot" cx="200" cy="65" r="9"/></g>
-        </svg>
-        <div class="dial-time"><b data-time>18:30</b><small data-label>Depois do trabalho</small></div>
-      </div>
-      <p class="hora-msg" data-msg aria-live="polite"></p>
-      <a class="btn btn--y btn--big" data-cta href="primeiro-treino.html?h=18.5"><span data-cta-text>Marcar para as 18:30</span>{{icon:arrow}}</a>
-    </div>
+    <div class="rv" style="--d:.1s">{{BOOK}}</div>
   </div>
 </section>
 
-<section class="section--tight" aria-label="Atalhos" data-en-aria="Shortcuts">
+<section class="sheet" aria-labelledby="eq-titulo">
   <div class="wrap">
-    <div class="tiles">
-      <a class="tile" href="primeiro-treino.html"><span class="n">01</span><h3 data-en="First workout">Primeiro treino</h3>{{icon:arrow}}</a>
-      <a class="tile" href="o-ginasio.html"><span class="n">02</span><h3 data-en="The gym">O ginásio</h3>{{icon:arrow}}</a>
-      <a class="tile" href="contactos.html"><span class="n">03</span><h3 data-en="Contact">Contactos</h3>{{icon:arrow}}</a>
-      <a class="tile" href="{{rota}}" target="_blank" rel="noopener"><span class="n">04</span><h3 data-en="Get directions">Como chegar</h3>{{icon:arrow}}</a>
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow" data-en="Equipment">Equipamento</p>
+        <h2 id="eq-titulo" class="rv" data-en="What you'll <span class='y'>find.</span>">O que vai <span class="y">encontrar.</span></h2>
+      </div>
+      <div class="rv" style="display:grid;gap:12px;justify-items:start"><p class="lead" data-en="Four training zones. Select one to see which machines it has and how many.">Quatro zonas de treino. Selecione uma para ver que máquinas tem e quantas.</p>{{EQ_TAG}}</div>
     </div>
+    {{EQ_SUMMARY}}
   </div>
 </section>
 
-<section class="section" id="avaliacoes" aria-labelledby="av-titulo">
+<section class="sheet sheet--dark why" aria-labelledby="why-titulo">
+  <div class="wrap sec-head">
+    <div>
+      <p class="eyebrow" data-en="Why EVOXFIT">Porquê o EVOXFIT</p>
+      <h2 id="why-titulo" class="rv" data-en="Five <span class='y'>differences.</span>">Cinco <span class="y">diferenças.</span></h2>
+    </div>
+    <div class="strip-ctl">
+      <button type="button" data-strip-prev="why" aria-label="Anterior" data-en-aria="Previous">{{icon:left}}</button>
+      <button type="button" data-strip-next="why" aria-label="Seguinte" data-en-aria="Next">{{icon:right}}</button>
+    </div>
+  </div>
+  <div class="rail" data-strip="why">
+    <article class="why-card"><div class="pic"><img src="assets/img/ev-entrada.jpg" alt="" loading="lazy" decoding="async"><span class="num">01 / 05</span></div><div class="body"><h3 data-en="Parking at the entrance">Estacionamento à entrada</h3><p data-en="Outdoor parking next to the entrance, and first-workout booking through WhatsApp.">Estacionamento exterior junto à entrada e marcação do primeiro treino através de WhatsApp.</p><div class="vs"><div><span class="tag" data-en="Traditional gym">Ginásio tradicional</span><p data-en="Scarce parking, far from the entrance.">Estacionamento escasso ou distante da entrada.</p></div><div class="evox"><span class="tag">EVOXFIT</span><p data-en="Outdoor parking next to the entrance.">Estacionamento exterior junto à entrada.</p></div></div></div></article>
+    <article class="why-card"><div class="pic"><img src="assets/img/ev-ambiente.jpg" alt="" loading="lazy" decoding="async"><span class="num">02 / 05</span></div><div class="body"><h3 data-en="An atmosphere that motivates">Um ambiente que motiva</h3><p data-en="Members describe it as the American-style concept Greater Porto was missing: modern, clean and motivating.">Os sócios descrevem-no como o conceito de estilo americano que faltava na Grande Porto: moderno, limpo e motivador.</p><div class="vs"><div><span class="tag" data-en="Traditional gym">Ginásio tradicional</span><p data-en="An uninspiring atmosphere.">Ambiente pouco estimulante.</p></div><div class="evox"><span class="tag">EVOXFIT</span><p data-en="A modern, motivating atmosphere.">Ambiente moderno e motivador.</p></div></div></div></article>
+    <article class="why-card"><div class="pic"><img src="assets/img/ev-espaco.jpg" alt="" loading="lazy" decoding="async"><span class="num">03 / 05</span></div><div class="body"><h3 data-en="Generous space">Espaço amplo</h3><p data-en="A large, well-organised facility, designed for comfortable training without waiting.">Instalação ampla e bem organizada, pensada para treinar com conforto e sem esperas.</p><div class="vs"><div><span class="tag" data-en="Traditional gym">Ginásio tradicional</span><p data-en="Crowded rooms and waiting between machines.">Salas sobrelotadas e esperas entre equipamentos.</p></div><div class="evox"><span class="tag">EVOXFIT</span><p data-en="A spacious floor with equipment within reach.">Área ampla, com o equipamento ao alcance.</p></div></div></div></article>
+    <article class="why-card"><div class="pic"><img src="assets/img/ev-equipamento.jpg" alt="" loading="lazy" decoding="async"><span class="num">04 / 05</span></div><div class="body"><h3 data-en="Quality equipment">Equipamento de qualidade</h3><p data-en="The most praised aspect in members' Google reviews: modern, varied equipment.">É o aspeto mais elogiado nas avaliações dos sócios no Google: equipamento moderno e variado.</p><div class="vs"><div><span class="tag" data-en="Traditional gym">Ginásio tradicional</span><p data-en="Limited or outdated equipment.">Equipamento limitado ou desatualizado.</p></div><div class="evox"><span class="tag">EVOXFIT</span><p data-en="Modern, varied equipment.">Equipamento moderno e variado.</p></div></div></div></article>
+    <article class="why-card"><div class="pic"><img src="assets/img/ev-equipa.jpg" alt="" loading="lazy" decoding="async"><span class="num">05 / 05</span></div><div class="body"><h3 data-en="An attentive, available team">Equipa atenta e disponível</h3><p data-en="The team's friendliness and availability are among the most frequent mentions in reviews.">A simpatia e a disponibilidade da equipa estão entre as referências mais frequentes nas avaliações.</p><div class="vs"><div><span class="tag" data-en="Traditional gym">Ginásio tradicional</span><p data-en="Little guidance when joining.">Pouco acompanhamento na integração.</p></div><div class="evox"><span class="tag">EVOXFIT</span><p data-en="A team available to answer any question.">Equipa disponível para esclarecer qualquer dúvida.</p></div></div></div></article>
+  </div>
+</section>
+
+<section class="sheet" aria-labelledby="eqp-titulo">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow" data-en="Team">Equipa</p>
+      <h2 id="eqp-titulo" class="rv" data-en="People who <span class='y'>welcome you.</span>">Pessoas que o <span class="y">recebem.</span></h2>
+      <p class="lead rv" style="margin:22px 0 28px;--d:.08s" data-en="Reception, trainers and member support. Names and photos of the team will be added here.">Receção, treinadores e acompanhamento. Os nomes e as fotografias da equipa serão acrescentados aqui.</p>
+      <a class="btn btn--ink rv" style="--d:.14s" href="equipa.html"><span data-en="Meet the team">Conhecer a equipa</span>{{icon:arrow}}</a>
+    </div>
+    <figure class="frame rv" style="--d:.1s"><img src="assets/img/ev-equipa.jpg" alt="" loading="lazy" decoding="async" style="aspect-ratio:4/3"><figcaption data-en="Illustrative image">Imagem ilustrativa</figcaption></figure>
+  </div>
+</section>
+
+<section class="sheet sheet--dark" id="avaliacoes" aria-labelledby="av-titulo">
   <div class="wrap">
     <p class="eyebrow" data-en="Reviews">Avaliações</p>
     <h2 id="av-titulo" class="sr-only" data-en="What members think">A opinião dos sócios</h2>
@@ -163,9 +190,9 @@
       <span class="chip"><span data-en="Varied equipment">Equipamento variado</span><b>2</b></span>
     </div>
     <div class="voices">
-      <div class="voice"><p data-en="The American-style concept Greater Porto was missing.">O conceito de estilo americano que faltava na Grande Porto.</p><span data-en="Google review, summarised">Avaliação no Google, resumida</span></div>
-      <div class="voice"><p data-en="Visited to try it out and highlights the size, cleanliness and organisation.">Visitou o espaço para o experimentar e destaca a dimensão, a limpeza e a organização.</p><span data-en="Google review, summarised">Avaliação no Google, resumida</span></div>
-      <div class="voice"><p data-en="Highlights the equipment and the outdoor parking.">Destaque para o equipamento e para o estacionamento exterior.</p><span data-en="Google review, summarised">Avaliação no Google, resumida</span></div>
+      <div class="voice rv"><p data-en="The American-style concept Greater Porto was missing.">O conceito de estilo americano que faltava na Grande Porto.</p><span data-en="Google review, summarised">Avaliação no Google, resumida</span></div>
+      <div class="voice rv" style="--d:.08s"><p data-en="Visited to try it out and highlights the size, cleanliness and organisation.">Visitou o espaço para o experimentar e destaca a dimensão, a limpeza e a organização.</p><span data-en="Google review, summarised">Avaliação no Google, resumida</span></div>
+      <div class="voice rv" style="--d:.16s"><p data-en="Highlights the equipment and the outdoor parking.">Destaque para o equipamento e para o estacionamento exterior.</p><span data-en="Google review, summarised">Avaliação no Google, resumida</span></div>
     </div>
     <a class="link" href="{{ficha}}" target="_blank" rel="noopener" data-en="See all reviews on Google">Consultar todas as avaliações no Google</a>
   </div>
@@ -173,26 +200,29 @@
 
 {{FOTOS}}
 
-<section class="section alt" id="onde" aria-labelledby="onde-titulo">
-  <div class="wrap where">
-    <div>
-      <p class="eyebrow" data-en="Find us">Onde estamos</p>
-      <h2 id="onde-titulo" class="rv" data-en="Visit us <span class='y'>in Maia.</span>">Visite-nos <span class="y">na Maia.</span></h2>
-      <ul class="info">
-        <li>{{icon:pin}}<div><b data-en="Address">Morada</b><a href="{{rota}}" target="_blank" rel="noopener">{{morada}}<br>{{cp}}</a></div></li>
-        <li>{{icon:phone}}<div><b data-en="Phone">Telefone</b><a href="tel:{{tel_e164}}">{{tel}}</a></div></li>
-        <li>{{icon:clock}}<div><b data-en="Opening hours">Horário</b><span class="open-now" data-en="Open 24 hours · every day">Aberto 24 horas · todos os dias</span> <a class="mini" href="contactos.html" data-en="See full opening hours">Ver horário completo</a></div></li>
-      </ul>
-      <div class="btn-row">
-        <a class="btn btn--y" href="{{rota}}" target="_blank" rel="noopener"><span data-en="Get directions">Como chegar</span>{{icon:arrow}}</a>
-        <a class="btn" href="{{ig}}" target="_blank" rel="noopener">{{icon:ig}}<span>Instagram</span></a>
+<section class="sheet" id="onde" aria-labelledby="onde-titulo">
+  <div class="wrap">
+    <div class="where">
+      <div>
+        <p class="eyebrow" data-en="Find us">Onde estamos</p>
+        <h2 id="onde-titulo" class="rv" data-en="Visit us <span class='y'>in Maia.</span>">Visite-nos <span class="y">na Maia.</span></h2>
+        <ul class="info">
+          <li>{{icon:pin}}<div><b data-en="Address">Morada</b><a href="{{rota}}" target="_blank" rel="noopener">{{morada}}<br>{{cp}}</a></div></li>
+          <li>{{icon:phone}}<div><b data-en="Phone">Telefone</b><a href="tel:{{tel_e164}}">{{tel}}</a></div></li>
+          <li>{{icon:parking}}<div><b data-en="Parking">Estacionamento</b><span data-en="Outdoor parking next to the gym">Estacionamento exterior junto ao ginásio</span></div></li>
+        </ul>
+        <div class="btn-row">
+          <a class="btn btn--y" href="{{rota}}" target="_blank" rel="noopener"><span data-en="Get directions">Como chegar</span>{{icon:arrow}}</a>
+          <a class="btn" href="{{ig}}" target="_blank" rel="noopener">{{icon:ig}}<span>Instagram</span></a>
+        </div>
+      </div>
+      <div class="real-map">
+        <iframe title="Mapa do EVOXFIT Fitness Health Club Maia no Google Maps" data-en-title="EVOXFIT Fitness Health Club Maia on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="{{mapa}}"></iframe>
+        <div class="pin" aria-hidden="true"><b>EVOXFIT</b><i></i></div>
+        <button type="button" class="map-lock" data-en="Tap to explore the map">Toque para explorar o mapa</button>
       </div>
     </div>
-    <div class="real-map frame">
-      <iframe title="Mapa do EVOXFIT Fitness Health Club Maia no Google Maps" data-en-title="EVOXFIT Fitness Health Club Maia on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="{{mapa}}"></iframe>
-      <div class="pin" aria-hidden="true"><b>EVOXFIT</b><i></i></div>
-      <button type="button" class="map-lock" data-en="Tap to explore the map">Toque para explorar o mapa</button>
-      <span class="fc"></span>
-    </div>
+    <div class="hours-wrap" style="margin-top:clamp(24px,3vw,40px)">{{HOURS}}</div>
+    <p style="margin-top:16px">{{RECECAO_TAG}}</p>
   </div>
 </section>

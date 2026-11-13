@@ -1,16 +1,20 @@
-<!--{"file":"primeiro-treino.html","title":"Marque o seu primeiro treino | EVOXFIT Fitness Health Club Maia","title_en":"Book your first workout | EVOXFIT Fitness Health Club Maia","desc":"Indique o dia e a hora e marque o primeiro treino no EVOXFIT Fitness Health Club Maia, ginásio aberto 24 horas na Maia. Pedido enviado por WhatsApp.","nav":"treino","body":"page-inner","cta":false,"extra_js":"\n<script src=\"assets/js/treino.js\" defer></script>"}-->
-<section class="page-hero">
+<!--{"file":"primeiro-treino.html","title":"Marque o seu primeiro treino | EVOXFIT Fitness Health Club Maia","title_en":"Book your first workout | EVOXFIT Fitness Health Club Maia","desc":"Escolha o dia e a hora, dentro do horário da receção, e marque o primeiro treino no EVOXFIT Fitness Health Club Maia. Pedido enviado por WhatsApp.","nav":"treino","body":"page-inner","cta":false,"extra_js":"\n<script src=\"assets/js/treino.js\" defer></script>"}-->
+<section class="phero">
+  <div class="phero-bg" aria-hidden="true"><img src="assets/img/ev-treino.jpg" alt="" width="1920" height="1080" fetchpriority="high"></div>
   <div class="wrap">
     <nav class="crumb" aria-label="Localização" data-en-aria="Breadcrumb"><a href="maia.html" data-en="Home">Início</a><span>/</span><span data-en="First workout">Primeiro treino</span></nav>
     <h1 data-en="Book your first <span class='y'>workout.</span>">Marque o seu primeiro <span class="y">treino.</span></h1>
-    <p class="lead" data-en="Indicate your preferred day and time. We confirm by message and welcome you at the gym.">Indique o dia e o horário pretendidos. Confirmamos por mensagem e recebemo-lo no ginásio.</p>
+    <p class="lead" data-en="Choose a day and a time within the reception hours. We confirm by message and welcome you at the gym.">Escolha um dia e uma hora dentro do horário da receção. Confirmamos por mensagem e recebemo-lo no ginásio.</p>
+    <div class="tags">{{RECECAO_TAG}}</div>
   </div>
 </section>
 
-<section class="section" aria-labelledby="form-titulo">
+<section class="sheet" aria-labelledby="form-titulo">
   <div class="wrap invite-grid">
     <form class="form-card" id="treino-form" novalidate>
       <h2 id="form-titulo" class="sr-only" data-en="Booking form">Formulário de marcação</h2>
+
+      {{BOOK_FORM}}
 
       <div class="field" id="f-nome">
         <label for="nome" data-en="Your name">O seu nome</label>
@@ -24,27 +28,9 @@
       </div>
 
       <fieldset class="field">
-        <legend data-en="When?">Quando?</legend>
-        <div class="pick" data-pick="dia">
-          <label><input type="radio" name="dia" value="hoje" checked><span data-en="Today">Hoje</span></label>
-          <label><input type="radio" name="dia" value="amanha"><span data-en="Tomorrow">Amanhã</span></label>
-          <label><input type="radio" name="dia" value="fds"><span data-en="This weekend">Este fim de semana</span></label>
-          <label><input type="radio" name="dia" value="outro"><span data-en="Another day">Outro dia</span></label>
-        </div>
-        <input class="input" id="data" name="data" type="date" style="margin-top:12px;display:none" aria-label="Escolher data" data-en-aria="Pick a date">
-      </fieldset>
-
-      <div class="field">
-        <label for="hora" data-en="What time?">A que horas?</label>
-        <div class="time-read"><b data-hora-out>18:00</b><em data-hora-hint>Fim de tarde</em></div>
-        <input id="hora" name="hora" type="range" min="0" max="23.5" step="0.5" value="18" aria-describedby="hora-hint">
-        <div class="scale24" aria-hidden="true"><span>00h</span><span>06h</span><span>12h</span><span>18h</span><span>24h</span></div>
-      </div>
-
-      <fieldset class="field">
         <legend data-en="Your goal">O seu objetivo</legend>
         <div class="pick" data-pick="objetivo">
-          <label><input type="radio" name="objetivo" value="Ganho de força e massa muscular"><span data-en="Build strength and muscle">Ganho de força e massa muscular</span></label>
+          <label><input type="radio" name="objetivo" value="Ganho de força e massa muscular" data-en-v="Build strength and muscle"><span data-en="Build strength and muscle">Ganho de força e massa muscular</span></label>
           <label><input type="radio" name="objetivo" value="Perda de gordura"><span data-en="Lose fat">Perda de gordura</span></label>
           <label><input type="radio" name="objetivo" value="Iniciação ao treino"><span data-en="Start from scratch">Iniciação ao treino</span></label>
           <label><input type="radio" name="objetivo" value="Melhoria da condição física"><span data-en="Get in shape">Melhoria da condição física</span></label>
@@ -67,16 +53,27 @@
         <button class="btn btn--y btn--big" type="submit">{{icon:wa}}<span data-en="Send on WhatsApp">Enviar por WhatsApp</span></button>
         <a class="btn btn--big" href="tel:{{tel_e164}}">{{icon:phone}}<span data-en="I prefer to call">Prefiro telefonar</span></a>
       </div>
-      <p class="small" style="margin:16px 0 0" data-en="Your details are included only in the WhatsApp message you choose to send. Nothing is stored on this site.">Os seus dados são incluídos apenas na mensagem de WhatsApp que decidir enviar. Este site não armazena qualquer informação.</p>
+      <p class="small" data-en="Your details are included only in the WhatsApp message you choose to send. Nothing is stored on this site.">Os seus dados são incluídos apenas na mensagem de WhatsApp que decidir enviar. Este site não armazena qualquer informação.</p>
     </form>
 
     <aside>
       <p class="eyebrow" data-en="How it works">Como funciona</p>
       <ol class="side-steps">
-        <li><div><h3 data-en="Selection">Seleção</h3><p data-en="Day, time and goal. The process takes less than a minute.">Dia, hora e objetivo. O processo demora menos de um minuto.</p></div></li>
+        <li><div><h3 data-en="Selection">Seleção</h3><p data-en="Day and time within the reception hours. The process takes less than a minute.">Dia e hora dentro do horário da receção. O processo demora menos de um minuto.</p></div></li>
         <li><div><h3 data-en="Confirmation">Confirmação</h3><p data-en="The team replies by message to confirm your first workout.">A equipa responde por mensagem para confirmar o primeiro treino.</p></div></li>
         <li><div><h3 data-en="Workout">Treino</h3><p data-en="Come to the gym, see the facilities and train. Then decide if it is the right place.">Dirija-se ao ginásio, conheça as instalações e treine. Depois decida se é o local adequado.</p></div></li>
       </ol>
+
+      <div class="side-card">
+        <h3 data-en="Where">Onde</h3>
+        <p><a class="link" href="{{rota}}" target="_blank" rel="noopener">{{morada}}, {{cp}}</a></p>
+        <p class="small" data-en="Outdoor parking next to the gym.">Estacionamento exterior junto ao ginásio.</p>
+      </div>
+      <div class="side-card">
+        <h3 data-en="What you'll find">O que vai encontrar</h3>
+        {{EQ_LIST}}
+        <a class="link" href="maquinas.html" data-en="See every machine">Ver todas as máquinas</a>
+      </div>
       <p class="small" style="margin-top:22px" data-en="Terms and prices are confirmed directly with the team.">As condições e os valores são confirmados diretamente com a equipa.</p>
     </aside>
   </div>
