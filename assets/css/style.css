@@ -326,9 +326,7 @@ h3{font-size:clamp(20px,1.7vw,26px);letter-spacing:-.01em;line-height:1.15}
   .disc-live .disc-hint{left:clamp(20px,3vw,48px);bottom:32px;transform:none;align-items:flex-start}
 }
 
-@media (min-width:861px) and (max-width:1279px){
-  .disc-live .disc-tabs{left:26px;right:26px;bottom:176px;width:auto;justify-content:flex-start}
-}
+
 @media (min-width:861px){
   .disc:not(.disc-live) .disc-card{overflow:clip}
   .disc:not(.disc-live) .disc-grid{align-items:stretch}
@@ -731,4 +729,27 @@ html.calmo.js-anim .rv,html.calmo.js-anim .gate-card,html.calmo.js-anim .gate-he
   .pick label:hover{transform:translateY(-2px)}
   .pick label{transition:transform .25s var(--ease)}
   .map-lock:hover{letter-spacing:.03em}
+}
+
+/* Início (versão ecrã inteiro): o 3D ocupa o ecrã todo e o texto vai por cima, num degradê escuro. */
+.disc-live .disc-card{background:#08080b}
+.disc-live .disc-card::before{display:none}
+.disc-live .disc-viz{position:absolute;inset:0;height:auto;min-height:0;z-index:1;order:0}
+.disc-live .disc-frame{position:absolute;inset:0;border-radius:0;border:0;box-shadow:none}
+.disc-live .disc-grid{display:block;position:static;padding:0;gap:0}
+.disc-live .disc-text{position:absolute;z-index:5;pointer-events:none}
+.disc-live .disc-text a,.disc-live .disc-text button{pointer-events:auto}
+.disc-live .disc-frame::after{background:linear-gradient(0deg,rgba(8,8,11,.6),rgba(8,8,11,0) 26%),linear-gradient(180deg,rgba(8,8,11,.94) 0%,rgba(8,8,11,.78) 34%,rgba(8,8,11,0) 62%)}
+@media (min-width:861px){
+  .disc-live .disc-text{left:clamp(20px,3vw,48px);top:0;bottom:0;width:min(36%,520px);padding:90px 0 90px;align-content:center}
+  .disc-live .disc-frame::after{background:linear-gradient(0deg,rgba(8,8,11,.55),rgba(8,8,11,0) 24%),linear-gradient(90deg,rgba(8,8,11,.92) 0%,rgba(8,8,11,.74) 26%,rgba(8,8,11,0) 58%)}
+}
+@media (max-width:860px){
+  .disc-live .disc-text{left:0;right:0;top:0;padding:calc(var(--sat) + 132px) 20px 0}
+  .disc-live .disc-hud{bottom:104px;transition:opacity .4s}
+  .disc-live[data-s="0"] .disc-hud{opacity:0}
+}
+@media (min-width:861px){
+  .disc-live .disc-tabs{left:auto;right:30px;bottom:30px;width:calc(100% - 320px);max-width:700px;justify-content:flex-end;padding:0}
+  .disc-live .disc-hint{left:50%;bottom:32px;transform:translateX(-50%);align-items:center}
 }

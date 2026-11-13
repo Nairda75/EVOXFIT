@@ -498,8 +498,8 @@ function boot() {
     camera.aspect = W0 / H0;
     const intro = 1 - smooth(clamp((p - 0.01) / (INTRO + 0.04)));
     const lift = 1 - intro;
-    if (portrait) camera.setViewOffset(W0, H0, 0, H0 * (0.2 * lift - 0.3 * intro), W0, H0);
-    else camera.setViewOffset(W0, H0, -W0 * 0.2 * intro, H0 * (0.15 * lift + 0.04 * intro), W0, H0);
+    if (portrait) camera.setViewOffset(W0, H0, 0, H0 * (-0.14 * lift - 0.3 * intro), W0, H0);
+    else camera.setViewOffset(W0, H0, -W0 * (0.2 * intro + 0.15 * lift), H0 * 0.04 * intro, W0, H0);
     camera.updateProjectionMatrix();
     const inside = ins;
     const start = smooth(clamp(p / 0.19));
