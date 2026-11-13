@@ -32,10 +32,10 @@ Páginas: `index` (escolha Aveiro/Maia, na horizontal), `aveiro` (em preparaçã
 - Aveiro: página em preparação (faltam dados e fotografias).
 
 ## Estrutura do início (Maia)
-Disco de ginásio gigante que é também um relógio de 24 h (`assets/js/disco.js`, SVG + CSS, sem WebGL): ao deslizar roda e transforma-se em cada passo (24 h, equipamento, receção, avaliações, primeiro treino) com números reais; o texto fica sempre ao lado, nunca por cima → dados essenciais → marcação por horas da receção → zonas de máquinas → equipa → avaliações → onde estamos (horários e mapa) → chamada final.
+Visita 3D ao ginásio (`assets/js/gym3d.bundle.js`, three.js; câmara guiada pelo deslize) numa janela arredondada, com painel de números animado (24 h, equipamento, receção, avaliações, primeiro treino) e texto por passos ao lado, nunca por cima (`assets/js/disco.js`). Sem WebGL ou com movimento reduzido fica uma imagem estática → dados essenciais → marcação por horas da receção → zonas de máquinas → equipa → avaliações → onde estamos (horários e mapa) → chamada final.
 
 ## UNO Studio
 Sem animação de abertura. Marca de água vertical "UNO · STUDIO" em todas as páginas, faixa UNO no rodapé e ligação pequena "Portefólio UNO Studio" (definir `portefolio_url`). O "UNO." é um wordmark tipográfico provisório.
 
 ## Sem bibliotecas
-Só HTML, CSS e JS próprios (`main.js`, `anim.js`, `disco.js`, `agendar.js`, `treino.js`). A versão anterior está na etiqueta `v2-uno-intro` e a versão com o ginásio em 3D em `redesign-3d-slides` e na etiqueta `v4-3d-hero`.
+Só HTML, CSS e JS próprios (`main.js`, `anim.js`, `disco.js` (+ o pacote three.js `gym3d.bundle.js`), `agendar.js`, `treino.js`). A versão anterior está na etiqueta `v2-uno-intro` e a versão anterior com o 3D a ecrã inteiro em `redesign-3d-slides` e na etiqueta `v4-3d-hero`.
