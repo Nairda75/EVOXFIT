@@ -78,10 +78,10 @@
     apply(s);
     coreFor(s, !first);
     tabs.forEach(function (b, i) { b.classList.toggle("on", i === s - 1); if (i === s - 1) b.setAttribute("aria-current", "true"); else b.removeAttribute("aria-current"); });
-    /* com o 3D ligado: o texto anterior sai logo e o novo entra quando o ecrã está mais escuro (a meio da viagem) */
+    /* com o 3D ligado: o texto anterior sai logo e o novo entra pouco depois (a câmara segue o deslize, sem esperas) */
     intro.classList.remove("on"); caps.forEach(function (c) { c.classList.remove("on"); });
     clearTimeout(showT);
-    if (first || !sec.classList.contains("gl-on")) showText(s); else showT = setTimeout(function () { showText(s); }, 720);
+    if (first || !sec.classList.contains("gl-on")) showText(s); else showT = setTimeout(function () { showText(s); }, 140);
   }
 
   /* mesma conta que o pacote 3D usa, para o texto e a câmara andarem sempre juntos */

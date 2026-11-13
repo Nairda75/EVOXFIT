@@ -44,6 +44,7 @@ Só HTML, CSS e JS próprios (`main.js`, `anim.js`, `disco.js` (+ o pacote three
 ## Notas (atualização)
 - Slogan: **WE GOT THIS** (PT e EN).
 - Animações/3D: já não são desligadas por "reduzir movimento" do sistema (causava o problema no PC). Para uma versão calma, abrir qualquer página com `?calmo`.
+- Animação 3D da Maia: a câmara acompanha diretamente o deslize (scroll livre, como na Quinta do Geraldino); cada paragem tem um pequeno patamar. Para regenerar `assets/js/gym3d.bundle.js`: `sh _fonte/bundle.sh` (precisa de `_fonte/vendor/three.module.min.js`, three r160) e copiar para `assets/js/`.
 - Cursor: seta pontiaguda amarela EVOX (CSS puro, sem JavaScript); inversa sobre botões e links. Só com rato.
 - Botões: micro-animações ao passar o rato (reflexo, subida, brilho) e ao clicar (pressão).
 - Escolha de ginásio (`index`): cartões com fotografia, meio-termo entre o primeiro e o minimalista.

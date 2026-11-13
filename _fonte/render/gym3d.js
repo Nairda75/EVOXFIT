@@ -17,7 +17,7 @@ const host = sec && sec.querySelector("[data-gl]");
 const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 if (sec && host && webglOK()) {
   const fontsReady = (document.fonts && document.fonts.load)
-    ? Promise.race([document.fonts.load('italic 800 200px "Barlow Condensed"'), new Promise((r) => setTimeout(r, 1500))]).catch(() => {})
+    ? Promise.race([document.fonts.load('italic 800 200px "Barlow Condensed"'), new Promise((r) => setTimeout(r, 700))]).catch(() => {})
     : Promise.resolve();
   fontsReady.then(() => { try { boot(); } catch (e) { console.warn("gym3d", e); } });
 }
@@ -508,32 +508,32 @@ function boot() {
   }
 
   /* ---------- Ciclo ---------- */
-  /* Modo "diapositivos": o deslize só escolhe a paragem; a câmara viaja sozinha, com tempo próprio
-     (arranque e chegada suaves, meio rápido) e escurece a meio para cada paragem parecer uma cena à parte. */
+  /* Modo "scroll livre": a posição da câmara acompanha diretamente o deslize (sem esperas).
+     Cada paragem tem um pequeno patamar (a câmara fica parada enquanto se lê) e entre paragens o percurso segue o dedo/rato. */
   const STOPS = [0, 0.19, 0.37, 0.55, 0.73, 0.92];
-  const SLIDE_MS = 1500;
-  const stopFromScroll = () => {
-    const p = clamp(-sec.getBoundingClientRect().top / total());
-    return p > INTRO ? Math.min(N - 1, Math.floor((p - INTRO) / (1 - INTRO) * N)) + 1 : 0;
-  };
-  let cur = 0, raf = 0, running = false, last = performance.now(), stop = 0, tw = null, dip = 0;
-  const ease = (u) => (u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
   const total = () => Math.max(1, sec.offsetHeight - window.innerHeight);
-  const read = () => {
-    const st = stopFromScroll();
-    if (st === stop) return;
-    const skip = Math.abs(st - stop);
-    stop = st;
-    tw = { from: cur, to: STOPS[st], t0: performance.now(), dur: SLIDE_MS + (skip > 1 ? 350 : 0) };
+  const scrollP = () => clamp(-sec.getBoundingClientRect().top / total());
+  const ANCH = (() => {
+    const w = (1 - INTRO) / N, a = [[0, 0], [INTRO * 0.55, 0]];
+    for (let i = 1; i <= N; i++) { const c = INTRO + (i - 0.5) * w; a.push([c - w * 0.2, STOPS[i]], [c + w * 0.2, STOPS[i]]); }
+    a.push([1, STOPS[N]]);
+    return a;
+  })();
+  const camFromScroll = (sp) => {
+    for (let i = 0; i < ANCH.length - 1; i++) {
+      const A = ANCH[i], B = ANCH[i + 1];
+      if (sp <= B[0]) { const u = B[0] === A[0] ? 1 : clamp((sp - A[0]) / (B[0] - A[0])); return lerp(A[1], B[1], u * u * (3 - 2 * u) * 0.35 + u * 0.65); }
+    }
+    return STOPS[N];
   };
-  window.addEventListener("scroll", read, { passive: true });
+  let cur = camFromScroll(scrollP()), raf = 0, running = false, last = performance.now(), ovr = null;
   function resize() {
     W0 = Math.max(1, host.clientWidth); H0 = Math.max(1, host.clientHeight);
     const cap = Math.sqrt((isMobile ? 2.0e6 : 2.8e6) / (W0 * H0));            // limite de pixéis: ecrãs 4K não afogam a placa gráfica
     pr = Math.max(minPR, Math.min(pr, DPR, cap)); renderer.setPixelRatio(pr);
-    renderer.setSize(W0, H0, false); read();
+    renderer.setSize(W0, H0, false);
   }
-  new ResizeObserver(resize).observe(host); resize(); stop = stopFromScroll(); cur = STOPS[stop];
+  new ResizeObserver(resize).observe(host); resize(); cur = camFromScroll(scrollP());
 
   // qualidade adaptativa: se o computador não aguenta ~30 fps, baixa a resolução (a cena continua igual)
   let qAcc = 0, qN = 0;
@@ -546,13 +546,10 @@ function boot() {
   }
   function frame(now) {
     const dt = Math.min(0.05, (now - last) / 1000); adapt((now - last) / 1000); last = now;
-    const prev = cur;
-    if (tw) {
-      const u = clamp((now - tw.t0) / tw.dur);
-      cur = lerp(tw.from, tw.to, ease(u));
-      dip = Math.pow(Math.sin(Math.PI * u), 1.6) * 0.94;
-      if (u >= 1) { tw = null; dip = 0; cur = STOPS[stop]; }
-    }
+    const prev = cur, tgt = ovr !== null ? ovr : camFromScroll(scrollP());
+    cur += (tgt - cur) * (1 - Math.exp(-dt / 0.09));
+    if (Math.abs(tgt - cur) < 0.0002) cur = tgt;
+    const dip = 0;
     host.style.setProperty("--dip", dip.toFixed(3));
     const sp = Math.abs(cur - prev) / Math.max(dt, 0.001); bobAmp += (clamp(sp * 10) - bobAmp) * 0.12; bobPh += Math.abs(cur - prev) * 900;
     animate(now); place(cur, now);
@@ -564,7 +561,7 @@ function boot() {
     if (on && !running) { running = true; last = performance.now(); raf = requestAnimationFrame(loop); }
     else if (!on && running) { running = false; cancelAnimationFrame(raf); }
   }, { rootMargin: "100px" }).observe(sec);
-  document.addEventListener("visibilitychange", () => { if (document.hidden && running) { cancelAnimationFrame(raf); running = false; } else if (!document.hidden) read(); });
+  document.addEventListener("visibilitychange", () => { if (document.hidden && running) { cancelAnimationFrame(raf); running = false; } });
 
   renderer.domElement.addEventListener("webglcontextlost", (e) => { e.preventDefault(); host.classList.remove("ready"); });
   renderer.domElement.addEventListener("webglcontextrestored", () => { host.classList.add("ready"); frame(performance.now()); });
@@ -574,5 +571,5 @@ function boot() {
   requestAnimationFrame(() => host.classList.add("ready"));
 
   /* gancho para testes: salta para um ponto do percurso */
-  window.__gym = { jump(p) { tw = null; cur = clamp(p); frame(performance.now()); return p; }, get p() { return cur; }, get pr() { return pr; } };
+  window.__gym = { jump(p) { ovr = clamp(p); cur = ovr; frame(performance.now()); return p; }, free() { ovr = null; }, get p() { return cur; }, get pr() { return pr; } };
 }
