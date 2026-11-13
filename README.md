@@ -21,6 +21,7 @@ Páginas: `index` (escolha Aveiro/Maia, na horizontal), `aveiro` (em preparaçã
 
 ## Imagens e logótipo
 - As imagens `assets/img/ev-*.jpg` são **ilustrativas** (renders criados para esta proposta), identificadas como tal no site.
+- As fotografias e cartazes enviados pela EVOXFIT estão em `assets/img/evox-01…07.jpg` (galeria da Maia e de O ginásio, com ampliação). Têm resolução baixa: ideal substituir pelos originais. Os textos alternativos estão em `ALTS` no `_fonte/build.py`. Duas das fotografias (sala e grupo) parecem do ginásio dos EUA — confirmar antes de publicar.
 - Fotografias reais: pôr em `assets/img/evox-1.jpg`, `evox-2.jpg`… (ou `gym-*.jpg`) e correr o build: aparece uma tira no início e uma galeria em "O ginásio".
 - `assets/img/logo-evoxfit.png` é o logótipo deles (sem "Maia"); o design não foi alterado.
 
@@ -35,7 +36,7 @@ Páginas: `index` (escolha Aveiro/Maia, na horizontal), `aveiro` (em preparaçã
 Visita 3D ao ginásio (`assets/js/gym3d.bundle.js`, three.js; câmara guiada pelo deslize) numa janela arredondada, com painel de números animado (24 h, equipamento, receção, avaliações, primeiro treino) e texto por passos ao lado, nunca por cima (`assets/js/disco.js`). Sem WebGL ou com movimento reduzido fica uma imagem estática → dados essenciais → marcação por horas da receção → zonas de máquinas → equipa → avaliações → onde estamos (horários e mapa) → chamada final.
 
 ## UNO Studio
-Sem animação de abertura. Marca de água vertical "UNO · STUDIO" em todas as páginas, faixa UNO no rodapé e ligação pequena "Portefólio UNO Studio" (definir `portefolio_url`). O "UNO." é um wordmark tipográfico provisório.
+Sem animação de abertura. Sem marca de água lateral; faixa UNO no rodapé e ligação pequena "Portefólio UNO Studio" (definir `portefolio_url`). O "UNO." é um wordmark tipográfico provisório.
 
 ## Sem bibliotecas
 Só HTML, CSS e JS próprios (`main.js`, `anim.js`, `disco.js` (+ o pacote three.js `gym3d.bundle.js`), `agendar.js`, `treino.js`). A versão anterior está na etiqueta `v2-uno-intro` e a versão anterior com o 3D a ecrã inteiro em `redesign-3d-slides` e na etiqueta `v4-3d-hero`.

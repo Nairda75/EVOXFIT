@@ -320,12 +320,11 @@ def footer(active):
       <a class="btn btn--y btn--sm" href="{PORT_URL}"{PORT_EXT} data-en="See our portfolio">Ver o nosso portefólio</a>
     </div>
     <div class="footer-bottom">
-      <span>© <span data-year>2026</span> EVOXFIT Fitness Health Club Maia · <span data-en="Illustrative images created for this proposal.">Imagens ilustrativas criadas para esta proposta.</span></span>
+      <span>© <span data-year>2026</span> EVOXFIT Fitness Health Club Maia · <span data-en="3D scenes are illustrative; photos and posters belong to EVOXFIT.">Cenas 3D ilustrativas; fotografias e cartazes são da EVOXFIT.</span></span>
       {portfolio_link()}
     </div>
   </div>
 </footer>
-{watermark()}
 {dock}
 <script src="assets/js/config.js"></script>
 <script src="assets/js/main.js"></script>
@@ -339,21 +338,32 @@ def _imgs():
 
 LIGHTBOX = '''<div class="lightbox" role="dialog" aria-modal="true" aria-label="Fotografia" data-en-aria="Photo"><img alt=""><button class="lb-close" type="button" aria-label="Fechar" data-en-aria="Close">{{icon:close}}</button><button class="lb-prev" type="button" aria-label="Anterior" data-en-aria="Previous">{{icon:left}}</button><button class="lb-next" type="button" aria-label="Seguinte" data-en-aria="Next">{{icon:right}}</button></div>'''
 
+ALTS = {
+ 'evox-01': ('Treinador EVOXFIT com t-shirt da marca, no ginásio.', 'EVOXFIT coach wearing the brand t-shirt, in the gym.'),
+ 'evox-02': ('Vista geral da sala de treino EVOXFIT, com zonas de máquinas e pesos livres.', 'Overview of the EVOXFIT training floor, with machine and free-weight areas.'),
+ 'evox-03': ('Treino assistido numa máquina de peito, num ginásio EVOXFIT.', 'Assisted workout on a chest press machine at an EVOXFIT gym.'),
+ 'evox-04': ('Sócia a treinar pernas com halteres no ginásio EVOXFIT.', 'Member training legs with dumbbells at the EVOXFIT gym.'),
+ 'evox-05': ('Equipa e sócios EVOXFIT juntos na sala de treino.', 'EVOXFIT team and members together on the training floor.'),
+ 'evox-06': ('Sócio a treinar bíceps com haltere no ginásio EVOXFIT.', 'Member training biceps with a dumbbell at the EVOXFIT gym.'),
+ 'evox-07': ('Personal trainer EVOXFIT a limpar o equipamento, em ambiente de treino.', 'EVOXFIT personal trainer cleaning equipment on the gym floor.'),
+}
+
 def _photo_buttons(imgs):
     out = []
     for p in imgs:
         rel = os.path.relpath(p, OUT).replace(os.sep, '/')
-        out.append(f'<button type="button" data-full="{rel}" aria-label="Ver fotografia" data-en-aria="View photo"><img src="{rel}" alt="EVOXFIT Fitness Health Club Maia" loading="lazy" decoding="async"></button>')
+        key = os.path.splitext(os.path.basename(p))[0]
+        pt, en = ALTS.get(key, ('EVOXFIT Fitness Health Club Maia', 'EVOXFIT Fitness Health Club Maia'))
+        try:
+            from PIL import Image
+            with Image.open(p) as im: w, h = im.size
+        except Exception:
+            w, h = 4, 5
+        out.append(f'<button type="button" data-full="{rel}" style="--ar:{w}/{h}" aria-label="Ver fotografia" data-en-aria="View photo"><img src="{rel}" alt="{pt}" data-en-alt="{en}" width="{w}" height="{h}" loading="lazy" decoding="async"></button>')
     return out
 
 def gallery_html():
-    imgs = _imgs()
-    if not imgs: return ''
-    return ('''<section class="sheet" aria-labelledby="gal-titulo">
-  <div class="wrap">
-    <p class="eyebrow" data-en="Gallery">Galeria</p>
-    <h2 id="gal-titulo" style="margin-bottom:36px" data-en="The EVOXFIT world.">O mundo EVOXFIT.</h2>
-    <div class="gallery" data-photos>''' + '\n'.join(_photo_buttons(imgs)) + '</div>\n  </div>\n</section>\n' + LIGHTBOX)
+    return fotos_html()
 
 def fotos_html():
     imgs = _imgs()
@@ -396,7 +406,7 @@ def build():
         body = body.replace('{{GALERIA}}', gal).replace('{{FOTOS}}', fotos)
         intro = UNO if meta.get('intro') else ''
         if meta.get('bare'):
-            page = (head(meta) + f'\n<body class="{meta.get("body", "page-inner")}">\n' + intro + body + '\n' + watermark()
+            page = (head(meta) + f'\n<body class="{meta.get("body", "page-inner")}">\n' + intro + body + '\n'
                     + '\n<script src="assets/js/config.js"></script>\n<script src="assets/js/main.js"></script>\n</body>\n</html>\n')
         else:
             page = (head(meta) + f'\n<body class="{meta.get("body", "page-inner")} page-{meta["nav"]}">\n' + intro + header(meta['nav'])
