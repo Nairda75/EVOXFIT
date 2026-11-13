@@ -44,5 +44,5 @@ Só HTML, CSS e JS próprios (`main.js`, `anim.js`, `disco.js` (+ o pacote three
 ## Notas (atualização)
 - Slogan: **WE GOT THIS** (PT e EN).
 - Animações/3D: já não são desligadas por "reduzir movimento" do sistema (causava o problema no PC). Para uma versão calma, abrir qualquer página com `?calmo`.
-- Cursor: disco calibrado (peso) pequeno, roda ao mover; desativado em ecrãs táteis.
-- Escolha de ginásio (`index`): versão minimalista.
+- Cursor: seta pontiaguda amarela EVOX (CSS puro, sem JavaScript); inversa sobre botões e links. Só com rato.
+- Escolha de ginásio (`index`): cartões com fotografia, meio-termo entre o primeiro e o minimalista.

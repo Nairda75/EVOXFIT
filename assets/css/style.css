@@ -515,7 +515,7 @@ a.fact:hover{transform:translateY(-4px)}
 .real-map .pin b{background:var(--ink);color:var(--y);padding:7px 14px;border-radius:999px;font-size:12px;letter-spacing:.08em}
 .real-map .pin i{width:3px;height:22px;background:var(--ink)}
 .real-map.live .pin,.real-map.live .map-lock{display:none}
-.map-lock{position:absolute;inset:0;z-index:3;display:flex;align-items:flex-end;justify-content:center;padding-bottom:20px;font-weight:700;font-size:14px;background:transparent;color:var(--ink)}
+.map-lock{position:absolute;inset:0;z-index:3;display:flex;align-items:flex-end;justify-content:center;padding-bottom:20px;font-weight:700;font-size:14px;background:linear-gradient(0deg,rgba(27,27,31,.82),transparent 34%);color:var(--txt)}
 .map-lock:hover{background:rgba(255,210,31,.12)}
 .hours-wrap{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .hours-card{padding:24px 26px;border-radius:var(--r-l);background:var(--white);border:1px solid var(--line-ink);color:var(--ink)}
@@ -672,36 +672,35 @@ a.fact:hover{transform:translateY(-4px)}
 html.calmo *,html.calmo *::before,html.calmo *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 html.calmo.js-anim .rv,html.calmo.js-anim .gate-card,html.calmo.js-anim .gate-head,html.calmo.js-anim .gate-intro{opacity:1;transform:none}
 
-/* Cursor: disco calibrado (main.js) */
-.plate-cursor{position:fixed;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;z-index:2147483000;pointer-events:none;opacity:0;transition:opacity .2s;will-change:transform}
-.plate-cursor.show{opacity:1}
-.plate-cursor .pc-s{display:block;width:100%;height:100%;transition:transform .28s var(--ease,cubic-bezier(.2,.7,.2,1));filter:drop-shadow(0 2px 5px rgba(0,0,0,.4))}
-.plate-cursor .pc-r{display:block;width:100%;height:100%}
-.plate-cursor.hot .pc-s{transform:scale(1.5)}
-.plate-cursor.down .pc-s{transform:scale(.8)}
-.plate-cursor.hot.down .pc-s{transform:scale(1.2)}
-html.has-plate,html.has-plate *{cursor:none!important}
-html.has-plate input:not([type=radio]):not([type=checkbox]):not([type=button]):not([type=submit]),html.has-plate textarea{cursor:text!important}
+/* Cursor: seta pontiaguda amarela EVOX (CSS puro, sem JavaScript). Só com rato. */
+@media (hover:hover) and (pointer:fine){
+  html{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 22 22'%3E%3Cpath d='M2 1.5 19 9.5 11.4 11.6 8.9 19.5Z' fill='%23ffd21f' stroke='%231b1b1f' stroke-width='1.6' stroke-linejoin='miter'/%3E%3C/svg%3E") 2 2,auto}
+  a,button,summary,label,select,[role=button],.book-day,.book-slot,.pick label{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 22 22'%3E%3Cpath d='M2 1.5 19 9.5 11.4 11.6 8.9 19.5Z' fill='%231b1b1f' stroke='%23ffd21f' stroke-width='1.8' stroke-linejoin='miter'/%3E%3C/svg%3E") 2 2,pointer}
+  input,textarea{cursor:text}
+  .book-day[disabled],button:disabled{cursor:not-allowed}
+}
 
-
-/* Escolha do ginásio: versão minimalista */
-.gate{gap:clamp(10px,1.6vw,20px)}
+/* Escolha do ginásio: meio-termo (cartões completos, mas com menos ruído) */
+.gate{gap:clamp(10px,1.6vw,18px)}
 .gate-head{background:transparent;padding:6px 6px 0}
 .gate-head .gname small{display:none}
-.gate-intro{justify-content:flex-start;padding:clamp(6px,1.4vw,18px) 6px 0}
-.gate-intro h1{font-size:clamp(22px,2.6vw,38px);font-weight:800;letter-spacing:-.02em}
-.gate-card{padding:clamp(22px,3vw,48px);background:var(--bg2);color:var(--txt)}
-.gate-card--aveiro{background:var(--paper);color:var(--ink)}
-.gate-card--aveiro::before,.gate-card--aveiro .bg{display:none}
-.gate-card--maia::after{background:linear-gradient(0deg,rgba(18,18,22,.8),rgba(18,18,22,.35))}
-.gate-card--maia::after,.gate-card--maia .bg{opacity:0;transition:opacity .8s var(--ease)}
-.gate-card--maia:hover::after,.gate-card--maia:focus-visible::after,.gate-card--maia:hover .bg,.gate-card--maia:focus-visible .bg{opacity:1}
-.gate-card--maia .bg img{filter:grayscale(.2)}
-.gc-mid{margin-top:auto}
-.gc-where{display:block;margin-top:12px;font:500 12px/1.3 var(--mono);letter-spacing:.16em;text-transform:uppercase;opacity:.65}
-.gc-go{justify-content:flex-end}
-.gc-go>span:first-child{margin-right:auto;font:500 12px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;opacity:.65}
-.gc-go .circ{width:48px;height:48px;background:transparent;color:inherit;border:1.5px solid currentColor}
-.gate-card:hover .circ{background:var(--y);border-color:var(--y);color:var(--ink)}
+.gate-intro{justify-content:flex-start;padding:clamp(4px,1vw,12px) 6px 0}
+.gate-intro h1{font-size:clamp(30px,4.6vw,66px)}
+.gate-card--aveiro{background:var(--bg2);color:var(--txt)}
+.gate-card--aveiro .bg{background:radial-gradient(110% 80% at 100% 0%,rgba(255,210,31,.28),transparent 58%),repeating-linear-gradient(135deg,transparent 0 22px,rgba(244,242,236,.05) 22px 23px)}
+.gate-card--aveiro .gc-idx{background:rgba(255,255,255,.14);color:var(--txt)}
+.gate-card--aveiro .gc-state{background:transparent;border:1.5px dashed rgba(244,242,236,.5);color:var(--txt)}
+.gate-card--aveiro .gc-where svg{color:var(--y)}
+.gate-card--aveiro .gc-facts span{background:rgba(255,255,255,.1)}
+.gc-name{font-size:clamp(48px,8.6vw,140px)}
 .gate-foot{padding:0 6px}
 .gate-foot>span:first-child{font:500 11px/1 var(--mono);letter-spacing:.28em}
+
+/* Cartões dentro de folhas escuras: ficam grafite, não brancos */
+.sheet--dark :is(.fact,.eq-block,.team-card,.info li,.hours-card,.zone,.faq details,.side-steps li){background:var(--card);border-color:var(--line);color:var(--txt)}
+.sheet--2 :is(.fact,.eq-block,.team-card,.info li,.hours-card,.zone,.faq details,.side-steps li){background:var(--bg2);border-color:var(--line);color:var(--txt)}
+.sheet--dark :is(.fact,.eq-block,.team-card,.info li,.hours-card,.zone) :is(small,.small,p,li span),.sheet--2 :is(.fact,.eq-block,.team-card,.info li,.hours-card,.zone) :is(small,.small,p,li span){color:var(--muted)}
+.sheet--dark :is(.fact,.info li,.hours-card,.zone) b,.sheet--2 :is(.fact,.info li,.hours-card,.zone) b{color:var(--txt)}
+.sheet--dark .real-map,.sheet--2 .real-map{background:var(--card);border-color:var(--line)}
+.sheet--dark .avatar,.sheet--2 .avatar{background:var(--card2);color:var(--txt)}
+.sheet--dark .hours-card h3,.sheet--2 .hours-card h3{border-color:var(--line)}
