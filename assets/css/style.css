@@ -234,7 +234,7 @@ h3{font-size:clamp(20px,1.7vw,26px);letter-spacing:-.01em;line-height:1.15}
 .disc-stick{position:relative;padding:var(--m)}
 .disc-card{position:relative;overflow:hidden;isolation:isolate;border-radius:var(--r-xl);color:var(--txt);background:radial-gradient(85% 95% at 74% 48%,#3d3d46 0%,#2b2b31 52%,#222226 100%);min-height:calc(100svh - 2*var(--m))}
 .disc-card::before{content:"";position:absolute;inset:0;z-index:-1;background-image:radial-gradient(rgba(255,255,255,.09) 1px,transparent 1.6px);background-size:30px 30px;-webkit-mask-image:radial-gradient(75% 80% at 72% 50%,#000 10%,transparent 78%);mask-image:radial-gradient(75% 80% at 72% 50%,#000 10%,transparent 78%)}
-.disc-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);gap:clamp(16px,2.6vw,44px);align-items:center;min-height:calc(100svh - 2*var(--m));padding:calc(var(--sat) + 86px) clamp(16px,2.4vw,32px) 84px var(--gut)}
+.disc-grid{display:grid;grid-template-columns:minmax(0,.6fr) minmax(0,1.75fr);gap:clamp(14px,2vw,32px);align-items:center;min-height:calc(100svh - 2*var(--m));padding:calc(var(--sat) + 78px) 14px 78px clamp(20px,3vw,44px)}
 
 /* texto (ao lado da animação) */
 .disc-text{min-width:0;display:grid;align-self:center}
@@ -242,7 +242,7 @@ h3{font-size:clamp(20px,1.7vw,26px);letter-spacing:-.01em;line-height:1.15}
 .disc-caps{display:grid;list-style:none;margin:0;padding:0}
 .disc-caps>li{grid-area:1/1;min-width:0}
 .disc .eyebrow{color:#fff}
-.disc h1{font-size:clamp(2.8rem,5.8vw,6.2rem);line-height:.94;font-stretch:92%;margin-bottom:20px}
+.disc h1{font-size:clamp(2.6rem,4.8vw,5.2rem);line-height:.94;font-stretch:92%;margin-bottom:20px}
 .disc .lead{color:#dcdad4;max-width:34ch;margin-bottom:20px}
 .disc-chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
 .disc-actions{display:flex;flex-wrap:wrap;gap:12px}
@@ -252,11 +252,11 @@ h3{font-size:clamp(20px,1.7vw,26px);letter-spacing:-.01em;line-height:1.15}
 .disc-actions .btn--line:hover svg{transform:translateY(4px)}
 .disc-cap .num{font:500 13px/1 var(--mono);letter-spacing:.2em;color:var(--y);display:flex;align-items:center;gap:14px;margin-bottom:18px}
 .disc-cap .num::after{content:"";height:2px;width:56px;background:var(--y);border-radius:2px}
-.disc-cap h2{font-size:clamp(2.1rem,3.9vw,4rem);margin-bottom:16px;color:#fff}
+.disc-cap h2{font-size:clamp(2rem,3.3vw,3.4rem);margin-bottom:16px;color:#fff}
 .disc-cap p{color:#dcdad4;font-size:clamp(1rem,1.2vw,1.15rem);max-width:40ch}
 .disc-more{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:22px}
 .disc-meta{margin-top:16px;font:500 14px/1.5 var(--mono);letter-spacing:.04em;color:var(--y)!important}
-.disc-legend{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;max-width:430px}
+.disc-legend{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:1fr;gap:8px;max-width:260px}
 .disc-legend li{display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);font-size:14px;font-weight:600}
 .disc-legend i{width:10px;height:10px;border-radius:50%;flex:none;background:#ffd21f}
 .disc-legend .lg--livre i{background:#ffe785}.disc-legend .lg--cardio i{background:#f3f0e8}.disc-legend .lg--funcional i{background:#9a988f}
@@ -317,11 +317,22 @@ h3{font-size:clamp(20px,1.7vw,26px);letter-spacing:-.01em;line-height:1.15}
 
 .disc+.sheet{margin-top:var(--m)}
 
+/* PC: a janela do 3D ocupa quase todo o cartão; o cabeçalho flutua por cima */
+@media (min-width:861px){
+  .disc-grid{padding:10px 10px 10px clamp(20px,3vw,44px)}
+  .disc-frame{border-radius:calc(var(--r-xl) - 8px)}
+  .disc-tag{top:88px;left:22px}
+  .disc-hud{left:22px;bottom:22px}
+  .disc-live .disc-tabs{left:auto;right:calc(var(--m) + 24px);bottom:calc(var(--m) + 22px);width:min(58%,640px);justify-content:flex-end;padding:0}
+  .disc-live .disc-hint{left:calc(var(--m) + clamp(20px,3vw,44px));transform:none;align-items:flex-start}
+  .disc-text{padding-top:60px}
+}
+
 @media (max-width:860px){
   .disc:not(.disc-live) .disc-viz{height:auto}
   .disc:not(.disc-live) .disc-frame{aspect-ratio:4/3}
   .disc-grid{grid-template-columns:1fr;gap:6px;align-content:start;padding:calc(var(--sat) + 84px) 20px 84px}
-  .disc-viz{order:-1;height:36svh;min-height:230px}
+  .disc-viz{order:-1;height:44svh;min-height:250px}
   .disc-tag{left:10px;top:10px;padding:7px 11px;font-size:9.5px}
   .disc-hud{left:10px;bottom:10px;gap:10px;padding:6px 18px 6px 6px}
   .hud-g{width:60px;height:60px}
@@ -342,7 +353,7 @@ h3{font-size:clamp(20px,1.7vw,26px);letter-spacing:-.01em;line-height:1.15}
   .disc-cap p{font-size:.97rem;line-height:1.5}
   .disc-more{margin-top:12px;gap:10px}
   .disc-more .btn{padding:11px 16px;font-size:14px}
-  .disc-legend{gap:8px 10px;margin-top:14px}
+  .disc-legend{grid-template-columns:1fr 1fr;max-width:none;gap:8px 10px;margin-top:14px}
   .disc-legend li{padding:7px 11px;font-size:12.5px}
   .disc-live .disc-tabs{bottom:calc(var(--m) + 10px);gap:5px}
   .disc-tabs button{padding:8px 11px;font-size:10.5px;letter-spacing:.08em}
