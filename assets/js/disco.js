@@ -121,6 +121,37 @@
     else window.scrollTo({ top: y, behavior: reduce ? "auto" : "smooth" });
   }
   $$("[data-disc-go]").forEach(function (b) { b.addEventListener("click", function () { go(+b.getAttribute("data-disc-go")); }); });
+
+  /* faixa de baixo: deslizar, tocar ou clicar ali salta a animação e vai logo ao resto do site */
+  var peek = $("[data-disc-skip]"), skipRaf = 0;
+  function stopSkip() { if (skipRaf) { cancelAnimationFrame(skipRaf); skipRaf = 0; } }
+  function skipToSite() {
+    if (skipRaf) return;
+    var y0 = window.scrollY, y1 = sec.getBoundingClientRect().bottom + y0 - 8, d = y1 - y0;
+    if (d < 4) return;
+    if (window.__lenis) { window.__lenis.scrollTo(y1, { duration: 1.1 }); return; }
+    var t0 = performance.now(), D = Math.max(650, Math.min(1400, d / 2.4));
+    (function step(now) {
+      var p = Math.min(1, (now - t0) / D), e = p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+      window.scrollTo({ top: y0 + d * e, behavior: "instant" });
+      skipRaf = p < 1 ? requestAnimationFrame(step) : 0;
+    })(t0);
+  }
+  if (peek && live) {
+    var ty = null;
+    peek.addEventListener("click", function (e) { e.preventDefault(); skipToSite(); });
+    peek.addEventListener("wheel", function (e) { if (e.deltaY > 0) { e.preventDefault(); skipToSite(); } }, { passive: false });
+    peek.addEventListener("touchstart", function (e) { ty = e.touches[0].clientY; }, { passive: true });
+    peek.addEventListener("touchmove", function (e) {
+      if (ty === null) return;
+      if (ty - e.touches[0].clientY > 14) { ty = null; if (e.cancelable) e.preventDefault(); skipToSite(); }
+    }, { passive: false });
+    peek.addEventListener("touchend", function () { ty = null; }, { passive: true });
+    /* o utilizador pode interromper: toque, tecla ou roda para trás (a inércia da roda para a frente não interrompe) */
+    window.addEventListener("touchstart", function (e) { if (!peek.contains(e.target)) stopSkip(); }, { passive: true });
+    window.addEventListener("keydown", stopSkip);
+    window.addEventListener("wheel", function (e) { if (e.deltaY < 0) stopSkip(); }, { passive: true });
+  }
   document.addEventListener("keydown", function (e) {
     if (!live || e.altKey || e.ctrlKey || e.metaKey) return;
     if (/input|textarea|select/i.test((e.target.tagName || ""))) return;

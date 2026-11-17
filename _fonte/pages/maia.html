@@ -60,7 +60,6 @@
         </div>
       </div>
     </div>
-   </div>
 
     <p class="disc-hint" aria-hidden="true"><span data-en="Scroll">Deslize</span><i></i></p>
     <nav class="disc-tabs" aria-label="Secções" data-en-aria="Sections">
@@ -70,10 +69,16 @@
       <button type="button" data-disc-go="4" data-en="Reviews">Avaliações</button>
       <button type="button" data-disc-go="5" data-en="Workout">Treino</button>
     </nav>
+   </div>
+   <a class="disc-peek" href="#essencial" data-disc-skip aria-label="Saltar a animação e ir para o resto do site" data-en-aria="Skip the animation and go to the rest of the site">
+     <span class="pk-k" data-en="The rest of the site">O resto do site</span>
+     <span class="pk-t" data-en="Location, hours, equipment and reviews">Localização, horário, equipamento e avaliações</span>
+     <span class="pk-a" aria-hidden="true">{{icon:down}}</span>
+   </a>
   </div>
 </section>
 
-<section class="sheet sheet--2 sheet--tight" aria-label="Informação essencial" data-en-aria="Key information">
+<section class="sheet sheet--2 sheet--tight" id="essencial" aria-label="Informação essencial" data-en-aria="Key information">
   <div class="wrap">
     <div class="facts">
       <a class="fact rv" href="{{rota}}" target="_blank" rel="noopener"><span class="ic">{{icon:pin}}</span><div><b data-en="Location">Localização</b><span data-en="Maia, Greater Porto">Maia, Grande Porto</span><small>{{morada}}</small></div></a>
